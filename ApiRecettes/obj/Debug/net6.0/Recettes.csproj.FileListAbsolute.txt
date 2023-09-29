@@ -1,0 +1,140 @@
+D:\M2projects\Recettes\bin\Debug\net6.0\appsettings.Development.json
+D:\M2projects\Recettes\bin\Debug\net6.0\appsettings.json
+D:\M2projects\Recettes\bin\Debug\net6.0\Recettes.exe
+D:\M2projects\Recettes\bin\Debug\net6.0\Recettes.deps.json
+D:\M2projects\Recettes\bin\Debug\net6.0\Recettes.runtimeconfig.json
+D:\M2projects\Recettes\bin\Debug\net6.0\Recettes.dll
+D:\M2projects\Recettes\bin\Debug\net6.0\Recettes.pdb
+D:\M2projects\Recettes\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\M2projects\Recettes\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\M2projects\Recettes\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\M2projects\Recettes\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.csproj.AssemblyReference.cache
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.GeneratedMSBuildEditorConfig.editorconfig
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.AssemblyInfoInputs.cache
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.AssemblyInfo.cs
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.csproj.CoreCompileInputs.cache
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.MvcApplicationPartsAssemblyInfo.cs
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.MvcApplicationPartsAssemblyInfo.cache
+D:\M2projects\Recettes\obj\Debug\net6.0\staticwebassets\msbuild.Recettes.Microsoft.AspNetCore.StaticWebAssets.props
+D:\M2projects\Recettes\obj\Debug\net6.0\staticwebassets\msbuild.build.Recettes.props
+D:\M2projects\Recettes\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Recettes.props
+D:\M2projects\Recettes\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Recettes.props
+D:\M2projects\Recettes\obj\Debug\net6.0\staticwebassets.pack.json
+D:\M2projects\Recettes\obj\Debug\net6.0\staticwebassets.build.json
+D:\M2projects\Recettes\obj\Debug\net6.0\staticwebassets.development.json
+D:\M2projects\Recettes\obj\Debug\net6.0\scopedcss\bundle\Recettes.styles.css
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.csproj.CopyComplete
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.dll
+D:\M2projects\Recettes\obj\Debug\net6.0\refint\Recettes.dll
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.pdb
+D:\M2projects\Recettes\obj\Debug\net6.0\Recettes.genruntimeconfig.cache
+D:\M2projects\Recettes\obj\Debug\net6.0\ref\Recettes.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\appsettings.json
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Recettes.exe
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Recettes.deps.json
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Recettes.runtimeconfig.json
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Recettes.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Recettes.pdb
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Npgsql.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.csproj.AssemblyReference.cache
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.AssemblyInfoInputs.cache
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.AssemblyInfo.cs
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.csproj.CoreCompileInputs.cache
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\staticwebassets\msbuild.Recettes.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\staticwebassets\msbuild.build.Recettes.props
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Recettes.props
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Recettes.props
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\scopedcss\bundle\Recettes.styles.css
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.csproj.CopyComplete
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\refint\Recettes.dll
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.pdb
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\Recettes.genruntimeconfig.cache
+C:\Users\Ramady\Desktop\Test ASP et React\Recettes\obj\Debug\net6.0\ref\Recettes.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\appsettings.Development.json
+D:\M2projects\APIRecettes\bin\Debug\net6.0\appsettings.json
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Recettes.exe
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Recettes.deps.json
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Recettes.runtimeconfig.json
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Recettes.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Recettes.pdb
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Humanizer.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Mono.TextTemplating.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Npgsql.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\System.CodeDom.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\System.Text.Json.dll
+D:\M2projects\APIRecettes\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.csproj.AssemblyReference.cache
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.GeneratedMSBuildEditorConfig.editorconfig
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.AssemblyInfoInputs.cache
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.AssemblyInfo.cs
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.csproj.CoreCompileInputs.cache
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.MvcApplicationPartsAssemblyInfo.cs
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.MvcApplicationPartsAssemblyInfo.cache
+D:\M2projects\APIRecettes\obj\Debug\net6.0\staticwebassets\msbuild.Recettes.Microsoft.AspNetCore.StaticWebAssets.props
+D:\M2projects\APIRecettes\obj\Debug\net6.0\staticwebassets\msbuild.build.Recettes.props
+D:\M2projects\APIRecettes\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Recettes.props
+D:\M2projects\APIRecettes\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Recettes.props
+D:\M2projects\APIRecettes\obj\Debug\net6.0\staticwebassets.pack.json
+D:\M2projects\APIRecettes\obj\Debug\net6.0\staticwebassets.build.json
+D:\M2projects\APIRecettes\obj\Debug\net6.0\staticwebassets.development.json
+D:\M2projects\APIRecettes\obj\Debug\net6.0\scopedcss\bundle\Recettes.styles.css
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.csproj.CopyComplete
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.dll
+D:\M2projects\APIRecettes\obj\Debug\net6.0\refint\Recettes.dll
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.pdb
+D:\M2projects\APIRecettes\obj\Debug\net6.0\Recettes.genruntimeconfig.cache
+D:\M2projects\APIRecettes\obj\Debug\net6.0\ref\Recettes.dll
