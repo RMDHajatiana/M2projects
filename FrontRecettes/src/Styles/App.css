@@ -6,7 +6,47 @@
 }  
 
 @media (min-width : 600px ) {
-    .menuIcon {
-        display : none;
+    .App {
+        display: 1;
+        flex-direction: column;
     }
-}  
+}    
+
+/* @import url("/src/Assets/fonts/poppins/font.css");
+
+.MenusContent {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.Menus2 {
+    height: 60px;
+    flex-direction: row;
+} 
+
+
+.Header {
+    flex: 1;
+    height: 60;
+    flex-direction: row;
+    background-color: white;
+    justify-content: space-between;
+}
+*/
+
+.Appcontent {
+    flex: 1;
+    background: url("../Assets/Images/Boeing-737.jpg");  
+}
+
+
+.Appfooter {
+    height: 100px;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    color: #f6f6f7;
+    background-color: #800000;
+}
