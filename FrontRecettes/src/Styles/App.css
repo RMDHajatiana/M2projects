@@ -1,6 +1,5 @@
-/* @import url("/src/Assets/fonts/poppins/font.css");
- 
-  @media (max-width : 600px ) {
+
+@media (max-width : 600px ) {
     .headerMenu {
         display : none;
     }
@@ -13,6 +12,7 @@
     }
 }    
 
+/* @import url("/src/Assets/fonts/poppins/font.css");
 
 .MenusContent {
     height: 100vh;
@@ -34,6 +34,7 @@
     background-color: white;
     justify-content: space-between;
 }
+*/
 
 .Appcontent {
     flex: 1;
@@ -42,10 +43,10 @@
 
 
 .Appfooter {
-    height: 60px;
+    height: 100px;
     display: flex;
     flex: 1;
     flex-direction: row;
     color: #f6f6f7;
     background-color: #800000;
-} */
+}
