@@ -6,7 +6,6 @@ import Menus2 from "./Components/Menus2";
 import AppContent from "./Components/AppContent";
 import Appfooter from "./Components/Appfooter"
 import * as AiIcons from "react-icons/ai";
-import './Styles/App.css';
 
 function App() {
 
@@ -21,39 +20,43 @@ function App() {
   }
   return (
 
-    <div className="MenusContent" >
+    <div className="App" >
 
+      <div className="Navbar">
       <div 
       className="menuIcon"
-      style={{ backgroundColor:'white', color:'black',  height: 50,  paddingLeft:12, paddingTop:12, }}>
+
+      style={{ backgroundColor:'white', color:'#880808',  height: 50,  paddingLeft:12, paddingTop:12, }}>
 
         <AiIcons.AiOutlineMenuUnfold
         onClick={HandleOpen}
-        style={{ color: 'Black',fontSize : 24,
+        style={{ color: '#880808',fontSize : 24,
         }} />
-      {/* <Menu
-      mode="horizontal"
-        style={{ right:200, flexDirection:'column' }}
-      items={[
-        {label:'Deconnexion', icon: <LogoutOutlined/>, danger: true ,  }
-      ]} 
-      ></Menu> */}
+      </div>
+      <span className="headerMenu">
+        <Menus2/>
+      </span>
       </div>
 
-      <span className="headerMenu">
-     <Menus2/>
-      </span>
-
-      <AppContent/>
-      <Appfooter/>
+{/* Drawer menu */}
 
      <Drawer 
+         contentWrapperStyle={{width:'270px'}}
           placement = 'left'
           open ={openMenu}  
-          closable={false} 
+          closable={true} 
           onClose={HandleClose}>
           <Menus Isinline />
      </Drawer>
+
+     <div className="Content">
+      <div className="image">
+      <AppContent/>
+      </div>
+      </div>
+
+      <Appfooter/>
+
     </div>
   );
 }

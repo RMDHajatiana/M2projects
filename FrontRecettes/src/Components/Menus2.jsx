@@ -12,13 +12,15 @@ import * as FaIcons from "react-icons/fa";
 const Menus2 = ({Isinline= false}) => {
 
         const Navigate = useNavigate ()
+
         return (
             <div  className='Menus2' >
+
             <Menu
 
             mode=  { Isinline ?   "inline": "horizontal" }
-
-            style={{ color:'black',  fontSize: 16  }}
+            
+            style={{ color:'#051039',  fontSize: 19.5  }}
 
             onClick={({key}) => {
                     Navigate(key)

@@ -1,9 +1,10 @@
 import React from 'react';
+import { CardPassager } from '../Components/Card/Card';
 
 const Passagers = () => {
     return (
-        <div>
-            Liste des Passagers
+        <div style={{marginTop:'165px'}}>
+            <CardPassager titre="Tous les Passagers"/>
         </div>
     );
 };

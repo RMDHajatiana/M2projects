@@ -19,8 +19,8 @@ const Menus = ({Isinline = false}) => {
       <Menu
 
       mode=  { Isinline ?   "inline": "horizontal" }
-
-      style={{  backgroundColor:'white', color:'black', border:'none',  fontSize: 16  }}
+  
+      style={{  backgroundColor:'white', color:'#051039', border:'none',  fontSize: 19.5  }}
 
         onClick={({key}) => {
            Navigate(key)
