@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {  } from 'react';
 import { Menu } from 'antd';
 import {
     DashboardOutlined,
@@ -10,8 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
 
-const Menus = ({Isinline = false}) => {
+const Menus = ({Isinline = false }) => {
 
+ 
     const Navigate = useNavigate ()
 
     return (
@@ -19,8 +20,8 @@ const Menus = ({Isinline = false}) => {
       <Menu
 
       mode=  { Isinline ?   "inline": "horizontal" }
-  
-      style={{  backgroundColor:'white', color:'#051039', border:'none',  fontSize: 19.5  }}
+      
+      style={{  backgroundColor:'white', color:'#051039', border:'none',  fontSize: 18  }}
 
         onClick={({key}) => {
            Navigate(key)

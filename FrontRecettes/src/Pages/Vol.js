@@ -1,9 +1,10 @@
 import React from 'react';
+import { CardVols } from '../Components/Card/Card';
 
 const Vol = () => {
     return (
-        <div>
-            Nos vols
+        <div style={{marginTop:'165px'}} >
+            <CardVols titre="Nos vols" />
         </div>
     );
 };

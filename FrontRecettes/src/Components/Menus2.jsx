@@ -20,18 +20,24 @@ const Menus2 = ({Isinline= false}) => {
 
             mode=  { Isinline ?   "inline": "horizontal" }
             
-            style={{ color:'#051039',  fontSize: 19.5  }}
+            style={{ color:'#051039',  fontSize: 18  }}
 
             onClick={({key}) => {
                     Navigate(key)
                     }}
             items={[
+
          { label : 'Tableau de Bord', key : '/', icon: <DashboardOutlined/> },
+
            {label : 'Vente', key : 'Vente',  icon: <FaIcons.FaShopify/>},
+
            {  label : 'Recettes',key : 'Recettes',  icon: <AccountBookOutlined/>},
+
            {label : 'Nos Vols', key : 'Vols',  icon:<MdIcons.MdOutlineFlightTakeoff/>},
         ]} >
+
         </Menu>
+        
         </div>
     );
 }

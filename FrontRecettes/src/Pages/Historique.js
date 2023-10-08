@@ -1,9 +1,10 @@
 import React from 'react';
+import { CardHistorique } from '../Components/Card/Card';
 
 const Historique = () => {
     return (
-        <div>
-            Historiques
+        <div style={ {marginTop:"165px" }}>
+            <CardHistorique  titre=" Historique "/>
         </div>
     );
 };

@@ -10,7 +10,7 @@ import * as AiIcons from "react-icons/ai";
 function App() {
 
   const [openMenu, SetOpenMenu] = useState(false)
-
+  const Url = "../Assets/Images/Logo.ico"
   const HandleClose = () => {
     SetOpenMenu(false)
   }
@@ -23,15 +23,22 @@ function App() {
     <div className="App" >
 
       <div className="Navbar">
-      <div 
-      className="menuIcon"
 
-      style={{ backgroundColor:'white', color:'#880808',  height: 50,  paddingLeft:12, paddingTop:12, }}>
+      <div className="menuIcon"
 
-        <AiIcons.AiOutlineMenuUnfold
-        onClick={HandleOpen}
-        style={{ color: '#880808',fontSize : 24,
-        }} />
+      style={{ backgroundColor:'white', color:'#880808', }}>
+
+        <div className="Imenu">
+        <AiIcons.AiOutlineMenu onClick={HandleOpen} style={{ color: '#880808',fontSize : 24, }} /> 
+        </div>
+        <div className="logoEntreprise"> 
+            <img  src= {Url} alt="Logo" />
+        </div>
+        <div className="epace">
+        </div>
+        <div className="deconnexion"> 
+           <AiIcons.AiOutlineLogout/> Deconnexion
+        </div>
       </div>
       <span className="headerMenu">
         <Menus2/>
@@ -46,17 +53,15 @@ function App() {
           open ={openMenu}  
           closable={true} 
           onClose={HandleClose}>
-          <Menus Isinline />
+          <Menus Isinline  />
      </Drawer>
 
      <div className="Content">
-      <div className="image">
-      <AppContent/>
-      </div>
-      </div>
-
+        <div className="image">
+        <AppContent/>
+        </div>
+        </div>
       <Appfooter/>
-
     </div>
   );
 }

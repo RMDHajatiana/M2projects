@@ -10,12 +10,8 @@ export const CardAvion = ({titre}) => {
     className='cardBorder'
     bordered={false}
     headStyle={{ border:'none', textAlign:'center' }}
-    style={{
-      width: '1220px',
-      height: '85vh' ,
-      margin: '70px 70px 0px 56px',
-
-    }}>
+    rootClassName='card'
+>
 
   </Card>
   );
@@ -30,13 +26,7 @@ export const CardVols = ({titre}) => {
     className='cardBorder'
     bordered={false}
     headStyle={{ border:'none', textAlign:'center' }}
-    style={{
-      width: '1220px',
-      height: '85vh' ,
-      margin: '70px 70px 0px 56px',
-
-    }}>
-
+    rootClassName='card'>
   </Card>
   );
 };
@@ -51,13 +41,7 @@ export const CardPassager = ({titre}) => {
     className='cardBorder'
     bordered={false}
     headStyle={{ border:'none', textAlign:'center' }}
-    style={{
-      width: '1220px',
-      height: '85vh' ,
-      margin: '70px 70px 0px 56px',
-
-    }}>
-
+    rootClassName='card'>
       <div>
         body
       </div>
@@ -74,14 +58,8 @@ export const CardHistorique = ({titre}) => {
     title= {titre}
     className='cardBorder'
     bordered={false}
-    headStyle={{ border:'none', textAlign:'center' }}
-    style={{
-      width: '1220px',
-      height: '85vh' ,
-      margin: '70px 70px 0px 56px',
-
-    }}>
-
+    rootClassName='card'
+    headStyle={{ border:'none', textAlign:'center' }}>
   </Card>
   );
 };
@@ -96,11 +74,38 @@ export const CardClasse = ({titre}) => {
     className='cardBorder'
     bordered={false}
     headStyle={{ border:'none', textAlign:'center' }}
-    style={{
-      width: '1220px',
-      height: '85vh' ,
-      margin: '70px 70px 0px 56px',
-    }}>
+    rootClassName='card'>
+
+  </Card>
+  );
+};
+
+export const CardVente = ({titre}) => {
+
+  return (
+
+    < Card
+    title= {titre}
+    className='cardBorder'
+    rootClassName='card'
+    bordered={false}
+    headStyle={{ border:'none', textAlign:'center' }}>
+
+  </Card>
+  );
+};
+
+
+export const CardRecettes = ({titre}) => {
+
+  return (
+
+    < Card
+    title= {titre}
+    className='cardBorder'
+    rootClassName='card'
+    bordered={false}
+    headStyle={{ border:'none', textAlign:'center' }}>
 
   </Card>
   );

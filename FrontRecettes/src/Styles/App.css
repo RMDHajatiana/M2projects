@@ -1,39 +1,70 @@
 
 @import url("../Assets/fonts/poppins/font.css");
 
-@media (max-width : 600px ) {
-    .headerMenu {
-        display : none;
+@media (max-width : 1349px ) {
+    .conteneur {
+        width: 90%;
     }
 }  
 
-@media   (min-width : 600px ) {
+.App {
+    flex-direction: row;
+    display: block;
+    background-color: #c0baba7e; 
+}
+
+@media(max-width: 1000px ) {
+    .headerMenu {
+        display : none;
+    }
+}
+
+
+
+/* @media   (min-width : 600px ) {
     .AvionStyle{
         display: block;
         width: 470px;
         height: 80vh;
         margin: 70px 6px 0px;
     }
-}    
+}     */
 
-.styleAvion {
-    margin-top:165px,
-}
 
-.App {
+
+
+/* Nav Menu/logo/deconnexion */
+
+.menuIcon {
+    display: flex;
     flex-direction: row;
-    display: block;
-    background-color: #f3ebeb88; 
+    align-items: center;
+    white-space:nowrap;
+    align-self:center;
+    height: 60px;
 }
 
-@media (min-height: 60vh ) {
-    .menuIcon {
-        display: block;
-    }
-}    
+.logoEntreprise {
+    width: 300px;
+}
+
+.deconnexion {
+    width: 130px;
+    height: 30px;
+    padding-left: 10px;
+}
+.Imenu {
+    width: 46px;
+    border-left-width: 0px;
+    margin-left: 12px;
+}
+.epace {
+    width: 840px;
+}
+
+
 
 body {
-    font-size: 19.5;
     font-family: "Poppins", cursive, "open-sans";
 }
 
@@ -76,7 +107,6 @@ body {
 
 p {
     text-align: center;
-    font-size: 18;
 }
 
 .copyright {
@@ -84,4 +114,11 @@ p {
     height: 100px;
     margin-top: 94px;
     background-color: #0a0a0a67;
+}
+
+
+.card{
+    width: 1220px;
+    height: 85vh ;
+    margin: 70px 70px 0px 60px ;
 }

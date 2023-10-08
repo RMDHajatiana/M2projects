@@ -10,8 +10,7 @@ import Historique from '../Pages/Historique';
 import Avion from '../Pages/Avion';
 
 const Navigation = () => {
-    return (
-        <div >
+    return ( 
         <Routes>
             <Route path="/" element = { <Dashbord/> } />
             <Route path="/Vente" element = { <Reservation/> } />
@@ -22,7 +21,6 @@ const Navigation = () => {
             <Route path="/Passager" element = { <Passagers/> } />
             <Route path="/Historique" element = { <Historique/> } />
       </Routes>
-        </div>
     );
 };
 
