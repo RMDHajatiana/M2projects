@@ -38,17 +38,23 @@ namespace Recettes.Controllers
 
                 while (await reader.ReadAsync())
                 {
-                    int IdTarif = reader.GetInt32(reader.GetOrdinal("code_tarif"));
+                    int IdR = reader.GetInt32(reader.GetOrdinal("num_reservation"));
+
                     int IdPerso = reader.GetInt32(reader.GetOrdinal("id_perso"));
+
                     DateTime DateTraitement = reader.GetDateTime(reader.GetOrdinal("date_traitement"));
-                    double Recettes = reader.GetInt32(reader.GetOrdinal("recettes"));
+
+                    double Recette = reader.GetInt32(reader.GetOrdinal("recettes"));
 
                     var Traitement = new Traiter
                     {
-                        Code_tarif = IdTarif,
+                        Num_reservation = IdR,
+
                         Id_perso = IdPerso,
+
                         Date_traitement = DateTraitement,
-                        Recettes = Recettes,
+
+                        Recettes = Recette,
                     };
 
                     ListR.Add(Traitement);

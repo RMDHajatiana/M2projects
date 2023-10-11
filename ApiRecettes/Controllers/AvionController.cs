@@ -42,10 +42,14 @@ namespace Recettes.Controllers
 
                         string type = reader.GetString(reader.GetOrdinal("type_aeronef"));
 
+                        int capacit = reader.GetInt32(reader.GetOrdinal("capacite"));
+
+
                         var avions = new Avion
                         {
                             Id_aeronef = id,
                             Type_aeronef = type,
+                            Capacite = capacit,
                         };
 
                         listAvion.Add(avions);
@@ -96,10 +100,13 @@ namespace Recettes.Controllers
 
                             string TypeAeronef = reader.GetString(reader.GetOrdinal("type_aeronef"));
 
+                            int capacit = reader.GetInt32(reader.GetOrdinal("capacite"));
+
                             var avion = new Avion
                             {
                                 Id_aeronef = AvionId,
                                 Type_aeronef = TypeAeronef,
+                                Capacite = capacit,
                             };
 
                             return Ok(avion);
@@ -131,7 +138,7 @@ namespace Recettes.Controllers
             try
 
             {
-                string Insertsql = "INSERT INTO avion (type_aeronef) VALUES (@type_aeronef)" ;
+                string Insertsql = "INSERT INTO avion (type_aeronef,capacite) VALUES (@type_aeronef,@capacite)" ;
 
                 using (var DB = new AppDbContext())
 
@@ -147,6 +154,8 @@ namespace Recettes.Controllers
                         {
 
                             command.Parameters.AddWithValue("type_aeronef", avion.Type_aeronef);
+
+                            command.Parameters.AddWithValue("capacite", avion.Capacite);
 
                             await command.ExecuteNonQueryAsync();
 
@@ -178,7 +187,7 @@ namespace Recettes.Controllers
 
             try 
             {
-                string UpdateSql = " UPDATE  avion set type_aeronef = @type_aeronef where id_aeronef=@id  "; 
+                string UpdateSql = " UPDATE  avion set type_aeronef = @type_aeronef, capacite=@capacite where id_aeronef=@id  "; 
                 
                 using ( var DB = new AppDbContext())
 
@@ -188,6 +197,8 @@ namespace Recettes.Controllers
 
                 {
                     command.Parameters.AddWithValue("type_aeronef", avion.Type_aeronef);
+
+                    command.Parameters.AddWithValue("capacite", avion.Capacite);
 
                     command.Parameters.AddWithValue("id", id);
 

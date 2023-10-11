@@ -122,20 +122,9 @@ body {
     margin-top: 7.5%;
     width: 100%;
     height: 250px;
-   background-image: url("../Assets/Images/jet_privé.png");
+   background-image: url("../Assets/Images/Boeing-737.jpg");
 }
 
-/* @media screen and (min-width: 1455px) {
-    .image {
-      max-width: 100%; 
-      height: auto;
-    }
-    .deconnexion {
-        max-width: 100%;
-        height: auto;
-        padding-left: auto;
-    }
-  } */
 
 .Appfooter {
     margin-top: 10%;

@@ -8,9 +8,9 @@ namespace Recettes.Models
     public class Traiter
     {
         [Key]
-        [Column("code_tarif")]
-        public int Code_tarif { get; set; }
-        public Tarif? Tarif { get; set; }
+        [Column("num_reservation")]
+        public int Num_reservation { get; set; }
+        public Reservation? Reservation { get; set; }
 
         [Column("id_perso")]
         public int Id_perso { get; set; }

@@ -12,6 +12,9 @@ namespace Recettes.Models
         public int Id_aeronef { get; set; }
 
         [Column("type_aeronef")]
-        public string? Type_aeronef { get; set; } 
+        public string? Type_aeronef { get; set; }
+
+        [Column("capacite")]
+        public int Capacite { get; set; }
     }
 }

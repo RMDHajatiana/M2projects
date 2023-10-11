@@ -36,7 +36,7 @@ namespace Recettes.Models
 
             modelBuilder.Entity<Vol>().HasOne(r => r.Itineraire).WithMany().HasForeignKey(r => r.Code_escale);
 
-            modelBuilder.Entity<Traiter>().HasOne(r => r.Tarif).WithMany().HasForeignKey(r => r.Code_tarif);
+            modelBuilder.Entity<Traiter>().HasOne(r => r.Reservation).WithMany().HasForeignKey(r => r.Num_reservation);
 
             modelBuilder.Entity<Traiter>().HasOne(r => r.Personne).WithMany().HasForeignKey(r => r.Id_perso);
 
@@ -44,7 +44,7 @@ namespace Recettes.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(" Host=localhost; Port=5432; Database=test; Username=postgres; Password=0000 ");
+            optionsBuilder.UseNpgsql(" Host=localhost; Port=5432; Database=crud; Username=postgres; Password=0000 ");
         }
 
     }
