@@ -2,7 +2,6 @@ import React, {  } from 'react';
 import { ConfigProvider, Menu } from 'antd';
 import {
     DashboardOutlined,
-    AccountBookOutlined,
     UserOutlined,
     HistoryOutlined,
     DollarOutlined, 
@@ -11,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
 import * as SiIcons from "react-icons/si";
-import * as AiIcons from "react-icons/ai";
 
 
 export const Menus = ({Isinline = false, onSelect }) => {
@@ -25,10 +23,10 @@ export const Menus = ({Isinline = false, onSelect }) => {
       components: {
           Menu: {
             iconSize: 17.5,
-            itemActiveBg:'#880808',
-            itemBg:'#880808',
+            itemActiveBg:'#b82626',
+            itemBg:'#b82626',
             itemColor:'#051039',
-            itemHoverBg:'#880808',
+            itemHoverBg:'#b82626',
             itemHoverColor:'white',
             itemSelectedBg :'#8808087d',
             itemSelectedColor:'white'
@@ -68,8 +66,6 @@ export const Menus = ({Isinline = false, onSelect }) => {
               
               { label : 'Historique',key : 'Historique',  icon: <HistoryOutlined/> },
 
-              { label : 'Paramètre',key : 'Parametre',  icon: <AiIcons.AiOutlineSetting/> },
-
               { label : 'À propos de',key : 'a_propos',  icon: <SiIcons.SiAboutdotme/> },
           ]} >
 
@@ -85,13 +81,28 @@ export const Menus2 = ({Isinline= false}) => {
   const Navigate = useNavigate ()
 
   return (
-      <div  className='Menus2' >
+
+    <ConfigProvider 
+    theme={{
+      components: {
+        Menu: {
+          iconSize: 17.5,
+          itemColor:'#051039',
+          itemHoverColor:'#b82626',
+          horizontalItemSelectedBg:'#f7f7f7',
+          horizontalItemHoverColor:'#b82626',
+          horizontalItemSelectedColor:'#b82626',
+          activeBarHeight:3
+          
+        },
+    },
+    }}>
 
       <Menu
 
       mode=  { Isinline ?   "inline": "horizontal" }
       
-      style={{ color:'#051039',  fontSize: 16, fontFamily : '"Poppins", cursive, "open-sans"',  }}
+      style={{  fontSize: 16, fontFamily : '"Poppins", cursive, "open-sans"',  }}
 
       onClick={({key}) => {
               Navigate(key)
@@ -102,13 +113,14 @@ export const Menus2 = ({Isinline= false}) => {
 
      {label : 'Vente', key : 'Vente',  icon: <FaIcons.FaShopify/>},
 
-     {  label : 'Recettes',key : 'Recettes',  icon: <AccountBookOutlined/>},
+     {  label : 'Recettes',key : 'Recettes',  icon: <DollarOutlined/>},
 
      {label : 'Nos Vols', key : 'Vols',  icon:<MdIcons.MdOutlineFlightTakeoff/>},
   ]} >
 
   </Menu>
-  
-  </div>
+
+  </ConfigProvider>
+
 );
 }

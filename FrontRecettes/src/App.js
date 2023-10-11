@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { Button, ConfigProvider, Drawer } from "antd";
 import { Menus } from "./Components/Menus";
 import { Menus2 } from "./Components/Menus";
@@ -18,38 +18,36 @@ function App() {
     SetOpenMenu(true)
   }
 
-  useEffect(() => {
+const [show, setShow] = useState(true)
 
-    const handleScroll = () => {
+const navControl = () => {
+  if (window.scrollY > 100) {
+    setShow(false)
+  } else {
+    setShow(true)
+  }
+}
 
-      const secondNavBar = document.querySelector('.headerMenu')
-
-      if (window.scrollY  >=  500)
-       {
-        secondNavBar.classList.add('visible')
-      } 
-      secondNavBar.classList.remove('visible')
-      
-    }
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
+useEffect(()=> {
+  window.addEventListener("scroll", navControl)
+  return () => {
+    window.removeEventListener("scroll", navControl)
+  }
   }, [])
+
 
   return (
 
     <div className="App" >
 
-      <div className="Navbar">
+      {/* <div className="Navbar"> */}
 
       <div className="menuIcon"
 
-      style={{ backgroundColor:'white', color:'#880808', }}>
+      style={{ backgroundColor:'white', color:'#b82626', }}>
 
         <div className="Imenu">
-        <AiIcons.AiOutlineMenu onClick={HandleOpen} style={{ color: '#880808',fontSize : 22, }} /> 
+        <AiIcons.AiOutlineMenu onClick={HandleOpen} style={{ color: '#b82626',fontSize : 22, }} /> 
         </div>
         <div className="logoEntreprise"> 
             <img  src= "./Logo1.jpg" alt="Logo" />
@@ -61,29 +59,29 @@ function App() {
         theme={{
           components : {
             Button : {
-                primaryColor :'#880808',
-                defaultBorderColor:'#880808',
-                linkHoverBg:'#8808087d',
-                defaultColor:'white',
-                textHoverBg:'white',
-                ghostBg:'#880808',
-                defaultGhostColor:'white',
-                defaultGhostBorderColor:'#880808',
-            }
+             //   primaryColor :'#b82626',
+            //    defaultBorderColor:'#b82626',
+                linkHoverBg:'#88080833',
+            //     defaultColor:'white',
+            //     textHoverBg:'white',
+            //     ghostBg:'#880808',
+            //     defaultGhostColor:'white',
+            //     defaultGhostBorderColor:'#880808',
+               }
           }
 
         }} >
           <Button  type="link"
-          style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#880808'}}
+          style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}
           > <LoginOutlined/> Deconnexion</Button>
          </ConfigProvider>
 
         </div>
       </div>
-      <div className="headerMenu">
+      <div className={ show ? 'headerMenu' : 'noMenu' }>
         <span ><Menus2/></span>
       </div>
-      </div>
+      {/* </div> */}
 
 {/* Drawer menu */}
 

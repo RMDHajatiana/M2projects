@@ -7,11 +7,12 @@ export const CardAvion = ({titre}) => {
 
     < Card
     title= {titre}
-    style={{   width: '100% ',  height: '90vh', marginLeft:'40px', maxWidth:'1268px', fontFamily : '"Poppins", cursive, "open-sans"'   }}
+    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
     className='cardBorder'
+    bodyStyle={{ height:'95%', overflow:'auto' }}
     bordered={false}
     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}
-    rootClassName='card'
+   
 >
 
   </Card>
@@ -24,8 +25,9 @@ export const CardVols = ({titre}) => {
 
     < Card
     title= {titre}
-    style={{   width: '100% ',  height: '90vh', marginLeft:'40px', maxWidth:'1268px', fontFamily : '"Poppins", cursive, "open-sans"'   }}
+    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
     className='cardBorder'
+    bodyStyle={{ height:'95%', overflow:'auto' }}
     bordered={false}
     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}
     rootClassName='card'>
@@ -40,11 +42,13 @@ export const CardPassager = ({titre}) => {
 
     < Card
     title= {titre}
-    style={{   width: '100% ',  height: '90vh', marginLeft:'40px', maxWidth:'1268px', fontFamily : '"Poppins", cursive, "open-sans"'  }}
+    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'  }}
     className='cardBorder'
+    bodyStyle={{ height:'95%', overflow:'auto' }}
     bordered={false}
     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}
     rootClassName='card'>
+
       <div>
         body
       </div>
@@ -59,8 +63,9 @@ export const CardHistorique = ({titre}) => {
 
     < Card
     title= {titre}
-    style={{   width: '100% ',  height: '90vh', marginLeft:'40px', maxWidth:'1268px', fontFamily : '"Poppins", cursive, "open-sans"'   }}
+    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
     className='cardBorder'
+    bodyStyle={{ height:'95%', overflow:'auto' }}
     bordered={false}
     rootClassName='card'
     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
@@ -75,9 +80,10 @@ export const CardClasse = ({titre}) => {
 
     < Card
     title= {titre}
-    style={{   width: '100% ',  height: '90vh', marginLeft:'40px', maxWidth:'1268px', fontFamily : '"Poppins", cursive, "open-sans"'   }}
+    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
     className='cardBorder'
     bordered={false}
+    bodyStyle={{ height:'95%', overflow:'auto' }}
     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}
     rootClassName='card'>
   </Card>
@@ -90,9 +96,10 @@ export const CardVente = ({titre}) => {
 
     < Card
     title= {titre}
-    style={{   width: '100% ',  height: '90vh', marginLeft:'40px', maxWidth:'1268px', fontFamily : '"Poppins", cursive, "open-sans"'   }}
+    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
     className='cardBorder'
     rootClassName='card'
+    bodyStyle={{ height:'95%', overflow:'auto' }}
     bordered={false}
     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
   </Card>
@@ -106,9 +113,10 @@ export const CardRecettes = ({titre}) => {
 
     < Card
     title= {titre}
-    style={{   width: '100% ',  height: '90vh', marginLeft:'40px', maxWidth:'1268px', fontFamily : '"Poppins", cursive, "open-sans"'   }}
+    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
     className='cardBorder'
     rootClassName='card'
+    bodyStyle={{ height:'95%', overflow:'auto' }}
     bordered={false}
     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
 
@@ -122,12 +130,15 @@ export const CardApropos = ({titre}) => {
 
     < Card
     title= {titre}
-    style={{   width: '100% ',  height: '90vh', marginLeft:'40px', maxWidth:'1268px', fontFamily : '"Poppins", cursive, "open-sans"'   }}
+    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
     className='cardBorder'
     rootClassName='card'
+    bodyStyle={{ height:'95%', overflow:'auto' }}
     bordered={false}
     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
-
+        <div>
+        body
+      </div>
   </Card>
   );
 };
