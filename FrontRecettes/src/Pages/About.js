@@ -3,7 +3,7 @@ import { CardApropos } from '../Components/Card/Card';
 
 const About = () => {
     return (
-        <div style={{marginTop:'165px'}} className='conteneur' >
+        <div  className='conteneur' >
         <CardApropos  titre = "À propos de nous"  />
     </div>
     );

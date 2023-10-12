@@ -3,7 +3,7 @@ import { CardClasse } from '../Components/Card/Card';
 
 const Classe = () => {
     return (
-        <div style={{ marginTop:"165px" }} className='conteneur'>
+        <div className='conteneur'>
             <CardClasse titre="Les Classes de Services"  />
         </div>
     );

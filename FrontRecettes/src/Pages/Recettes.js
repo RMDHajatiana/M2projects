@@ -3,7 +3,7 @@ import { CardRecettes } from '../Components/Card/Card';
 
 const Recettes = () => {
     return (
-        <div style={{marginTop:"165px"}} className='conteneur'>
+        <div  className='conteneur'>
             <CardRecettes titre="Recettes" />
         </div>
     );

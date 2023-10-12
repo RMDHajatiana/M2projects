@@ -18,10 +18,12 @@ function App() {
     SetOpenMenu(true)
   }
 
+// Disparaitre when Scrowl
+
 const [show, setShow] = useState(true)
 
 const navControl = () => {
-  if (window.scrollY > 100) {
+  if (window.scrollY > 98) {
     setShow(false)
   } else {
     setShow(true)
@@ -40,7 +42,7 @@ useEffect(()=> {
 
     <div className="App" >
 
-      {/* <div className="Navbar"> */}
+      <div className="navBar" >
 
       <div className="menuIcon"
 
@@ -81,7 +83,6 @@ useEffect(()=> {
       <div className={ show ? 'headerMenu' : 'noMenu' }>
         <span ><Menus2/></span>
       </div>
-      {/* </div> */}
 
 {/* Drawer menu */}
 
@@ -93,14 +94,13 @@ useEffect(()=> {
           onClose={HandleClose}>
           <Menus Isinline  onSelect={HandleClose}  />
      </Drawer>
-
+     </div>
+      <div className="styleContent" ></div>
      <div className="Content">
-        <div className="image">
         <AppContent/>
-        </div>
-        </div>
+      </div>
       <Appfooter/>
-    </div>
+  </div>
   );
 }
 

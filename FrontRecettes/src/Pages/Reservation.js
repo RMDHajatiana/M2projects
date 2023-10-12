@@ -3,7 +3,7 @@ import { CardVente } from '../Components/Card/Card';
 
 const Reservation = () => {
     return (
-        <div style={{marginTop:'165px'}} className='conteneur'>
+        <div  className='conteneur'>
             <CardVente titre="Toutes les réservations" />
         </div>
     );
