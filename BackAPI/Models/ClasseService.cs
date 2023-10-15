@@ -14,6 +14,7 @@ namespace BackAPI.Models
         public int Num_siege { get; set; }
 
         [Column("type_classe")]
+        [StringLength(30)]
         public string? Type_classe { get; set; }
     }
 }

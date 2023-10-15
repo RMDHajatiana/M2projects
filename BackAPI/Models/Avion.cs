@@ -11,6 +11,7 @@ namespace BackAPI.Models
         public int Id_aeronef { get; set; }
 
         [Column("type_aeronef")]
+        [StringLength(30)]
         public string? Type_aeronef { get; set; }
         /*
         [NotMapped]

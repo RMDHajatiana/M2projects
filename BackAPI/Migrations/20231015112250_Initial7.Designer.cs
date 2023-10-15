@@ -3,6 +3,7 @@ using System;
 using BackAPI.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231015112250_Initial7")]
+    partial class Initial7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,8 +65,7 @@ namespace BackAPI.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id_aeronef"));
 
                     b.Property<string>("Type_aeronef")
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
+                        .HasColumnType("text")
                         .HasColumnName("type_aeronef");
 
                     b.HasKey("Id_aeronef");
@@ -85,8 +87,7 @@ namespace BackAPI.Migrations
                         .HasColumnName("num_siege");
 
                     b.Property<string>("Type_classe")
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
+                        .HasColumnType("text")
                         .HasColumnName("type_classe");
 
                     b.HasKey("Id_classe");
@@ -126,18 +127,15 @@ namespace BackAPI.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id_passager"));
 
                     b.Property<string>("Adresse_passager")
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)")
+                        .HasColumnType("text")
                         .HasColumnName("adresse_passager");
 
                     b.Property<string>("Email_passager")
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)")
+                        .HasColumnType("text")
                         .HasColumnName("email_passager");
 
                     b.Property<string>("Nom_passager")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("text")
                         .HasColumnName("nom_passager");
 
                     b.Property<long>("Num_passeport")
@@ -149,8 +147,7 @@ namespace BackAPI.Migrations
                         .HasColumnName("phone_passager");
 
                     b.Property<string>("Prenom_passager")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("text")
                         .HasColumnName("prenom_passager");
 
                     b.HasKey("Id_passager");
@@ -234,23 +231,19 @@ namespace BackAPI.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Num_matricule"));
 
                     b.Property<string>("Adresse_user")
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)")
+                        .HasColumnType("text")
                         .HasColumnName("adresse_user");
 
                     b.Property<string>("Email_user")
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)")
+                        .HasColumnType("text")
                         .HasColumnName("email_user");
 
                     b.Property<string>("Mdp_user")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
+                        .HasColumnType("text")
                         .HasColumnName("mdp_user");
 
                     b.Property<string>("Nom_user")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("text")
                         .HasColumnName("nom_user");
 
                     b.Property<long>("Phone_user")
@@ -258,13 +251,11 @@ namespace BackAPI.Migrations
                         .HasColumnName("phone_user");
 
                     b.Property<string>("Prenom_user")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("text")
                         .HasColumnName("prenom_user");
 
                     b.Property<string>("Role_user")
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)")
+                        .HasColumnType("text")
                         .HasColumnName("role_user");
 
                     b.HasKey("Num_matricule");
@@ -298,8 +289,7 @@ namespace BackAPI.Migrations
                         .HasColumnName("id_itineraire");
 
                     b.Property<string>("Num_vol")
-                        .HasMaxLength(15)
-                        .HasColumnType("character varying(15)")
+                        .HasColumnType("text")
                         .HasColumnName("num_vol");
 
                     b.Property<double>("Remboursement")

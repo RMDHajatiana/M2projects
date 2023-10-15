@@ -12,6 +12,7 @@ namespace BackAPI.Models
         public int Id_vol { get; set; }
 
         [Column("num_vol")]
+        [StringLength(15)]
         public string? Num_vol { get; set; }
 
         [Column("id_aeronef")]
