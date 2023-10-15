@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Button, Card, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
 export const CardAvion = ({titre}) => {
 
@@ -102,6 +103,10 @@ export const CardVente = ({titre}) => {
     bodyStyle={{ height:'95%', overflow:'auto' }}
     bordered={false}
     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
+
+      <Upload>
+        <Button icon ={ <UploadOutlined/>} > Importer </Button>
+      </Upload>
   </Card>
   );
 };

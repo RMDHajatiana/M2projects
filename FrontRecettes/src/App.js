@@ -23,7 +23,7 @@ function App() {
 const [show, setShow] = useState(true)
 
 const navControl = () => {
-  if (window.scrollY > 98) {
+  if (window.scrollY > 105) {
     setShow(false)
   } else {
     setShow(true)
