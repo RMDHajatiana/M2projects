@@ -29,7 +29,7 @@ namespace BackAPI.Controllers
           {
               return NotFound();
           }
-            return await _context.Avion.ToListAsync();
+            return await _context.Avion.OrderBy(a => a.Id_aeronef).ToListAsync();
         }
 
         // GET: api/Avions/5
