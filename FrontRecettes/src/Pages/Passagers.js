@@ -4,7 +4,7 @@ import { CardPassager } from '../Components/Card/Card';
 const Passagers = () => {
     return (
         <div className='conteneur'>
-            <CardPassager titre="Tous les Passagers"/>
+            <CardPassager titre="Liste des Passagers"/>
         </div>
     );
 };
