@@ -20,7 +20,6 @@ export const TablePassagers = ({title, IndexData, data, size, handleDelete, hand
           )}
       })
 
-
     return (
         <div initial={{ opacity: 0 }} transition={{ duration: 0.5 }} animate={{ opacity: 1 }} >
         <ConfigProvider 

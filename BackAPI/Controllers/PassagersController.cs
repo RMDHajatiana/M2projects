@@ -29,7 +29,7 @@ namespace BackAPI.Controllers
           {
               return NotFound();
           }
-            return await _context.Passager.ToListAsync();
+            return await _context.Passager.OrderBy(id => id.Id_passager).ToListAsync();
         }
 
         // GET: api/Passagers/5

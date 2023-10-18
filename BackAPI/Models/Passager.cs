@@ -21,14 +21,14 @@ namespace BackAPI.Models
         public string? Prenom_passager { get; set; }
 
         [Column("phone_passager")]
-        public long Phone_passager { get; set; }
+        public string? Phone_passager { get; set; }
 
         [Column("email_passager")]
         [StringLength(25)]
         public string? Email_passager { get; set; }
 
         [Column("num_passeport")]
-        public long Num_passeport { get; set; }
+        public string? Num_passeport { get; set; }
 
         [Column("adresse_passager")]
         [StringLength(25)]
