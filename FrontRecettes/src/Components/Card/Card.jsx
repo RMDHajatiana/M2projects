@@ -2,9 +2,9 @@ import { Button, Card, ConfigProvider, Input, Modal, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import * as BiIcons from 'react-icons/bi';
-import { TableAvion } from '../Table';
+import { TableClasse } from '../Table';
 import axios from 'axios';
-import { ModalAvion } from '../Modal';
+import { ModalClasse } from '../Modal';
 
 
 export const CardVols = ({titre}) => {
@@ -23,65 +23,9 @@ export const CardVols = ({titre}) => {
   )
 }
 
-
-export const CardHistorique = ({titre}) => {
-
-  return (
-
-    < Card
-    title= {titre}
-    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
-    className='cardBorder'
-    bodyStyle={{ height:'95%', overflow:'auto' }}
-    bordered={false}
-    rootClassName='card'
-    headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
-  </Card>
-  );
-};
-
-
-export const CardClasse = ({titre}) => {
-
-  return (
-
-    < Card
-    title= {titre}
-    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
-    className='cardBorder'
-    bordered={false}
-    bodyStyle={{ height:'92%', overflow:'auto'}}
-    headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}
-    rootClassName='card'>
-  </Card>
-  )
-};
-
-export const CardVente = ({titre}) => {
-
-  return (
-
-    < Card
-    title= {titre}
-    style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
-    className='cardBorder'
-    rootClassName='card'
-    bodyStyle={{ height:'95%', overflow:'auto' }}
-    bordered={false}
-    headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
-
-      <Upload>
-        <Button icon ={ <UploadOutlined/>} > Importer </Button>
-      </Upload>
-  </Card>
-  );
-};
-
-
 export const CardRecettes = ({titre}) => {
 
   return (
-
     < Card
     title= {titre}
     style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
@@ -92,8 +36,8 @@ export const CardRecettes = ({titre}) => {
     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
 
   </Card>
-  );
-};
+  )
+}
 
 export const CardApropos = ({titre}) => {
 

@@ -33,7 +33,8 @@
 }
 
 .styleContent {
-   background-image: url("../Assets/Images/Boeing-737.jpg");
+   /* background-image: url("../Assets/Images/Boeing-737.jpg"); */
+   background-color: #b82626;
    height: 300px;
     width: 100%;
     z-index: 100;

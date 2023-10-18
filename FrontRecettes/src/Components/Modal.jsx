@@ -117,3 +117,49 @@ export const ModalAvion = ({  titre, okText, open, cancelText, onCancel, handleS
         </Modal>
     )
 }
+
+export const ModalClasse = ({  titre, okText, open, cancelText, onCancel, handleSave}) => {
+
+    const [nomSiege, setNumSiege] = useState()
+    const [type, setType] = useState()
+
+    handleSave = () => {
+        const url = "http://localhost:5160/api/ClasseServices"
+        const data = 
+        {
+            "num_siege":nomSiege,
+            "type_classe":type,
+        }
+        axios.post(url, data)
+        .then(() => {
+            onCancel()
+            setNumSiege()
+            setType('')
+          })
+        .catch(error => console.log(error))
+      }
+    return (
+        <Modal   
+        style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
+        title = {titre} 
+        okText = {okText} 
+        open  = {open}
+        cancelText = {cancelText}
+        onCancel={onCancel}
+        onOk={ handleSave  }>
+            <ConfigProvider theme={{
+                components : {
+                    Input: {
+                        activeBorderColor:'#b82626',
+                        hoverBorderColor:'#b82626'
+                      }
+                }
+            }} >
+            <label htmlFor="nom">Numéro de Siège :</label>
+            <Input onChange={(e) => setNumSiege(e.target.value)}  value={nomSiege} />
+            <label htmlFor="nom">Type de classe de service :</label>
+            <Input onChange={(e) => setType(e.target.value)}  value={type} />
+            </ConfigProvider>
+        </Modal>
+    )
+}
