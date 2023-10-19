@@ -1,11 +1,14 @@
 import React, {  useEffect, useState } from "react";
 import { Button, ConfigProvider, Drawer } from "antd";
 import { Menus } from "./Components/Menus";
-import { Menus2 } from "./Components/Menus";
+import { Menus2 } from "./Components/Menu2";
 import AppContent from "./Components/AppContent";
 import Appfooter from "./Components/Appfooter"
 import * as AiIcons from "react-icons/ai";
 import { LoginOutlined } from "@ant-design/icons";
+import { MenuProvider } from "./Components/MenuContext";
+import { NavLink, Route, Routes } from "react-router-dom";
+import Login from "./Pages/Login";
 
 function App() {
 
@@ -37,8 +40,9 @@ useEffect(()=> {
   }
   }, [])
 
-
   return (
+
+    <MenuProvider>
 
     <div className="App" >
 
@@ -73,9 +77,17 @@ useEffect(()=> {
           }
 
         }} >
+          <NavLink to="/">
           <Button  type="link"
-          style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}
-          > <LoginOutlined/> Deconnexion</Button>
+            onClick={()=> {
+              console.log("login");
+              }}
+            style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}
+            > <LoginOutlined/> Deconnexion</Button>
+            </NavLink>
+          <Routes>
+            <Route path="/" element = { <Login/> } />
+          </Routes>
          </ConfigProvider>
 
         </div>
@@ -101,10 +113,8 @@ useEffect(()=> {
       </div>
       <Appfooter/>
   </div>
+  </MenuProvider>
   );
 }
-
-
-
 
 export default App;

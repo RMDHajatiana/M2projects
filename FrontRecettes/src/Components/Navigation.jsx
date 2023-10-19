@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Login from '../Pages/Login';
+//import Login from '../Pages/Login';
 import Dashbord from '../Pages/Dashbord';
 import Reservation from '../Pages/Reservation';
 import Vol from '../Pages/Vol';
@@ -14,7 +14,6 @@ import About from '../Pages/About';
 const Navigation = () => {
     return ( 
         <Routes>
-            <Route path="/" element = { <Login/> } />
             <Route path="/Tableau_de_bord" element = { <Dashbord/> } />
             <Route path="/Vente" element = { <Reservation/> } />
             <Route path="/Vols" element = { <Vol/> } />

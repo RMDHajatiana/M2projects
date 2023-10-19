@@ -15,7 +15,7 @@
 }
 
 .conteneur {
-    margin-top: -130px;
+    margin-top: -60px;
 }
 
 .App {
@@ -35,7 +35,7 @@
 .styleContent {
    /* background-image: url("../Assets/Images/Boeing-737.jpg"); */
    background-color: #b82626;
-   height: 300px;
+   height: 200px;
     width: 100%;
     z-index: 100;
     position: relative;
@@ -149,10 +149,9 @@ body {
 }
 
 
-
-
 p {
     text-align: center;
+    font-family:"Poppins", cursive, "open-sans";
 }
 
 .copyright {
@@ -162,6 +161,9 @@ p {
     background-color: #0a0a0a67;
 }
 
+Button {
+    font-family:"Poppins", cursive, "open-sans";
+}
 
 .card {
     justify-content: center;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Menus2 from './Menus2';
+import Menus2 from '../Components/Menu2';
 
 
 const Header = () => {
@@ -10,4 +10,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default Header

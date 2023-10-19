@@ -1,5 +1,9 @@
 import { combineReducers } from "redux";
+import selectionReducer from "./SelectionReducer";
 
-export default combineReducers ({
+ const rootReducer = combineReducers ({
     
+    menu: selectionReducer,
 })
+
+export default rootReducer

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { ConfigProvider, Input, Modal } from 'antd';
+import { ConfigProvider, Input, Modal, Upload, message } from 'antd';
+import * as FaIcons from 'react-icons/fa'
 import axios from 'axios';
 
 export const  ModalPassager =  ({titre, okText, cancelText, onCancel, handleSave, open}) =>  {
     
     const [nom, setNom] =useState('')
     const [prenom, setPrenom] =useState('')
-    const [telephone, setTelephone] =useState(34)
+    const [telephone, setTelephone] =useState('')
     const [email, setEmail] =useState('')
-    const [passeport, setPasseport] =useState(0)
+    const [passeport, setPasseport] =useState('')
     const [adresse, setAdresse] =useState('')
    
 
@@ -40,6 +41,7 @@ export const  ModalPassager =  ({titre, okText, cancelText, onCancel, handleSave
             <Modal   
             style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
             title = {titre} 
+            width= '350px'
             okText = {okText} 
             open  = {open}
             cancelText = {cancelText}
@@ -98,6 +100,7 @@ export const ModalAvion = ({  titre, okText, open, cancelText, onCancel, handleS
         <Modal   
         style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
         title = {titre} 
+        width= '350px'
         okText = {okText} 
         open  = {open}
         cancelText = {cancelText}
@@ -159,6 +162,62 @@ export const ModalClasse = ({  titre, okText, open, cancelText, onCancel, handle
             <Input onChange={(e) => setNumSiege(e.target.value)}  value={nomSiege} />
             <label htmlFor="nom">Type de classe de service :</label>
             <Input onChange={(e) => setType(e.target.value)}  value={type} />
+            </ConfigProvider>
+        </Modal>
+    )
+}
+
+
+export const ModalReservation = ({  titre, okText, open, cancelText, onCancel, handleSave}) => {
+
+    // Upload files //
+
+    const { Dragger } = Upload
+    const props = {
+    
+      name: 'file',
+      multiple: true,
+      action: 'http://localhost:5160/api/Reservations',
+    
+      onChange(info) {
+        const { status } = info.file;
+        if (status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (status === 'done') {
+          message.success(`${info.file.name} Importation avec succès.`);
+        } else if (status === 'error') {
+            console.log(info.file)
+          message.error(`${info.file.name} Erreur d'importaion.`);
+        }
+      },
+      onDrop(e) {
+        console.log('Dropped files', e.dataTransfer.files)
+      }
+    }
+    return (
+        <Modal   
+        style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
+        title = {titre} 
+        okText = {okText} 
+        open  = {open}
+        cancelText = {cancelText}
+        onCancel={onCancel}
+        onOk={ handleSave  }>
+            <ConfigProvider theme={{
+                components : {
+                    Upload: {
+                        activeBorderColor:'#b82626',
+                        hoverBorderColor:'#b82626'
+                      }
+                } }} >
+                    <Dragger {...props}>
+                        <p className="ant-upload-drag-icon">
+                        <FaIcons.FaFileUpload  fontSize={35} color='#b82626'/>
+                        </p>
+                        <p >Cliquer ou glisser le fichier ici </p>
+                        <p > Extension de fichier supporter : CSV, XML  </p>
+                    </Dragger>
             </ConfigProvider>
         </Modal>
     )

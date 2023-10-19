@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, ConfigProvider, Input, Upload } from 'antd';
+import { Button, Card, ConfigProvider, Input} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 //import { use } from 'i18next';
 import axios from 'axios';
 import { TablePassagers } from '../Components/Table';
+import { ModalReservation } from '../Components/Modal';
 
 const Reservation = () => {
 
@@ -56,6 +57,7 @@ const Reservation = () => {
         const intervale = setInterval(() => {
             fetch()
         }, 1000)
+        document.title = "Toutes les réservations"
         return () => clearInterval(intervale)
     })
 
@@ -75,7 +77,8 @@ const Reservation = () => {
                 bodyStyle={{ height:'95%', overflow:'auto' }}
                 bordered={false}
                 headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
-                                        <div style={{ marginBottom:14, display:'flex', flexDirection:'row', fontFamily: '"Poppins", cursive, "open-sans"' }} >
+                    <div className="cardBody">
+                  <div style={{ marginBottom:14, display:'flex', flexDirection:'row', fontFamily: '"Poppins", cursive, "open-sans"' }} >
                     <ConfigProvider theme={{
                         components : {
                         Button : {
@@ -109,6 +112,14 @@ const Reservation = () => {
                         IndexData={IndexData} 
                         size='small' />
 
+                        <ModalReservation
+                        titre="Importation "
+                        okText="Enregistrer"
+                        cancelText="Annuler"
+                        open = {open} 
+                        onCancel={()=> setOpen(false)}
+                        handleSave={()=> setOpen(false)}/>
+                    </div>
                 </Card>
             </div>
 

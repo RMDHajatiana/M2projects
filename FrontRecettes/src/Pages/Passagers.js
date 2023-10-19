@@ -39,6 +39,7 @@ const Passagers = () => {
           const intervale = setInterval(() => {
             fetch()
           }, 1000)
+          document.title = "Les Passagers"
           return () => clearInterval(intervale)
         },[])
         
@@ -187,6 +188,7 @@ const Passagers = () => {
                 style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
                 title = "Modification"
                 okText = "Enregistrer"
+                width= '300px'
                 open  = {openModalEdit }
                 onCancel={() => setOpenModalEdit(false)}
                 onOk={() => handleSaveUpdate()}

@@ -160,7 +160,8 @@ const Avion = () => {
 
                                     <Modal   
                                     style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
-                                    title = "Modification"
+                                    title = "Modification" 
+                                    width= '350px'
                                     okText = "Enregistrer"
                                     open  = {openModalEdit}
                                     cancelText ="Annuler"

@@ -41,6 +41,7 @@ const Classe = () => {
             const intervale = setInterval(() => {
               fetch()
             }, 1000)
+            document.title = "Les Classes de services"
             return () => clearInterval(intervale)
           })
         
@@ -166,6 +167,7 @@ const Classe = () => {
                         title = "Modification"
                         okText = "Enregistrer"
                         cancelText ="Annuler"
+                        width= '350px'
                         open  = {openModalEdit }
                         onCancel={() => setOpenModalEdit(false)}
                         onOk={() => handleSaveUpdate()} >
@@ -185,7 +187,7 @@ const Classe = () => {
                             <label htmlFor="nom">Numéro de Siège :</label>
                             <Input onChange={(e) => setNumSiege(e.target.value)}  value={nomSiege} />
                             <label htmlFor="nom">Type de classe de service :</label>
-                        <Input onChange={(e) => setType(e.target.value)}  value={type} />
+                            <Input onChange={(e) => setType(e.target.value)}  value={type} />
                         
                             </ConfigProvider>
 

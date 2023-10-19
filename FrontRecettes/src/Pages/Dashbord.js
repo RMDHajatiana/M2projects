@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Dashbord = () => {
+    useEffect(()=>{
+        document.title = "Tableau de bord"
+    })
     return (
-        <div>
+        <div className='conteneur'>
             Tableau de bord
         </div>
     );
