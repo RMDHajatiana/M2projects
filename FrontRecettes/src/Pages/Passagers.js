@@ -3,9 +3,46 @@ import React, { useEffect, useState } from 'react';
 import { TablePassagers } from '../Components/Table';
 import * as BsIcon from 'react-icons/bs' ;
 import {  ModalPassager } from '../Components/Modal';
-import { Button, Card, ConfigProvider, Input, Modal } from 'antd';
+import { Button, Card, ConfigProvider, Drawer, Input, Modal } from 'antd';
+import { Menus } from "../Components/Menus";
+import { Menus2 } from "../Components/Menu2";
+import Appfooter from "../Components/Appfooter"
+import * as AiIcons from "react-icons/ai";
+import { LoginOutlined } from "@ant-design/icons";
+import { MenuProvider } from "../Components/MenuContext";
 
 const Passagers = () => {
+
+  // nav bar et menu //
+
+  const [openMenu, SetOpenMenu] = useState(false)
+  const HandleClose = () => {
+    SetOpenMenu(false)
+  }
+  
+  const HandleOpen = () => {
+    SetOpenMenu(true)
+  }
+
+// Disparaitre si on scrowll //
+
+const [show, setShow] = useState(true)
+
+const navControl = () => {
+  if (window.scrollY > 105) {
+    setShow(false)
+  } else {
+    setShow(true)
+  }
+}
+
+useEffect(()=> {
+  window.addEventListener("scroll", navControl)
+  return () => {
+    window.removeEventListener("scroll", navControl)
+  }
+  }, [])
+
 
     const IndexData = [  
         "id_passager",
@@ -129,110 +166,195 @@ const Passagers = () => {
           }
         }) }
     return (
-        <div className='conteneur'>
-                < Card
-                title= "Liste des Passagers"
-                style={{   width: '100% ',  height: '90vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'  }}
-                className='cardBorder'
-                bodyStyle={{ height:'90%', overflow:'auto', margin:'auto' }}
-                bordered={false}
-                headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}
-                rootClassName='card'>
-                <div className="cardBody">
-                    <div style={{ marginBottom:14, display:'flex', flexDirection:'row', fontFamily: '"Poppins", cursive, "open-sans"' }} >
-                    <ConfigProvider theme={{
-                        components : {
-                        Button : {
-                        fontFamily: '"Poppins", cursive, "open-sans"',
-                        colorPrimary:'#b82626',
-                        colorPrimaryBorder:'#b82626',
-                        colorPrimaryHover:'rgba(145, 53, 61, 0.699)',
-                        colorPrimaryActive:'#b82626'
-                        }, 
-                        Input: {
-                            activeBorderColor:'#b82626',
-                            hoverBorderColor:'#b82626'
-                        }
-                        }}} >
-                        <Button  onClick={() => HandleModalAdd () }
-                        type='primary'  icon= {<BsIcon.BsPersonAdd/>} >Ajouter</Button>
-                        <Input style={{ marginLeft:'70%' }} value={recherche} onChange={handleRecherche} placeholder =  "Rechercher" />
-                    </ConfigProvider>
-                    </div>
+      <MenuProvider>
+      <div className="App" >
+        <div className="navBar" >
+        <div className="menuIcon"
+        style={{ backgroundColor:'white', color:'#b82626', }}>
+          <div className="Imenu">
+          <AiIcons.AiOutlineMenu onClick={HandleOpen} style={{ color: '#b82626',fontSize : 22, }} /> 
+          </div>
+          <div className="logoEntreprise"> 
+              <img  src= "./Logo1.jpg" alt="Logo" />
+          </div>
+          <div className="epace">
+          </div>
+          <div className="deconnexion"> 
+          <ConfigProvider
+          theme={{
+            components : {
+              Button : {
+               //   primaryColor :'#b82626',
+              //    defaultBorderColor:'#b82626',
+                  linkHoverBg:'#88080833',
+              //     defaultColor:'white',
+              //     textHoverBg:'white',
+              //     ghostBg:'#880808',
+              //     defaultGhostColor:'white',
+              //     defaultGhostBorderColor:'#880808',
+                 }
+            }
+  
+          }} >
+            <Button  type="link"
+              onClick={()=> {
+                console.log("login");
+                }}
+              style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}
+              > <LoginOutlined/> Deconnexion</Button>
+           </ConfigProvider>
+  
+          </div>
+        </div>
+        <div className={ show ? 'headerMenu' : 'noMenu' }>
+          <span ><Menus2/></span>
+        </div>
+  
+  {/* Drawer menu */}
+  
+       <Drawer
+           contentWrapperStyle={{width:'270px'}}
+            placement = 'left'
+            open ={openMenu}  
+            closable={true} 
+            onClose={HandleClose}>
+            <Menus Isinline  onSelect={HandleClose}  />
+       </Drawer>
+       </div>
+        <div className="styleContent" ></div>
+       <div className="Content">
 
-                    {/* Affichage de données */}
 
-                        <TablePassagers
-                        handleEdit = {(id_passager) => {
-                        OpenModalEdit(id_passager) 
-                        handleUpdate(id_passager)
-                        }}
-                        handleDelete={ (id_passager) => handleRecuperedId(id_passager) }
-                        data = { data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
-                        title={title} 
-                        IndexData={IndexData} 
-                        size='small' />
+          {/* <AppContent/> */}
 
-                        {/* Modal Ajout */}
 
-                        <ModalPassager
-                        titre='Ajouter un passager'
-                        cancelText= 'Annuler'
-                        okText='Ajouter' open={open} 
-                        onCancel = {() => setOpen(false)}
-                        handleSave  = {() => setOpen(false)} />
+          <div className='conteneur'>
+              < Card
+              title= "Liste des Passagers"
+              style={{   width: '100% ',  height: '90vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'  }}
+              className='cardBorder'
+              bodyStyle={{ height:'90%', overflow:'auto', margin:'auto' }}
+              bordered={false}
+              headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}
+              rootClassName='card'>
+              <div className="cardBody">
+                  <div style={{ marginBottom:14, display:'flex', flexDirection:'row', fontFamily: '"Poppins", cursive, "open-sans"' }} >
+                  <ConfigProvider theme={{
+                      components : {
+                      Button : {
+                      fontFamily: '"Poppins", cursive, "open-sans"',
+                      colorPrimary:'#b82626',
+                      colorPrimaryBorder:'#b82626',
+                      colorPrimaryHover:'rgba(145, 53, 61, 0.699)',
+                      colorPrimaryActive:'#b82626'
+                      }, 
+                      Input: {
+                          activeBorderColor:'#b82626',
+                          hoverBorderColor:'#b82626'
+                      }
+                      }}} >
+                      <Button  onClick={() => HandleModalAdd () }
+                      type='primary'  icon= {<BsIcon.BsPersonAdd/>} >Ajouter</Button>
+                      <Input style={{ marginLeft:'70%' }} value={recherche} onChange={handleRecherche} placeholder =  "Rechercher" />
+                  </ConfigProvider>
+                  </div>
 
-                        {/* //Modal Modification // */}
+                  {/* Affichage de données */}
 
-                <Modal
-                style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
-                title = "Modification"
-                okText = "Enregistrer"
-                width= '300px'
-                open  = {openModalEdit }
-                onCancel={() => setOpenModalEdit(false)}
-                onOk={() => handleSaveUpdate()}
-                >
+                      <TablePassagers
+                      handleEdit = {(id_passager) => {
+                      OpenModalEdit(id_passager) 
+                      handleUpdate(id_passager)
+                      }}
+                      handleDelete={ (id_passager) => handleRecuperedId(id_passager) }
+                      data = { data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
+                      title={title} 
+                      IndexData={IndexData} 
+                      size='small' />
 
-                    <ConfigProvider 
-                    theme={{
-                        components : {
-                            Input: {
-                                activeBorderColor:'#b82626',
-                                hoverBorderColor:'#b82626'
-                                }
-                        }
-                    }} >
-                    <label htmlFor="nom">ID :</label>
-                    <Input disabled={true}  value={idpassager}  onChange={(e) => setIdpassager(e.target.value) }/>
+                      {/* Modal Ajout */}
 
-                    <label htmlFor="nom">Nom :</label>
-                    <Input onChange={(e) => setNom(e.target.value)}  value={nom} />
+                      <ModalPassager
+                      titre='Ajouter un passager'
+                      cancelText= 'Annuler'
+                      okText='Ajouter' open={open} 
+                      onCancel = {() => setOpen(false)}
+                      handleSave  = {() => setOpen(false)} />
 
-                    <label htmlFor="prenom">Prenom :</label>
-                    <Input onChange={(e)=> setPrenom(e.target.value)}  value={prenom}/>
+                      {/* //Modal Modification // */}
 
-                    <label htmlFor="telephone">Téléphone :</label>
-                    <Input onChange={(e) =>setTelephone(e.target.value) }  value={telephone}/>
+              <Modal
+              style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
+              title = "Modification"
+              okText = "Enregistrer"
+              width= '300px'
+              open  = {openModalEdit }
+              onCancel={() => setOpenModalEdit(false)}
+              onOk={() => handleSaveUpdate()}
+              >
 
-                    <label htmlFor="email">E-mail :</label>
-                    <Input onChange={(e)=>setEmail(e.target.value)}  value={email}/>
+                  <ConfigProvider 
+                  theme={{
+                      components : {
+                          Input: {
+                              activeBorderColor:'#b82626',
+                              hoverBorderColor:'#b82626'
+                              }
+                      }
+                  }} >
+                  <label htmlFor="nom">ID :</label>
+                  <Input disabled={true}  value={idpassager}  onChange={(e) => setIdpassager(e.target.value) }/>
 
-                    <label htmlFor="passeport">Passeport :</label>
-                    <Input onChange={(e)=> setPasseport(e.target.value)}  value={passeport}/>
+                  <label htmlFor="nom">Nom :</label>
+                  <Input onChange={(e) => setNom(e.target.value)}  value={nom} />
 
-                    <label htmlFor="adresse">Adresse :</label>
-                    <Input onChange={(e) => setAdresse(e.target.value)}  value={adresse}/>
+                  <label htmlFor="prenom">Prenom :</label>
+                  <Input onChange={(e)=> setPrenom(e.target.value)}  value={prenom}/>
 
-                    </ConfigProvider>
+                  <label htmlFor="telephone">Téléphone :</label>
+                  <Input onChange={(e) =>setTelephone(e.target.value) }  value={telephone}/>
 
-                </Modal>
+                  <label htmlFor="email">E-mail :</label>
+                  <Input onChange={(e)=>setEmail(e.target.value)}  value={email}/>
 
-                </div>  
-                </Card>
+                  <label htmlFor="passeport">Passeport :</label>
+                  <Input onChange={(e)=> setPasseport(e.target.value)}  value={passeport}/>
+
+                  <label htmlFor="adresse">Adresse :</label>
+                  <Input onChange={(e) => setAdresse(e.target.value)}  value={adresse}/>
+
+                  </ConfigProvider>
+
+              </Modal>
+
+              </div>  
+              </Card> 
+
+              </div> 
+
+          {/* <AppContent/> */}
 
         </div>
-    );
-};
+        <Appfooter/>
+    </div>
+    </MenuProvider>
+    )
+}
 
 export default Passagers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

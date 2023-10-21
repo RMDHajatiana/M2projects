@@ -7,10 +7,10 @@ export function useMenuContext() {
 }
 
 export function MenuProvider({ children }) {
-  const [selectedMenuKey, setSelectedMenuKey] = useState(null);
+  const [selectedMenuKey, setSelectedMenuKey] = useState(null)
 
   const selectMenu = (menuKey) => {
-    setSelectedMenuKey(menuKey);
+    setSelectedMenuKey(menuKey)
   }
 
   const value = {
@@ -18,5 +18,5 @@ export function MenuProvider({ children }) {
     selectMenu,
   }
 
-  return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>;
+  return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>
 }

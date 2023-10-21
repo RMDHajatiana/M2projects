@@ -1,12 +1,50 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, ConfigProvider, Input} from 'antd';
+import { Button, Card, ConfigProvider, Input, Drawer} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-//import { use } from 'i18next';
 import axios from 'axios';
 import { TablePassagers } from '../Components/Table';
 import { ModalReservation } from '../Components/Modal';
+import { Menus } from "../Components/Menus";
+import { Menus2 } from "../Components/Menu2";
+import Appfooter from "../Components/Appfooter"
+import * as AiIcons from "react-icons/ai";
+import { LoginOutlined } from "@ant-design/icons";
+import { MenuProvider } from "../Components/MenuContext";
 
 const Reservation = () => {
+
+  // nav bar et menu //
+
+  const [openMenu, SetOpenMenu] = useState(false)
+  const HandleClose = () => {
+    SetOpenMenu(false)
+  }
+  
+  const HandleOpen = () => {
+    SetOpenMenu(true)
+  }
+
+// Disparaitre si on scrowll //
+
+const [show, setShow] = useState(true)
+
+const navControl = () => {
+  if (window.scrollY > 105) {
+    setShow(false)
+  } else {
+    setShow(true)
+  }
+}
+
+useEffect(()=> {
+  window.addEventListener("scroll", navControl)
+  return () => {
+    window.removeEventListener("scroll", navControl)
+  }
+  }, [])
+    useEffect(()=>{
+        document.title = "Tableau de bord"
+    })
 
     const title = [
         "ID",
@@ -68,6 +106,67 @@ const Reservation = () => {
     }
 
     return (
+        <MenuProvider>
+        <div className="App" >
+          <div className="navBar" >
+          <div className="menuIcon"
+          style={{ backgroundColor:'white', color:'#b82626', }}>
+            <div className="Imenu">
+            <AiIcons.AiOutlineMenu onClick={HandleOpen} style={{ color: '#b82626',fontSize : 22, }} /> 
+            </div>
+            <div className="logoEntreprise"> 
+                <img  src= "./Logo1.jpg" alt="Logo" />
+            </div>
+            <div className="epace">
+            </div>
+            <div className="deconnexion"> 
+            <ConfigProvider
+            theme={{
+              components : {
+                Button : {
+                 //   primaryColor :'#b82626',
+                //    defaultBorderColor:'#b82626',
+                    linkHoverBg:'#88080833',
+                //     defaultColor:'white',
+                //     textHoverBg:'white',
+                //     ghostBg:'#880808',
+                //     defaultGhostColor:'white',
+                //     defaultGhostBorderColor:'#880808',
+                   }
+              }
+    
+            }} >
+              <Button  type="link"
+                onClick={()=> {
+                  console.log("login");
+                  }}
+                style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}
+                > <LoginOutlined/> Deconnexion</Button>
+             </ConfigProvider>
+    
+            </div>
+          </div>
+          <div className={ show ? 'headerMenu' : 'noMenu' }>
+            <span ><Menus2/></span>
+          </div>
+    
+    {/* Drawer menu */}
+    
+         <Drawer
+             contentWrapperStyle={{width:'270px'}}
+              placement = 'left'
+              open ={openMenu}  
+              closable={true} 
+              onClose={HandleClose}>
+              <Menus Isinline  onSelect={HandleClose}  />
+         </Drawer>
+         </div>
+          <div className="styleContent" ></div>
+         <div className="Content">
+  
+  
+            {/* <AppContent/> */}
+
             <div  className='conteneur'>
                 <Card
                 title="Toutes les réservations"
@@ -78,7 +177,7 @@ const Reservation = () => {
                 bordered={false}
                 headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
                     <div className="cardBody">
-                  <div style={{ marginBottom:14, display:'flex', flexDirection:'row', fontFamily: '"Poppins", cursive, "open-sans"' }} >
+                <div style={{ marginBottom:14, display:'flex', flexDirection:'row', fontFamily: '"Poppins", cursive, "open-sans"' }} >
                     <ConfigProvider theme={{
                         components : {
                         Button : {
@@ -94,14 +193,14 @@ const Reservation = () => {
                         }
                         }}} >
                         <Button  onClick={() => HandleModalAdd () }
-                         icon ={ <UploadOutlined/>} > Importer </Button>
+                        icon ={ <UploadOutlined/>} > Importer </Button>
                         <Input style={{ marginLeft:'70%' }} value={recherche} onChange={handleRecherche} placeholder =  "Rechercher" />
                     </ConfigProvider>
                     </div>
 
-                  {/* Affichage de données */}
+                {/* Affichage de données */}
 
-                     <TablePassagers
+                    <TablePassagers
                         // handleEdit = {(id_passager) => {
                         // OpenModalEdit(id_passager) 
                         // handleUpdate(id_passager)
@@ -121,9 +220,19 @@ const Reservation = () => {
                         handleSave={()=> setOpen(false)}/>
                     </div>
                 </Card>
-            </div>
+                </div>
+
+            {/* <AppContent/> */}
+  
+          </div>
+          <Appfooter/>
+      </div>
+      </MenuProvider>
 
     )
 }
 
-export default Reservation;
+export default Reservation
+
+
+
