@@ -13,15 +13,19 @@ namespace BackAPI.Models
         public int Num_reservation { get; set; }
 
         [Column("id_vol")]
-        public int Id_vol { get; set; }
+        public int VolID { get; set; }
         public Vol? Vol { get; set; }
 
         [Column("id_classe")]
-        public int Id_classe { get; set; }
+        public int ClasseServiceID { get; set; }
         public ClasseService? ClasseService { get; set; }
 
+        [Column("remboursement")]
+        public double remboursement { get; set; }
+
+
         [Column("id_passager")]
-        public int Id_passager { get; set; }
+        public int PassagerID { get; set; }
         public Passager? Passager { get; set; }
 
         [Column("date_reservation")]

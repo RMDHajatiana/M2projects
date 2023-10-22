@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231015115816_Initial8")]
-    partial class Initial8
+    [Migration("20231021140824_Donneescomplete")]
+    partial class Donneescomplete
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,23 +34,23 @@ namespace BackAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id_apart"));
 
+                    b.Property<int>("AvionID")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_aeronef");
+
                     b.Property<int>("Capacite")
                         .HasColumnType("integer")
                         .HasColumnName("capacite");
 
-                    b.Property<int>("Id_aeronef")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_aeronef");
-
-                    b.Property<int>("Id_classe")
+                    b.Property<int>("ClasseServiceID")
                         .HasColumnType("integer")
                         .HasColumnName("id_classe");
 
                     b.HasKey("Id_apart");
 
-                    b.HasIndex("Id_aeronef");
+                    b.HasIndex("AvionID");
 
-                    b.HasIndex("Id_classe");
+                    b.HasIndex("ClasseServiceID");
 
                     b.ToTable("appartenir");
                 });
@@ -134,8 +134,8 @@ namespace BackAPI.Migrations
                         .HasColumnName("adresse_passager");
 
                     b.Property<string>("Email_passager")
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("email_passager");
 
                     b.Property<string>("Nom_passager")
@@ -143,12 +143,14 @@ namespace BackAPI.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("nom_passager");
 
-                    b.Property<long>("Num_passeport")
-                        .HasColumnType("bigint")
+                    b.Property<string>("Num_passeport")
+                        .HasMaxLength(9)
+                        .HasColumnType("character varying(9)")
                         .HasColumnName("num_passeport");
 
-                    b.Property<long>("Phone_passager")
-                        .HasColumnType("bigint")
+                    b.Property<string>("Phone_passager")
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
                         .HasColumnName("phone_passager");
 
                     b.Property<string>("Prenom_passager")
@@ -170,29 +172,33 @@ namespace BackAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Num_reservation"));
 
+                    b.Property<int>("ClasseServiceID")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_classe");
+
                     b.Property<DateTime>("Date_reservation")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_reservation");
 
-                    b.Property<int>("Id_classe")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_classe");
-
-                    b.Property<int>("Id_passager")
+                    b.Property<int>("PassagerID")
                         .HasColumnType("integer")
                         .HasColumnName("id_passager");
 
-                    b.Property<int>("Id_vol")
+                    b.Property<int>("VolID")
                         .HasColumnType("integer")
                         .HasColumnName("id_vol");
 
+                    b.Property<double>("remboursement")
+                        .HasColumnType("double precision")
+                        .HasColumnName("remboursement");
+
                     b.HasKey("Num_reservation");
 
-                    b.HasIndex("Id_classe");
+                    b.HasIndex("ClasseServiceID");
 
-                    b.HasIndex("Id_passager");
+                    b.HasIndex("PassagerID");
 
-                    b.HasIndex("Id_vol");
+                    b.HasIndex("VolID");
 
                     b.ToTable("reservation");
                 });
@@ -206,23 +212,23 @@ namespace BackAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id_tarif"));
 
-                    b.Property<int>("Id_classe")
+                    b.Property<int>("ClasseServiceID")
                         .HasColumnType("integer")
                         .HasColumnName("id_classe");
-
-                    b.Property<int>("Id_vol")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_vol");
 
                     b.Property<double>("Montant_tarif")
                         .HasColumnType("double precision")
                         .HasColumnName("montant_tarif");
 
+                    b.Property<int>("VolID")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_vol");
+
                     b.HasKey("Id_tarif");
 
-                    b.HasIndex("Id_classe");
+                    b.HasIndex("ClasseServiceID");
 
-                    b.HasIndex("Id_vol");
+                    b.HasIndex("VolID");
 
                     b.ToTable("tarif");
                 });
@@ -284,6 +290,10 @@ namespace BackAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id_vol"));
 
+                    b.Property<int>("AvionID")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_aeronef");
+
                     b.Property<DateTime>("Date_depart")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_depart");
@@ -292,11 +302,7 @@ namespace BackAPI.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("heure_depart");
 
-                    b.Property<int>("Id_aeronef")
-                        .HasColumnType("integer")
-                        .HasColumnName("id_aeronef");
-
-                    b.Property<int>("Id_itineraire")
+                    b.Property<int>("ItineraireID")
                         .HasColumnType("integer")
                         .HasColumnName("id_itineraire");
 
@@ -305,15 +311,11 @@ namespace BackAPI.Migrations
                         .HasColumnType("character varying(15)")
                         .HasColumnName("num_vol");
 
-                    b.Property<double>("Remboursement")
-                        .HasColumnType("double precision")
-                        .HasColumnName("remboursement");
-
                     b.HasKey("Id_vol");
 
-                    b.HasIndex("Id_aeronef");
+                    b.HasIndex("AvionID");
 
-                    b.HasIndex("Id_itineraire");
+                    b.HasIndex("ItineraireID");
 
                     b.ToTable("vol");
                 });
@@ -321,14 +323,14 @@ namespace BackAPI.Migrations
             modelBuilder.Entity("BackAPI.Models.Appartenir", b =>
                 {
                     b.HasOne("BackAPI.Models.Avion", "Avion")
-                        .WithMany()
-                        .HasForeignKey("Id_aeronef")
+                        .WithMany("Appartenirs")
+                        .HasForeignKey("AvionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BackAPI.Models.ClasseService", "ClasseService")
-                        .WithMany()
-                        .HasForeignKey("Id_classe")
+                        .WithMany("Appartenirs")
+                        .HasForeignKey("ClasseServiceID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -340,20 +342,20 @@ namespace BackAPI.Migrations
             modelBuilder.Entity("BackAPI.Models.Reservation", b =>
                 {
                     b.HasOne("BackAPI.Models.ClasseService", "ClasseService")
-                        .WithMany()
-                        .HasForeignKey("Id_classe")
+                        .WithMany("Reservations")
+                        .HasForeignKey("ClasseServiceID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BackAPI.Models.Passager", "Passager")
-                        .WithMany()
-                        .HasForeignKey("Id_passager")
+                        .WithMany("Reservations")
+                        .HasForeignKey("PassagerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BackAPI.Models.Vol", "Vol")
-                        .WithMany()
-                        .HasForeignKey("Id_vol")
+                        .WithMany("Reservations")
+                        .HasForeignKey("VolID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -367,14 +369,14 @@ namespace BackAPI.Migrations
             modelBuilder.Entity("BackAPI.Models.Tarif", b =>
                 {
                     b.HasOne("BackAPI.Models.ClasseService", "ClasseService")
-                        .WithMany()
-                        .HasForeignKey("Id_classe")
+                        .WithMany("Tarifs")
+                        .HasForeignKey("ClasseServiceID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BackAPI.Models.Vol", "Vol")
-                        .WithMany()
-                        .HasForeignKey("Id_vol")
+                        .WithMany("Tarifs")
+                        .HasForeignKey("VolID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -386,20 +388,53 @@ namespace BackAPI.Migrations
             modelBuilder.Entity("BackAPI.Models.Vol", b =>
                 {
                     b.HasOne("BackAPI.Models.Avion", "Avion")
-                        .WithMany()
-                        .HasForeignKey("Id_aeronef")
+                        .WithMany("Vols")
+                        .HasForeignKey("AvionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BackAPI.Models.Itineraire", "Itineraire")
-                        .WithMany()
-                        .HasForeignKey("Id_itineraire")
+                        .WithMany("Vols")
+                        .HasForeignKey("ItineraireID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Avion");
 
                     b.Navigation("Itineraire");
+                });
+
+            modelBuilder.Entity("BackAPI.Models.Avion", b =>
+                {
+                    b.Navigation("Appartenirs");
+
+                    b.Navigation("Vols");
+                });
+
+            modelBuilder.Entity("BackAPI.Models.ClasseService", b =>
+                {
+                    b.Navigation("Appartenirs");
+
+                    b.Navigation("Reservations");
+
+                    b.Navigation("Tarifs");
+                });
+
+            modelBuilder.Entity("BackAPI.Models.Itineraire", b =>
+                {
+                    b.Navigation("Vols");
+                });
+
+            modelBuilder.Entity("BackAPI.Models.Passager", b =>
+                {
+                    b.Navigation("Reservations");
+                });
+
+            modelBuilder.Entity("BackAPI.Models.Vol", b =>
+                {
+                    b.Navigation("Reservations");
+
+                    b.Navigation("Tarifs");
                 });
 #pragma warning restore 612, 618
         }

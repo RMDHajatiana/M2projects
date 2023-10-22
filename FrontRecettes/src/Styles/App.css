@@ -3,14 +3,14 @@
 
 @media (max-width : 100% ) {
     .conteneur {
-        width: 90%;
+        width: 85%;
     }
 }  
 
-@media (max-width:700px) {
+@media (max-width:800px) {
     .conteneur {
-        width: 88%;
-        margin-right: 20px ;
+        width: 90%;
+        /* margin-right: 2px ; */
     }
 }
 
@@ -23,7 +23,7 @@
     background-color: #c0baba7e; 
 }
 
-@media(max-width: 600px ) {
+@media(max-width: 800px ) {
     .headerMenu {
         display : none;
     }

@@ -5,6 +5,7 @@ import { Menus2 } from "../Components/Menu2";
 import Appfooter from "../Components/Appfooter"
 import * as AiIcons from "react-icons/ai";
 import { LoginOutlined } from "@ant-design/icons";
+import { NavLink } from 'react-router-dom';
 
 const Dashbord = () => {
 
@@ -43,7 +44,6 @@ useEffect(()=>{
 
     return (
 
-        
         <div className="App" >
           <div className="navBar" >
           <div className="menuIcon"
@@ -73,12 +73,15 @@ useEffect(()=>{
               }
     
             }} >
+              <NavLink to="/">
+
               <Button  type="link"
                 onClick={()=> {
                   console.log("login")
-                  }}
+                }}
                 style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}
                 > <LoginOutlined/> Deconnexion</Button>
+                </NavLink>
              </ConfigProvider>
     
             </div>

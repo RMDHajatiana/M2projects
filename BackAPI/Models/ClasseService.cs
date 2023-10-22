@@ -16,5 +16,10 @@ namespace BackAPI.Models
         [Column("type_classe")]
         [StringLength(30)]
         public string? Type_classe { get; set; }
+
+        public ICollection<Appartenir>? Appartenirs { get; set; }
+        public ICollection<Tarif>? Tarifs { get; set; }
+        public ICollection<Reservation>? Reservations { get; set; }
+
     }
 }

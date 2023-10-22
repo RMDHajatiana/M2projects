@@ -15,24 +15,32 @@ namespace BackAPI.Models
         [StringLength(15)]
         public string? Num_vol { get; set; }
 
-        [Column("id_aeronef")]
-        public int Id_aeronef { get; set; }
-        public Avion? Avion { get; set; }
+       /// [ForeignKey("Id_aeronef")]
 
+        [Column("id_aeronef")]
+        public int AvionID { get; set; }
+
+
+        //[ForeignKey("Id_itineraire")]
 
         [Column("id_itineraire")]
-        public int Id_itineraire { get; set; }
-        public Itineraire? Itineraire { get; set; }
-
-
-        [Column("remboursement")]
-        public double Remboursement { get; set; }
-
+        public int ItineraireID { get; set; }
 
         [Column("date_depart")]
         public DateTime Date_depart { get; set; }
 
         [Column("heure_depart")]
         public DateTime Heure_depart { get; set; }
+
+
+        public   Avion ? Avion { get; set; }
+
+        public  Itineraire ? Itineraire { get; set; }
+
+        public ICollection<Tarif>? Tarifs { get; set; }
+
+        public ICollection<Reservation>? Reservations { get; set; }
+
+
     }
 }

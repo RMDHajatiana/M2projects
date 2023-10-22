@@ -13,6 +13,9 @@ namespace BackAPI.Models
         [Column("type_aeronef")]
         [StringLength(30)]
         public string? Type_aeronef { get; set; }
+
+        public ICollection<Vol> ? Vols  { get; set; }
+        public ICollection<Appartenir> ? Appartenirs  { get; set; }
         /*
         [NotMapped]
         public int nb { get; set; }

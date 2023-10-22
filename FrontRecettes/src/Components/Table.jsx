@@ -1,6 +1,8 @@
 import React from 'react';
 import {ConfigProvider, Table } from 'antd';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
+import * as AiIcons from 'react-icons/ai';
+import * as FiIcons from 'react-icons/fi';
 
 export const TablePassagers = ({title, IndexData, data, size, handleDelete, handleEdit}) => {
 
@@ -14,7 +16,7 @@ export const TablePassagers = ({title, IndexData, data, size, handleDelete, hand
         render: (action) => {
           return (
             <>
-              <EditOutlined  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_passager) }/>
+              <FiIcons.FiEdit  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_passager) }/>
               <DeleteOutlined style={{ fontSize:14, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleDelete (action.id_passager) }/>
             </>
           )}
@@ -38,8 +40,9 @@ export const TablePassagers = ({title, IndexData, data, size, handleDelete, hand
         }} >
 
         <Table size={size}  columns={colonne} 
-        scroll={{ y: 347 }}
-        dataSource={data.map(  (items, index) => ( { ...items, key:index  })) }  />
+        scroll={{ y: 338 }}
+        dataSource={data.map(  (items, index) => ( { ...items, key:index  })) } />
+        
         </ConfigProvider>
         </div>
     )
@@ -58,7 +61,7 @@ export const TableAvion = ({title, IndexData, data, size, handleDelete, handleEd
    render: (action) => {
      return (
        <>
-         <EditOutlined  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_aeronef) }/>
+         <FiIcons.FiEdit  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_aeronef) }/>
          <DeleteOutlined style={{ fontSize:16, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleDelete (action.id_aeronef) }/>
        </>
      )}
@@ -101,7 +104,7 @@ export const TableClasse = ({title, IndexData, data, size, handleDelete, handleE
     render: (action) => {
       return (
         <>
-          <EditOutlined style={{fontSize:15.5}}  onClick={()  => handleEdit (action.id_classe) }/>
+          <FiIcons.FiEdit style={{fontSize:15.5}}  onClick={()  => handleEdit (action.id_classe) }/>
           <DeleteOutlined style={{ fontSize:15.5, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleDelete (action.id_classe) }/>
         </>
       )}
@@ -144,7 +147,7 @@ export const TableReservation = ({title, IndexData, data, size, handleDelete, ha
    render: (action) => {
      return (
        <>
-         <EditOutlined  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_passager) }/>
+         <FiIcons.FiEdit  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_passager) }/>
          <DeleteOutlined style={{ fontSize:15.5, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleDelete (action.id_passager) }/>
        </>
      )}
@@ -168,14 +171,14 @@ return (
    }} >
 
    <Table size={size}  columns={colonne} 
-   scroll={{ y: 400 }}
+   scroll={{ y: 338 }}
    dataSource={data.map(  (items, index) => ( { ...items, key:index  })) }  />
    </ConfigProvider>
    </div>
 )
 }
 
-export const TableVols = ({title, IndexData, data, size, handleDelete, handleEdit}) => {
+export const TableVols = ({title, IndexData, data, size, handleDelete, handleEdit, expandable}) => {
 
   const colonne = IndexData.map( (items, index) => ({
    title : title[index],
@@ -187,8 +190,8 @@ export const TableVols = ({title, IndexData, data, size, handleDelete, handleEdi
    render: (action) => {
      return (
        <>
-         <EditOutlined  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_passager) }/>
-         <DeleteOutlined style={{ fontSize:14, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleDelete (action.id_passager) }/>
+         <FiIcons.FiEdit  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_vol) }/>
+         <AiIcons.AiOutlineEye style={{ fontSize:14, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleDelete (action.id_vol) } />
        </>
      )}
  })
@@ -211,7 +214,8 @@ return (
    }} >
 
    <Table size={size}  columns={colonne} 
-   scroll={{ y: 347 }}
+   scroll={{ y: 338 }}
+   expandable={expandable} 
    dataSource={data.map(  (items, index) => ( { ...items, key:index  })) }  />
    </ConfigProvider>
    </div>

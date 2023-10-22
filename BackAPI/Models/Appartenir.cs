@@ -12,11 +12,11 @@ namespace BackAPI.Models
         public int Id_apart { get; set; }
 
         [Column("id_aeronef")]
-        public int Id_aeronef { get; set; }
+        public int AvionID { get; set; }
         public Avion? Avion { get; set; }
 
         [Column("id_classe")]
-        public int Id_classe { get; set; }
+        public int ClasseServiceID { get; set; }
         public ClasseService? ClasseService { get; set; }
 
         [Column("capacite")]

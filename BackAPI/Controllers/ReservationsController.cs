@@ -116,6 +116,12 @@ namespace BackAPI.Controllers
             return NoContent();
         }
 
+/*        [HttpGet("getRecete")] 
+        public async Task<double> getAllRecette()
+        {
+            var ret = 0.0;
+            return ret;
+        }*/
         private bool ReservationExists(int id)
         {
             return (_context.Reservation?.Any(e => e.Num_reservation == id)).GetValueOrDefault();

@@ -15,5 +15,8 @@ namespace BackAPI.Models
 
         [Column("aeroport_arrive")]
         public string? Aeroport_arrive { get; set; }
+
+        public ICollection<Vol> ? Vols { get; set; }
+
     }
 }

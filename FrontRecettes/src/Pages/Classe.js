@@ -11,6 +11,7 @@ import Appfooter from "../Components/Appfooter"
 import * as AiIcons from "react-icons/ai";
 import { LoginOutlined } from "@ant-design/icons";
 import { MenuProvider } from "../Components/MenuContext";
+import { NavLink } from 'react-router-dom';
 
 const Classe = () => {
 
@@ -179,12 +180,15 @@ const Classe = () => {
             }
   
           }} >
+            <NavLink to="/">
             <Button  type="link"
               onClick={()=> {
+                
                 console.log("login");
-                }}
+              }}
               style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}
               > <LoginOutlined/> Deconnexion</Button>
+              </NavLink>
            </ConfigProvider>
   
           </div>

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BackAPI.Context;
 using BackAPI.Models;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace BackAPI.Controllers
 {
@@ -25,13 +27,24 @@ namespace BackAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Vol>>> GetVol()
         {
-          if (_context.Vol == null)
-          {
-              return NotFound();
-          }
-            return await _context.Vol.ToListAsync();
+            if (_context.Vol == null)
+            {
+                return NotFound();
+            }
+            return await _context.Vol.Include(v => v.Avion).Include(v => v.Itineraire).ToListAsync();
         }
 
+        //public async Task<List<Vol>> GetVol()
+        //{
+        //    JsonSerializerOptions options = new JsonSerializerOptions
+        //    {
+        //        ReferenceHandler = ReferenceHandler.Preserve
+        //    };
+
+        //    return await _context.Vol
+        //        .Include(v => v.Avion)
+        //        .ToListAsync();
+        //}
         // GET: api/Vols/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Vol>> GetVol(int id)

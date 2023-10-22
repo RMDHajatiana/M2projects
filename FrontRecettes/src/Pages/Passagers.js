@@ -10,6 +10,7 @@ import Appfooter from "../Components/Appfooter"
 import * as AiIcons from "react-icons/ai";
 import { LoginOutlined } from "@ant-design/icons";
 import { MenuProvider } from "../Components/MenuContext";
+import { NavLink } from 'react-router-dom';
 
 const Passagers = () => {
 
@@ -196,12 +197,14 @@ useEffect(()=> {
             }
   
           }} >
+            <NavLink to="/">
             <Button  type="link"
               onClick={()=> {
                 console.log("login");
-                }}
+              }}
               style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}
               > <LoginOutlined/> Deconnexion</Button>
+              </NavLink>
            </ConfigProvider>
   
           </div>
@@ -283,15 +286,14 @@ useEffect(()=> {
 
                       {/* //Modal Modification // */}
 
-              <Modal
-              style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
-              title = "Modification"
-              okText = "Enregistrer"
-              width= '300px'
-              open  = {openModalEdit }
-              onCancel={() => setOpenModalEdit(false)}
-              onOk={() => handleSaveUpdate()}
-              >
+                      <Modal
+                      style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
+                      title = "Modification"
+                      okText = "Enregistrer"
+                      width= '300px'
+                      open  = {openModalEdit }
+                      onCancel={() => setOpenModalEdit(false)}
+                      onOk={() => handleSaveUpdate()} >
 
                   <ConfigProvider 
                   theme={{

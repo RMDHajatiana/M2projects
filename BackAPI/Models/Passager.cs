@@ -36,5 +36,8 @@ namespace BackAPI.Models
         [Column("adresse_passager")]
         [StringLength(25)]
         public string? Adresse_passager { get; set; }
+
+        public ICollection<Reservation>? Reservations { get; set; }
+
     }
 }

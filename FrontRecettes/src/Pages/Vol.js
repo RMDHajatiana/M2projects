@@ -8,6 +8,7 @@ import { Menus2 } from "../Components/Menu2";
 import Appfooter from "../Components/Appfooter"
 import * as AiIcons from "react-icons/ai";
 import { LoginOutlined } from "@ant-design/icons";
+import { NavLink } from 'react-router-dom';
 
 const Vol = () => {
 
@@ -54,8 +55,8 @@ useEffect(()=> {
    const IndexData = [    
         "id_vol",
         "num_vol",
-        "id_aeronef",
-        "id_itineraire",
+        "avionID",
+        "itineraireID",
         "date_depart",
         "heure_depart"
       ]
@@ -80,6 +81,7 @@ useEffect(()=> {
     const fetch = async () => {
         let resultat = await axios.get("http://localhost:5160/api/Vols")
         setData ( resultat.data)
+        console.log(data)
     }
 
     useEffect(()=> {
@@ -122,12 +124,14 @@ useEffect(()=> {
               }
     
             }} >
+              <NavLink to="/">
               <Button  type="link"
                 onClick={()=> {
                   console.log("login");
-                  }}
+                }}
                 style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}
                 > <LoginOutlined/> Deconnexion</Button>
+                </NavLink>
              </ConfigProvider>
     
             </div>

@@ -20,7 +20,7 @@ namespace BackAPI.Context
         public DbSet<Utulisateur> Utulisateur { get; set; }
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+/*        protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         {
             modelBuilder.Entity<Reservation>().HasOne(r => r.ClasseService).WithMany().HasForeignKey(r => r.Id_classe);
@@ -29,9 +29,9 @@ namespace BackAPI.Context
 
             modelBuilder.Entity<Reservation>().HasOne(r => r.Passager).WithMany().HasForeignKey(r => r.Id_passager);
 
-            modelBuilder.Entity<Vol>().HasOne(r => r.Avion).WithMany().HasForeignKey(r => r.Id_aeronef);
+*//*            modelBuilder.Entity<Vol>().HasOne(r => r.Avion).WithMany().HasForeignKey(r => r.Id_aeronef);
 
-            modelBuilder.Entity<Vol>().HasOne(r => r.Itineraire).WithMany().HasForeignKey(r => r.Id_itineraire);
+            modelBuilder.Entity<Vol>().HasOne(r => r.Itineraire).WithMany().HasForeignKey(r => r.Id_itineraire);*//*
 
             modelBuilder.Entity<Appartenir>().HasOne(r => r.ClasseService).WithMany().HasForeignKey(r => r.Id_classe);
 
@@ -41,7 +41,7 @@ namespace BackAPI.Context
 
             modelBuilder.Entity<Tarif>().HasOne(r => r.Vol).WithMany().HasForeignKey(r => r.Id_vol);
 
-        }
+        }*/
 
 
     }
