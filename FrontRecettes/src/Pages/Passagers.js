@@ -157,9 +157,10 @@ useEffect(()=> {
         const handleRecuperedId =  (id_passager) => {
         
         Modal.confirm ({
-          cancelText:'Annuler',
+          cancelText:'Non',
           okType:'danger',
-          title : "Voulez vous vraiment supprimer ? ", 
+          okText:'oui',
+          title : "Êtes vous sûr de supprimer ? ", 
           onOk: () => {
             axios.delete("http://localhost:5160/api/Passagers/" + id_passager )
             .then(() => fetch())

@@ -92,39 +92,6 @@ namespace BackAPI.Controllers
             return utulisateur;
         }
 
-       /* // PUT: api/Utulisateurs/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUtulisateur(int id, Utulisateur utulisateur)
-        {
-            if (id != utulisateur.Num_matricule)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(utulisateur).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UtulisateurExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Utulisateurs
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Utulisateur>> PostUtulisateur(Utulisateur utulisateur)
         {
@@ -133,34 +100,70 @@ namespace BackAPI.Controllers
                 return Problem("Entity set 'AppDbContext.Utulisateur'  is null.");
             }
             _context.Utulisateur.Add(utulisateur);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUtulisateur", new { id = utulisateur.Num_matricule }, utulisateur);
         }
 
-        // DELETE: api/Utulisateurs/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUtulisateur(int id)
-        {
-            if (_context.Utulisateur == null)
-            {
-                return NotFound();
-            }
-            var utulisateur = await _context.Utulisateur.FindAsync(id);
-            if (utulisateur == null)
-            {
-                return NotFound();
-            }
+        /* // PUT: api/Utulisateurs/5
+         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+         [HttpPut("{id}")]
+         public async Task<IActionResult> PutUtulisateur(int id, Utulisateur utulisateur)
+         {
+             if (id != utulisateur.Num_matricule)
+             {
+                 return BadRequest();
+             }
 
-            _context.Utulisateur.Remove(utulisateur);
-            await _context.SaveChangesAsync();
+             _context.Entry(utulisateur).State = EntityState.Modified;
 
-            return NoContent();
-        }
-        private bool UtulisateurExists(int id)
-        {
-            return (_context.Utulisateur?.Any(e => e.Num_matricule == id)).GetValueOrDefault();
-        }
-*/
+             try
+             {
+                 await _context.SaveChangesAsync();
+             }
+             catch (DbUpdateConcurrencyException)
+             {
+                 if (!UtulisateurExists(id))
+                 {
+                     return NotFound();
+                 }
+                 else
+                 {
+                     throw;
+                 }
+             }
+
+             return NoContent();
+         }
+
+         // POST: api/Utulisateurs
+         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+
+         // DELETE: api/Utulisateurs/5
+         [HttpDelete("{id}")]
+         public async Task<IActionResult> DeleteUtulisateur(int id)
+         {
+             if (_context.Utulisateur == null)
+             {
+                 return NotFound();
+             }
+             var utulisateur = await _context.Utulisateur.FindAsync(id);
+             if (utulisateur == null)
+             {
+                 return NotFound();
+             }
+
+             _context.Utulisateur.Remove(utulisateur);
+             await _context.SaveChangesAsync();
+
+             return NoContent();
+         }
+         private bool UtulisateurExists(int id)
+         {
+             return (_context.Utulisateur?.Any(e => e.Num_matricule == id)).GetValueOrDefault();
+         }
+ */
     }
 }

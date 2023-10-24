@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Donneescomplete : Migration
+    public partial class Datacomplete : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -123,7 +123,7 @@ namespace BackAPI.Migrations
                 {
                     id_vol = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num_vol = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: true),
+                    num_vol = table.Column<string>(type: "character varying(6)", maxLength: 6, nullable: true),
                     id_aeronef = table.Column<int>(type: "integer", nullable: false),
                     id_itineraire = table.Column<int>(type: "integer", nullable: false),
                     date_depart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -156,7 +156,7 @@ namespace BackAPI.Migrations
                     id_classe = table.Column<int>(type: "integer", nullable: false),
                     remboursement = table.Column<double>(type: "double precision", nullable: false),
                     id_passager = table.Column<int>(type: "integer", nullable: false),
-                    date_reservation = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    date_reservation = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {

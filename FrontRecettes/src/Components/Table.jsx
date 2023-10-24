@@ -178,12 +178,23 @@ return (
 )
 }
 
-export const TableVols = ({title, IndexData, data, size, handleDelete, handleEdit, expandable}) => {
+export const TableVols = ({title, IndexData, data, size, handleInfo, handleEdit}) => {
 
   const colonne = IndexData.map( (items, index) => ({
    title : title[index],
    dataIndex: items
  }))
+
+
+ colonne.push({
+  title: "Date de départ",
+  dataIndex: "date_depart",
+  render: (text, record) => {
+    const date = new Date(record.date_depart)
+    const options = { year: "numeric", day: "2-digit", month: "long" }
+    return <span>{date.toLocaleDateString("fr-FR", options)}</span>
+  }
+})
 
  colonne.push({
    title: 'Action',
@@ -191,7 +202,7 @@ export const TableVols = ({title, IndexData, data, size, handleDelete, handleEdi
      return (
        <>
          <FiIcons.FiEdit  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_vol) }/>
-         <AiIcons.AiOutlineEye style={{ fontSize:14, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleDelete (action.id_vol) } />
+         <AiIcons.AiOutlineEye style={{ fontSize:14, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleInfo (action.id_vol) } />
        </>
      )}
  })
@@ -215,7 +226,6 @@ return (
 
    <Table size={size}  columns={colonne} 
    scroll={{ y: 338 }}
-   expandable={expandable} 
    dataSource={data.map(  (items, index) => ( { ...items, key:index  })) }  />
    </ConfigProvider>
    </div>

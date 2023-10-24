@@ -21,7 +21,7 @@ namespace BackAPI.Models
         public ClasseService? ClasseService { get; set; }
 
         [Column("remboursement")]
-        public double remboursement { get; set; }
+        public double Remboursement { get; set; }
 
 
         [Column("id_passager")]

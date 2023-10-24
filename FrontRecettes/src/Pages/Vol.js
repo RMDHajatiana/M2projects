@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, ConfigProvider, Drawer, Input } from 'antd';
+import { Button, Card, ConfigProvider, Drawer, Input, Modal } from 'antd';
 import axios from 'axios';
 import { TableVols } from '../Components/Table';
 import { MenuProvider } from '../Components/MenuContext';
@@ -47,9 +47,8 @@ useEffect(()=> {
         "Id",
         "Numéro de vol",
         "Id Avion",
-        "Itineraire",
-        "Date de départ",
-        "Heure de départ"
+        "Itineraire"
+
     ]
 
    const IndexData = [    
@@ -57,8 +56,6 @@ useEffect(()=> {
         "num_vol",
         "avionID",
         "itineraireID",
-        "date_depart",
-        "heure_depart"
       ]
     
      // recherche //
@@ -67,7 +64,6 @@ useEffect(()=> {
         "num_vol",
         "id_aeronef",
         "id_itineraire",
-        "remboursement",
         "date_depart",
         "heure_depart"
      ]
@@ -91,6 +87,24 @@ useEffect(()=> {
         document.title = "Nos Vols"
         return () => clearInterval(intervale)
     })
+
+    // Modal information //
+    const recuperedInfo = (id_vol) => {
+
+    data.map( (items) => { 
+    Modal.info({
+      style: 'height 50vh ',
+      title: 'Information de vol numéro'   + items.num_vol  ,
+      content: (
+        <div key={items.id_vol}>
+          <label> Numéro de ce vol : </label>
+          <p>{items.}</p>
+        </div>
+      ),
+      onOk() {}
+    })  })
+
+  }
 
     return (
 
@@ -188,6 +202,7 @@ useEffect(()=> {
                         </div>
 
                         <TableVols
+                            handleInfo={(id_vol) => recuperedInfo(id_vol)}
                             data = { data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
                             title={title} 
                             IndexData={IndexData} 

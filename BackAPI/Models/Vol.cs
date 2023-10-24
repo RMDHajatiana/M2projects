@@ -12,16 +12,14 @@ namespace BackAPI.Models
         public int Id_vol { get; set; }
 
         [Column("num_vol")]
-        [StringLength(15)]
+
+        [StringLength(6)]
         public string? Num_vol { get; set; }
 
-       /// [ForeignKey("Id_aeronef")]
 
         [Column("id_aeronef")]
         public int AvionID { get; set; }
 
-
-        //[ForeignKey("Id_itineraire")]
 
         [Column("id_itineraire")]
         public int ItineraireID { get; set; }

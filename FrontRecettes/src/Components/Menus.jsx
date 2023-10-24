@@ -50,7 +50,7 @@ export const Menus = ({ Isinline = false, onSelect }) => {
           <Link to="/Tableau_de_bord">Tableau de Bord</Link>
         </Menu.Item>
         <Menu.Item key="Vente" icon={<FaIcons.FaShopify />}>
-          <Link to="/Vente">Vente</Link>
+          <Link to="/Vente">Réservation</Link>
         </Menu.Item>
         <Menu.Item key="Vols" icon={<MdIcons.MdOutlineFlightTakeoff />}>
           <Link to="/Vols">Nos Vols</Link>

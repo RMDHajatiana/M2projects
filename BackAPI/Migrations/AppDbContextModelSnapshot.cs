@@ -173,8 +173,8 @@ namespace BackAPI.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id_classe");
 
-                    b.Property<DateTime>("Date_reservation")
-                        .HasColumnType("timestamp with time zone")
+                    b.Property<DateOnly>("Date_reservation")
+                        .HasColumnType("date")
                         .HasColumnName("date_reservation");
 
                     b.Property<int>("PassagerID")
@@ -304,8 +304,8 @@ namespace BackAPI.Migrations
                         .HasColumnName("id_itineraire");
 
                     b.Property<string>("Num_vol")
-                        .HasMaxLength(15)
-                        .HasColumnType("character varying(15)")
+                        .HasMaxLength(6)
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("num_vol");
 
                     b.HasKey("Id_vol");
