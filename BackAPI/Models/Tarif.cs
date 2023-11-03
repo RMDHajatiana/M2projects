@@ -12,13 +12,14 @@ namespace BackAPI.Models
 
         [Column("id_classe")]
         public int ClasseServiceID { get; set; }
-        public ClasseService? ClasseService { get; set; }
 
         [Column("id_vol")]
         public int VolID { get; set; }
-        public Vol? Vol { get; set; }
 
         [Column("montant_tarif")]
         public double Montant_tarif { get; set; }
+
+        public Vol? Vol { get; set; }
+        public ClasseService? ClasseService { get; set; }
     }
 }

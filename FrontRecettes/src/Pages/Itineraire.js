@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, Card, ConfigProvider, Input, Modal, Drawer, Select } from 'antd';
+import { Button, Card, ConfigProvider, Input, Modal, Drawer } from 'antd';
 import { useEffect, useState } from 'react';
 import * as BiIcons from 'react-icons/bi';
-import { TableClasse } from '../Components/Table';
+import { TableItineraire } from '../Components/Table';
 import axios from 'axios';
-import { ModalClasse } from '../Components/Modal';
+import {  ModalItineraire } from '../Components/Modal';
 import { Menus } from "../Components/Menus";
 import { Menus2 } from "../Components/Menu2";
 import Appfooter from "../Components/Appfooter"
@@ -13,9 +13,8 @@ import { LoginOutlined } from "@ant-design/icons";
 import { MenuProvider } from "../Components/MenuContext";
 import { NavLink } from 'react-router-dom';
 
-const Classe = () => {
 
-  const classeService = ["classe économique",  "classe affaires ", "première classe"] 
+const Itineraire = () => {
 
     // nav bar et menu //
 
@@ -49,13 +48,13 @@ const Classe = () => {
 
     const title = [
         "Id",
-        "Capacité",
-        "Type de Classe"
+        "Ville de départ",
+        "Ville d'arrivée"
         ]
     const IndexData = [
-          "id_classe",
-          "num_siege",
-          "type_classe",
+          "id_itineraire",
+          "aeroport_depart",
+          "aeroport_arrive",
       ]
         
           //recherche//
@@ -65,23 +64,23 @@ const Classe = () => {
             setRecherche(e.target.value)
           }
       const key = [
-          "id_classe",
-          "num_siege",
-          "type_classe",
+        "id_itineraire",
+        "aeroport_depart",
+        "aeroport_arrive",
         ]
         
         //fetch data //
         
         const [data, setData] = useState([])
         const fetch = async  () => {
-            let resultat = await axios.get("http://localhost:5160/api/ClasseServices ")
+            let resultat = await axios.get("http://localhost:5160/api/Itineraires ")
             setData(resultat.data)
           }
           useEffect(()=> {
             const intervale = setInterval(() => {
               fetch()
             }, 1000)
-            document.title = "Les Classes de services"
+            document.title = "Itinéraire"
             return () => clearInterval(intervale)
           })
         
@@ -96,10 +95,9 @@ const Classe = () => {
         
         //Modification // 
         
-        const [idclasse, setIdClasse] = useState()
-        const [avionID, setAvionID] = useState()
-        const [capacite, setCapacite] = useState()
-        const [type, setType] = useState()
+        const [idItineraire, setIdItineraire] = useState()
+        const [depart, setDepart] = useState()
+        const [arrive, setArrive] = useState()
         
         const [openModalEdit, setOpenModalEdit] = useState(false)
         
@@ -107,14 +105,13 @@ const Classe = () => {
           setOpenModalEdit(true)
         } 
         
-        const handleUpdate = (id_classe) =>
+        const handleUpdate = (id_itineraire) =>
         {
-        axios.get( "http://localhost:5160/api/ClasseServices/ " + id_classe )
+        axios.get( "http://localhost:5160/api/Itineraires/ " + id_itineraire )
         .then ((resultat) => {
-          setIdClasse (resultat.data.id_classe)
-          setAvionID (resultat.data.avionID)
-          setCapacite(resultat.data.num_siege)
-          setType(resultat.data.type_classe)
+          setIdItineraire (resultat.data.id_itineraire)
+          setDepart(resultat.data.aeroport_depart)
+          setArrive(resultat.data.aeroport_arrive)
         
           })
         .catch(error => console.log(error))
@@ -122,13 +119,12 @@ const Classe = () => {
         
         const   handleSaveUpdate = () =>  {
         
-        const url = "http://localhost:5160/api/ClasseServices/" + idclasse
+        const url = "http://localhost:5160/api/Itineraires/" + idItineraire
         
          const data = {
-            "id_classe":idclasse,
-            "avionID":avionID,
-             "num_siege":capacite,
-            "type_classe":type,
+            "id_itineraire":idItineraire,
+              "aeroport_depart":depart,
+              "aeroport_arrive":arrive,
           }
          axios.put(url, data)
          .then(() => {
@@ -138,17 +134,16 @@ const Classe = () => {
         
         }
         
-        const {Option} = Select
          // suppression de données // 
                 
-          const handleRecuperedId =  (id_classe) => {
+          const handleRecuperedId =  (id_itineraire) => {
                 
           Modal.confirm ({
               cancelText:'Annuler',
               okType:'danger',
-              title : "Voulez vous vraiment supprimer ? ", 
+              title : "Êtess-vous sûr de supprimer ? ", 
                onOk: () => {
-               axios.delete("http://localhost:5160/api/ClasseServices/" + id_classe )
+               axios.delete("http://localhost:5160/api/Itineraires/" + id_itineraire )
                .then(() => fetch())
                .catch(error => console.log(error))
             } }) }
@@ -222,49 +217,48 @@ const Classe = () => {
 
           <div className='conteneur'>
             < Card
-            title=  "Les Classes de Services"
-            style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
-            className='cardBorder'
-            width= '300px'
-            bordered={false}
-            bodyStyle={{ height:'92%', overflow:'auto'}}
-            headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}
-            rootClassName='card'>
-              <div style={{ marginBottom:14, display:'flex', flexDirection:'row', fontFamily: '"Poppins", cursive, "open-sans"' }} >
-                  <ConfigProvider
-                          theme={{
-                          components : {
-                          Button : {
-                              fontFamily: '"Poppins", cursive, "open-sans"',
-                              colorPrimary:'#b82626',
-                              colorPrimaryBorder:'#b82626',
-                              colorPrimaryHover:'rgba(145, 53, 61, 0.699)',
-                              colorPrimaryActive:'#b82626'
-                                  }, 
-                              Input: {
-                                  activeBorderColor:'#b82626',
-                                  hoverBorderColor:'#b82626'
-                                                  } }}} >
-                          <Button  onClick={() => HandleModalAdd () }
-                              type='primary'  icon= {<BiIcons.BiAddToQueue/>} >Ajouter</Button>
-                              <Input style={{ marginLeft:'70%' }} value={recherche} onChange={handleRecherche} placeholder = "Rechercher"/>
-                </ConfigProvider>
-              </div>
+          title=  "Itinéraires"
+          style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
+          className='cardBorder'
+          bordered={false}
+          bodyStyle={{ height:'92%', overflow:'auto'}}
+          headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}
+          rootClassName='card'>
+          <div style={{ marginBottom:14, display:'flex', flexDirection:'row', fontFamily: '"Poppins", cursive, "open-sans"' }} >
+              <ConfigProvider
+                      theme={{
+                      components : {
+                      Button : {
+                          fontFamily: '"Poppins", cursive, "open-sans"',
+                          colorPrimary:'#b82626',
+                          colorPrimaryBorder:'#b82626',
+                          colorPrimaryHover:'rgba(145, 53, 61, 0.699)',
+                          colorPrimaryActive:'#b82626'
+                              }, 
+                          Input: {
+                              activeBorderColor:'#b82626',
+                              hoverBorderColor:'#b82626'
+                                              } }}} >
+                      <Button  onClick={() => HandleModalAdd () }
+                          type='primary'  icon= {<BiIcons.BiAddToQueue/>} >Ajouter</Button>
+                          <Input style={{ marginLeft:'70%' }} value={recherche} onChange={handleRecherche} placeholder = "Rechercher"/>
+                          </ConfigProvider>
+                      </div>
 
-          <TableClasse
-              handleEdit = {(id_classe) => {
-                  OpenModalEdit(id_classe) 
-                  handleUpdate(id_classe)
+          <TableItineraire
+              handleEdit = {(id_itineraire) => {
+                  OpenModalEdit(id_itineraire) 
+                  handleUpdate(id_itineraire)
                   }}
-                  handleDelete={ (id_classe) => handleRecuperedId(id_classe) }
+                  handleDelete={ (id_itineraire) => handleRecuperedId(id_itineraire) }
                   data = { data.filter( (items)  => key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche))) }
                   title={title} 
                   IndexData={IndexData} />
 
                   {/* Modal Ajout */}
 
-              <ModalClasse
-                  titre='Ajouter une Classe de service'
+              <ModalItineraire
+                  titre='Ajouter une Itinéraire'
                   cancelText= 'Annuler'
                   okText='Ajouter' open={open} 
                   onCancel = {() => setOpen(false)}
@@ -288,33 +282,17 @@ const Classe = () => {
                                   Input: {
                                       activeBorderColor:'#b82626',
                                       hoverBorderColor:'#b82626'
-                                      },
-                                      Select: {
-                                        //optionSelectedBg:'#b82626',
-                                        colorPrimaryHover:'#b82626',
-                                        colorPrimaryBg:'#b82626'
                                       }
                               }
                           }} >
 
                           <label htmlFor="nom">ID :</label>
-                          <Input disabled={true}  value={idclasse}  onChange={(e) => setIdClasse(e.target.value) }/>
-
-                          <label htmlFor="avion">Avion :</label>
-                          <Input id='avion' disabled={true}  value={avionID}  onChange={(e) => setAvionID(e.target.value) }/>
-
-                          <label htmlFor="capacite">Capacité :</label>
-                          <Input id='capacite' onChange={(e) => setCapacite(e.target.value)}  value={capacite} />
-                          
-                          <label htmlFor="nom">Type de classe de service :</label>
-                          <Select onChange={(value) => setType(value)}  value={type} style={{width : 300,  fontFamily:'"Poppins", cursive, "open-sans"' }}>
-                            { 
-                            classeService.map(items => 
-                              <Option value = {items}>
-                                  {items}
-                              </Option>
-                              )}
-                          </Select>
+                          <Input disabled={true}  value={idItineraire}  onChange={(e) => setIdItineraire(e.target.value) }/>
+                          <label htmlFor="nom">Ville de départ :</label>
+                          <Input onChange={(e) => setDepart(e.target.value)}  value={depart} />
+                          <label htmlFor="nom">Ville d'arrivée :</label>
+                          <Input onChange={(e) => setArrive(e.target.value)}  value={arrive} />
+                      
                           </ConfigProvider>
 
                       </Modal>
@@ -330,7 +308,4 @@ const Classe = () => {
     )
 }
 
-export default Classe
-
-
-
+export default Itineraire

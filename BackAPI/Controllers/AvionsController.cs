@@ -29,7 +29,7 @@ namespace BackAPI.Controllers
           {
               return NotFound();
           }
-            return await _context.Avion.Include(a => a.Vols).ToListAsync();
+            return await _context.Avion.Include(a => a.Vols).Include(c=>c.ClasseServices).ToListAsync();
         }
 
         // GET: api/Avions/5

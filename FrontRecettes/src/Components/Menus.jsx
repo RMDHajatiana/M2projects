@@ -11,6 +11,7 @@ import { Link,  } from 'react-router-dom';
 import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
 import * as SiIcons from "react-icons/si";
+import * as LiaIcons from "react-icons/lia";
 import { useMenuContext } from './MenuContext';
 
 export const Menus = ({ Isinline = false, onSelect }) => {
@@ -63,6 +64,9 @@ export const Menus = ({ Isinline = false, onSelect }) => {
         </Menu.Item>
         <Menu.Item key="Classe_de_Service" icon={<MdIcons.MdFlightClass />}>
           <Link to="/Classe_de_Service">Classe de Service</Link>
+        </Menu.Item>
+        <Menu.Item key="itineraire" icon={<LiaIcons.LiaFantasyFlightGames />}>
+          <Link to="/Itineraire">Itinéraire</Link>
         </Menu.Item>
         <Menu.Item key="Passager" icon={<UserOutlined />}>
           <Link to="/Passager">Passagers</Link>

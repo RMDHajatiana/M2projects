@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Datacomplete : Migration
+    public partial class Complete : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,20 +23,6 @@ namespace BackAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_avion", x => x.id_aeronef);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "classeservice",
-                columns: table => new
-                {
-                    id_classe = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num_siege = table.Column<int>(type: "integer", nullable: false),
-                    type_classe = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_classeservice", x => x.id_classe);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,6 +77,57 @@ namespace BackAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "classeservice",
+                columns: table => new
+                {
+                    id_classe = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id_aeronef = table.Column<int>(type: "integer", nullable: false),
+                    num_siege = table.Column<int>(type: "integer", nullable: false),
+                    type_classe = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_classeservice", x => x.id_classe);
+                    table.ForeignKey(
+                        name: "FK_classeservice_avion_id_aeronef",
+                        column: x => x.id_aeronef,
+                        principalTable: "avion",
+                        principalColumn: "id_aeronef",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "vol",
+                columns: table => new
+                {
+                    id_vol = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    num_vol = table.Column<string>(type: "character varying(6)", maxLength: 6, nullable: true),
+                    id_aeronef = table.Column<int>(type: "integer", nullable: false),
+                    statut = table.Column<string>(type: "text", nullable: true),
+                    id_itineraire = table.Column<int>(type: "integer", nullable: false),
+                    date_depart = table.Column<DateOnly>(type: "date", nullable: false),
+                    heure_depart = table.Column<TimeOnly>(type: "time without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_vol", x => x.id_vol);
+                    table.ForeignKey(
+                        name: "FK_vol_avion_id_aeronef",
+                        column: x => x.id_aeronef,
+                        principalTable: "avion",
+                        principalColumn: "id_aeronef",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_vol_itineraire_id_itineraire",
+                        column: x => x.id_itineraire,
+                        principalTable: "itineraire",
+                        principalColumn: "id_itineraire",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "appartenir",
                 columns: table => new
                 {
@@ -118,35 +155,6 @@ namespace BackAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "vol",
-                columns: table => new
-                {
-                    id_vol = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    num_vol = table.Column<string>(type: "character varying(6)", maxLength: 6, nullable: true),
-                    id_aeronef = table.Column<int>(type: "integer", nullable: false),
-                    id_itineraire = table.Column<int>(type: "integer", nullable: false),
-                    date_depart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    heure_depart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_vol", x => x.id_vol);
-                    table.ForeignKey(
-                        name: "FK_vol_avion_id_aeronef",
-                        column: x => x.id_aeronef,
-                        principalTable: "avion",
-                        principalColumn: "id_aeronef",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_vol_itineraire_id_itineraire",
-                        column: x => x.id_itineraire,
-                        principalTable: "itineraire",
-                        principalColumn: "id_itineraire",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "reservation",
                 columns: table => new
                 {
@@ -156,7 +164,8 @@ namespace BackAPI.Migrations
                     id_classe = table.Column<int>(type: "integer", nullable: false),
                     remboursement = table.Column<double>(type: "double precision", nullable: false),
                     id_passager = table.Column<int>(type: "integer", nullable: false),
-                    date_reservation = table.Column<DateOnly>(type: "date", nullable: false)
+                    date_reservation = table.Column<DateOnly>(type: "date", nullable: false),
+                    prix = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -217,6 +226,11 @@ namespace BackAPI.Migrations
                 name: "IX_appartenir_id_classe",
                 table: "appartenir",
                 column: "id_classe");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_classeservice_id_aeronef",
+                table: "classeservice",
+                column: "id_aeronef");
 
             migrationBuilder.CreateIndex(
                 name: "IX_reservation_id_classe",

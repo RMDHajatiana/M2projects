@@ -68,12 +68,13 @@ const Login = () => {
                         }
                     }
                 }}>
-                    <Button  style={{
+                    <Button style={{
                         fontSize: 14,
+                        color:'white',
                         fontFamily:' "Poppins", Cursive, "Open-sans" ',
                         height: '40px'
                         
-                    }} onClick= {()=> { authentification ()}} className="btn-login"> {auth ? <i className="fa fa-spin fa-circle-o-notch"></i> : <i className="fa fa-sign-in"></i>}  Se connecter</Button>
+                    }} onClick= {()=> { authentification ()}} className="btn-login"> {auth ? <i className="fa fa-spin fa-circle-o-notch"></i> : <i className="fa fa-sign-in"></i>}  Se connecter </Button>
                 </ConfigProvider>
                 </div>
             </div>

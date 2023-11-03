@@ -1,0 +1,138 @@
+// import { ConfigProvider, Input, Modal, Select } from 'antd';
+// import axios from 'axios';
+// import React, { useEffect, useState } from 'react';
+
+// const ModalVol = ({  titre, okText, open, cancelText, onCancel, handleSave}) => {
+//     const [numVol, setNumVol] =useState('')
+//     const [avionID, setAvionID] =useState('')
+//     const [itineraireID, setItineraireID] =useState()
+//     const [statut, setStatut] =useState('')
+//     const [dateD, setDateD] =useState('')
+//     const [heureD, setHeureD] =useState('')
+  
+//     const [dataIT, setDataIT] = useState([])
+//     const [dataAV, setDataAV] = useState([])
+  
+//     useEffect(() => {
+//       axios.get("http://localhost:5160/api/Itineraires").then(response => setDataIT(response.data)).catch(error => console.log(error))
+//     }, [])
+  
+//     useEffect(() => {
+//       axios.get("http://localhost:5160/api/Avions")
+//       .then(response => setDataAV(response.data))
+//       .catch(error => console.log(error))
+//     }, [])
+  
+  
+//     const statuts = [
+//       "A l'heure",
+//       "Retardé",
+//       "Annuler"
+//     ]
+//     handleSave = () => {
+//         const url = "http://localhost:5160/api/Vols"
+//         const data = 
+//         {
+//           "num_vol":numVol,
+//           "avionID": avionID ,
+//           "itineraireID": itineraireID,
+//           "statut": statut,
+//           "date_depart": dateD,
+//           "heure_depart": heureD
+//         }
+//         axios.post(url, data)
+//         .then(() => {
+//           onCancel()
+//           setNumVol('')
+//           setAvionID()
+//           setItineraireID()
+//           setStatut('')
+//           setDateD('')
+//           setHeureD('')
+//           })
+//         .catch(error => console.log(error))
+//       }
+
+
+//       const avionOptions = dataAV.map(item => ({
+//         label: item.type_aeronef,
+//         value: item.id_aeronef,
+//       }));
+      
+//       const itineraireOptions = dataIT.map(item => ({
+//         label: `${item.aeroport_depart} - ${item.aeroport_arrive}`,
+//         value: item.id_itineraire,
+//       }));
+      
+//       const statutOptions = statuts.map(item => ({
+//         label: item,
+//         value: item,
+//       }));
+      
+
+// return (
+//  <div>
+//  <Modal
+//     style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
+//     title = {titre}
+//     okText ={okText}
+//     cancelText = {cancelText}
+//     width= '300px'
+//     open  = {open }
+//     onCancel ={onCancel}
+//     onOk={handleSave} >
+
+// <ConfigProvider
+// theme={{
+//     components : {
+//         Input: {
+//             activeBorderColor:'#b82626',
+//             hoverBorderColor:'#b82626'
+//             },
+//         Select: {
+//           //optionSelectedBg:'#b82626',
+//           colorPrimaryHover:'#b82626',
+//           colorPrimaryBg:'#b82626'
+//         }
+//     }
+// }} >
+
+//       <label htmlFor="numeroVol">Numero de vol :</label>
+//       <Input onChange={(e) =>setNumVol(e.target.value) }  value={numVol}/>
+
+//       <label htmlFor="avion">Avion :</label>
+//       <Select style={{width : 250,  fontFamily:'"Poppins", cursive, "open-sans"' }}
+//       onChange={(e) => setAvionID(e.target.value)} 
+//       value={avionID}
+//       options={dataAV.map(items => ({label: items.type_aeronef, value: items.id_aeronef }))} />
+
+//       <label htmlFor="Itineraire">Itineraire du vol :</label>
+//       <Select style={{width : 250,  fontFamily:'"Poppins", cursive, "open-sans"' }}
+//       //  defaultValue={datas[0].aeroport_depart + "-" + datas[0].aeroport_arrive}
+//       onChange={(e)=> setItineraireID(e.target.value)} 
+//       value={itineraireID}
+//       options = {dataIT.map((items) =>( { label: items.aeroport_depart + "-" + items.aeroport_arrive,  value: items.id_itineraire })  )}
+//       /> <br/>
+
+//       <label htmlFor="Statut">Statut de vol :</label>
+//       <Select 
+//       style={{width : 250,  fontFamily:'"Poppins", cursive, "open-sans"' }}
+//       onChange={(e)=>setStatut(e.target.value)} 
+//       value={statut}
+//       options={statuts.map( (items )=>( { label: items, value: items}) )}
+//       /><br/>
+
+//       <label htmlFor="Date">Date de départ :</label>
+//       <Input type='date' onChange={(e)=> setDateD(e.target.value)}  value={dateD}/>
+
+//       <label htmlFor="Heure">Heure de départ :</label>
+//       <Input type='time' onChange={(e) => setHeureD(e.target.value)}  value={heureD}/>  
+
+//       </ConfigProvider>
+
+//       </Modal>
+//         </div>
+//     )
+// }
+
+// export default ModalVol

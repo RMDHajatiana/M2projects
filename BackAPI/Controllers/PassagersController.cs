@@ -91,6 +91,7 @@ namespace BackAPI.Controllers
               return Problem("Entity set 'AppDbContext.Passager'  is null.");
           }
             _context.Passager.Add(passager);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPassager", new { id = passager.Id_passager }, passager);

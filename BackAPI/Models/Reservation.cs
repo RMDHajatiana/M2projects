@@ -29,7 +29,16 @@ namespace BackAPI.Models
         public Passager? Passager { get; set; }
 
         [Column("date_reservation")]
-        public DateTime Date_reservation { get; set; }
+        public DateOnly Date_reservation { get; set; }
+
+        [Column("prix")]
+
+        public double Prix { get; set; }
+
+        
+        [NotMapped]
+        public double Devise { get; set; }
+ 
 
     }
 }

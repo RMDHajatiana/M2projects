@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, ConfigProvider, Drawer } from 'antd';
+import { Button, ConfigProvider, Drawer } from 'antd';
 import { Menus } from "../Components/Menus";
 import { Menus2 } from "../Components/Menu2";
 import Appfooter from "../Components/Appfooter"
 import * as AiIcons from "react-icons/ai";
 import { LoginOutlined } from "@ant-design/icons";
 import { NavLink } from 'react-router-dom';
+import { CardDashboard } from '../Components/Card/CardDashboard';
 
 const Dashbord = () => {
 
@@ -107,9 +108,9 @@ useEffect(()=>{
             {/* <AppContent/> */}
 
 
-            <div className='conteneur'>
-                    Tableau de bord
-            </div>
+           <div className='dashContent'>
+              <CardDashboard/>
+           </div>
 
             {/* <AppContent/> */}
   

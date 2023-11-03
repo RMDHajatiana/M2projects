@@ -117,14 +117,37 @@ useEffect(()=> {
                     bodyStyle={{ height:'95%', overflow:'auto' }}
                     bordered={false}
                     headStyle={{ border:'none', textAlign:'center', fontFamily : '"Poppins", cursive, "open-sans"'  }}>
-
+                      <div className='recette'>
                         <Card
-                            style={{ fontFamily : '"Poppins", cursive, "open-sans"', width: '20%', justifyContent:'center'}}
+                            style={{ fontFamily : '"Poppins", cursive, "open-sans"', width: '40%', height:'200px', justifyContent:'center'}}
                             hoverable
                             cover ={ ""} >
-                            <Meta title="Recette globale" description="200000 $" />
+                            <Meta title="Recettes globale" description="7 000 000 Ar" />
+                            Avion 1 : 1 000 00 Ar 
+                            Avion 2 : 4 000 000 Ar
+                            Avion 3 : 2 000 000 Ar
+                        </Card> <br/>
+                        <Card
+                            style={{  fontFamily : '"Poppins", cursive, "open-sans"', height:'200px', width: '40%', justifyContent:'center'}}
+                            hoverable
+                            cover ={ ""} >
+                            <Meta title="Recettes nettes" description="9 000 000 Ar" />
+                            Avion 1 : 1 000 00 Ar 
+                            Avion 2 : 4 000 000 Ar
+                            Avion 3 : 2 000 000 Ar
+                            Avion 3 : 2 000 000 Ar
+                        </Card><br/>
+                        <Card
+                            style={{ fontFamily : '"Poppins", cursive, "open-sans"', marginLeft:'50%', marginTop:'-27%',  height:'200px', width: '40%', justifyContent:'center'}}
+                            hoverable
+                            cover ={ ""} >
+                            <Meta title="Recettes futures" description="9 000 000 Ar" />
+                            Avion 1 : 1 000 00 Ar 
+                            Avion 2 : 4 000 000 Ar
+                            Avion 3 : 2 000 000 Ar
+                            Avion 3 : 2 000 000 Ar
                         </Card>
-
+                        </div>
                 </Card>
             </div>
 

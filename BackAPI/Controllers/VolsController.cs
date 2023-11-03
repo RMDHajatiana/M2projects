@@ -31,21 +31,39 @@ namespace BackAPI.Controllers
             {
                 return NotFound();
             }
-            return await _context.Vol.Include(v => v.Avion).Include(v => v.Itineraire).ToListAsync();
+            return await _context.Vol.Include(v => v.Avion).Include(v => v.Itineraire).OrderBy(a=>a.Id_vol).ToListAsync();
         }
 
-        //public async Task<List<Vol>> GetVol()
-        //{
-        //    JsonSerializerOptions options = new JsonSerializerOptions
-        //    {
-        //        ReferenceHandler = ReferenceHandler.Preserve
-        //    };
+        [HttpGet("/tarif")]
+        public ActionResult<IEnumerable<object>> GetVolComplete()
+        {
+            var vols = _context.Vol.Include(v => v.Avion).Include(v => v.Tarifs).ToList();
 
-        //    return await _context.Vol
-        //        .Include(v => v.Avion)
-        //        .ToListAsync();
-        //}
+            var result = vols.Select(vol => new
+            {
+                NuméroVol = vol.Num_vol,
+
+                Avion = vol.Avion != null ? vol.Avion.Type_aeronef : null,
+
+                Tarifs = vol.Tarifs.Select(tarif => new
+
+                {
+                    ClasseService = tarif.ClasseService != null ? tarif.ClasseService.Type_classe : null,
+
+                    MontantTarif = tarif.Montant_tarif
+
+                }).ToList()
+
+            }).ToList();
+
+            return result;
+        }
+
+
+
+
         // GET: api/Vols/5
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Vol>> GetVol(int id)
         {
@@ -110,6 +128,7 @@ namespace BackAPI.Controllers
         }
 
         // DELETE: api/Vols/5
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVol(int id)
         {

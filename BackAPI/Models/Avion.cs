@@ -15,7 +15,7 @@ namespace BackAPI.Models
         public string? Type_aeronef { get; set; }
 
         public ICollection<Vol> ? Vols  { get; set; }
-        public ICollection<Appartenir> ? Appartenirs  { get; set; }
+        public ICollection<ClasseService> ? ClasseServices { get; set; }
         /*
         [NotMapped]
         public int nb { get; set; }

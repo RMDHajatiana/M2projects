@@ -18,6 +18,12 @@
     margin-top: -60px;
 }
 
+.dashContent {
+    margin-left: 2%;
+    margin-top: 4%;
+    width: 90%;
+}
+
 .App {
     flex-direction: row;
     background-color: #c0baba7e; 
@@ -30,6 +36,17 @@
     .navBar {
         height: 60px;
     }
+}
+
+label {
+    font-family: "Poppins", cursive, "open-sans"
+}
+span {
+    font-family: "Poppins", cursive, "open-sans"
+}
+
+Modal {
+    font-family: "Poppins", cursive, "open-sans";
 }
 
 .styleContent {
@@ -131,34 +148,33 @@ body {
     height: 102px;
 }
 
-/* .image {
-    margin-top: 7.5%;
-    width: 100%;
-    height: 250px;
-} */
+.image {
+    margin-left: 45%;
+} 
+
 
 
 .Appfooter {
     /* margin-top: 5%; */
     height: 250px;
+    flex-direction: column;
     display: flex;
     flex: 1;
-    flex-direction: column;
-    color: #f6f6f7;
+    color: #ffff;
     background-color: #b82626;
 }
 
 
-p {
-    text-align: center;
-    font-family:"Poppins", cursive, "open-sans";
+.contact {
+    margin-top: 5%;
+    width: 100%;
+    height: 140px;
+    background-color: rgba(15, 14, 14, 0.37);
 }
 
 .copyright {
-    color: #f6f6f798;
-    height: 100px;
-    margin-top: 94px;
-    background-color: #0a0a0a67;
+    color: #ffffff;
+    margin-left: 49%;
 }
 
 Button {
@@ -170,3 +186,6 @@ Button {
     align-items: center;
 }
 
+.recette {
+    flex-direction: row;
+}

@@ -20,15 +20,19 @@ namespace BackAPI.Models
         [Column("id_aeronef")]
         public int AvionID { get; set; }
 
+        [Column("statut")]
+
+        public string ? Statut { get; set; }
+
 
         [Column("id_itineraire")]
         public int ItineraireID { get; set; }
 
         [Column("date_depart")]
-        public DateTime Date_depart { get; set; }
+        public DateOnly Date_depart { get; set; }
 
         [Column("heure_depart")]
-        public DateTime Heure_depart { get; set; }
+        public TimeOnly Heure_depart { get; set; }
 
 
         public   Avion ? Avion { get; set; }

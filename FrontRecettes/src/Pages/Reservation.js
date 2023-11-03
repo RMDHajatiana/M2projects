@@ -3,11 +3,12 @@ import { Button, Card, ConfigProvider, Input, Drawer} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { TablePassagers } from '../Components/Table';
-import { ModalReservation } from '../Components/Modal';
+import { ModalReservationAdd, ModalReservationUpload } from '../Components/Modal';
 import { Menus } from "../Components/Menus";
 import { Menus2 } from "../Components/Menu2";
 import Appfooter from "../Components/Appfooter"
 import * as AiIcons from "react-icons/ai";
+import * as BiIcons from "react-icons/bi";
 import { LoginOutlined } from "@ant-design/icons";
 import { MenuProvider } from "../Components/MenuContext";
 import { NavLink } from 'react-router-dom';
@@ -48,25 +49,19 @@ useEffect(()=> {
     })
 
     const title = [
-        "ID",
-        "Identifiant vol",
-        "itineraire",
-         "Remboursement",
-        "Date de depart",
-        "iIdentifiant de classe",
-        "Identifiant de passager",
-        "Date de reservation"
+        "#",
+        "Numéro de vol",
+        "Classe de service",
+        "Passager",
+        "Remboursement",
     ]
 
     const IndexData = [
-        "num_reservation",
-        "id_vol",
-        "id_itineraire",
-         "remboursement",
-        "date_depart",
-        "id_classe",
-        "id_passager",
-        "date_reservation"
+      "num_reservation",
+      "volID",
+      "classeServiceID",
+      "passagerID",
+      "remboursement",
     ]
 
     const [recherche, setRecherche ] = useState('')
@@ -86,7 +81,8 @@ useEffect(()=> {
         "date_reservation"
     ]
     
-    // fetch data// 
+    //fetch data// 
+
     const [data, setData]= useState([])
     const fetch = async () => {
         let resultat = await axios.get("http://localhost:5160/api/Reservations")
@@ -101,10 +97,16 @@ useEffect(()=> {
     })
 
     // Ajout de données // 
+
     const [open, setOpen ]= useState(false)
-     const HandleModalAdd = () => {
+     const HandleModalUpload = () => {
         setOpen(true)
     }
+
+    const [openAdd, setOpenAdd ]= useState(false)
+    const HandleModalAdd = () => {
+       setOpenAdd(true)
+   }
 
     return (
         <MenuProvider>
@@ -186,6 +188,8 @@ useEffect(()=> {
                         Button : {
                         fontFamily: '"Poppins", cursive, "open-sans"',
                         colorPrimary:'#b82626',
+                        defaultColor:'',
+                        defaultBorderColor:'#b82626',
                         colorPrimaryBorder:'#b82626',
                         colorPrimaryHover:'rgba(145, 53, 61, 0.699)',
                         colorPrimaryActive:'#b82626'
@@ -195,8 +199,10 @@ useEffect(()=> {
                             hoverBorderColor:'#b82626'
                         }
                         }}} >
-                        <Button  onClick={() => HandleModalAdd () }
+                        <Button   onClick={() => HandleModalUpload () }
                         icon ={ <UploadOutlined/>} > Importer </Button>
+                        <Button style={{ marginLeft:'0.5%' }}  type='primary' onClick={() => HandleModalAdd () }
+                        icon ={ <BiIcons.BiAddToQueue/>} > Ajouter </Button>
                         <Input style={{ marginLeft:'70%' }} value={recherche} onChange={handleRecherche} placeholder =  "Rechercher" />
                     </ConfigProvider>
                     </div>
@@ -209,18 +215,28 @@ useEffect(()=> {
                         // handleUpdate(id_passager)
                         // }}
                         //handleDelete={ (id_passager) => handleRecuperedId(id_passager) }
-                        data = { data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
+
+                        data = {data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
                         title={title} 
                         IndexData={IndexData} 
                         size='small' />
 
-                        <ModalReservation
+                        <ModalReservationUpload
                         titre="Importation "
                         okText="Enregistrer"
                         cancelText="Annuler"
                         open = {open} 
                         onCancel={()=> setOpen(false)}
                         handleSave={()=> setOpen(false)}/>
+
+                      <ModalReservationAdd
+                        titre="Ajouter une réservation "
+                        okText="Ajouter"
+                        cancelText="Annuler"
+                        open = {openAdd} 
+                        onCancel={()=> setOpenAdd(false)}
+                        handleSave={()=> setOpenAdd(false)}/>
+
                     </div>
                 </Card>
                 </div>

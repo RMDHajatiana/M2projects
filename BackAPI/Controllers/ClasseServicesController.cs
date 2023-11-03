@@ -29,7 +29,7 @@ namespace BackAPI.Controllers
           {
               return NotFound();
           }
-            return await _context.ClasseService.ToListAsync();
+            return await _context.ClasseService.Include(a=>a.Avion).Include(t=>t.Tarifs).Include(r=>r.Reservations).OrderBy(c=>c.Id_classe).ToListAsync();
         }
 
         // GET: api/ClasseServices/5

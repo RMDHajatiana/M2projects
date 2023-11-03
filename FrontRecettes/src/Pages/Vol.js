@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, ConfigProvider, Drawer, Input, Modal } from 'antd';
+import { Button, Card, ConfigProvider, Drawer, Input, Modal, Select } from 'antd';
 import axios from 'axios';
 import { TableVols } from '../Components/Table';
 import { MenuProvider } from '../Components/MenuContext';
@@ -7,8 +7,11 @@ import { Menus } from "../Components/Menus";
 import { Menus2 } from "../Components/Menu2";
 import Appfooter from "../Components/Appfooter"
 import * as AiIcons from "react-icons/ai";
-import { LoginOutlined } from "@ant-design/icons";
-import { NavLink } from 'react-router-dom';
+import * as BiIcons from "react-icons/bi";
+import {  useNavigate } from 'react-router-dom';
+import { ModalVol } from '../Components/Modal';
+import { LogoutOutlined } from '@ant-design/icons';
+
 
 const Vol = () => {
 
@@ -42,17 +45,22 @@ useEffect(()=> {
   }
   }, [])
 
+  const customRenderers = [
+  //  (text, record) => record.id_vol,
+    (text, record) => record.num_vol,
+    (text, record) => record.avion ? record.avion.type_aeronef : '',
+    (text, record) => record.itineraire ? `${record.itineraire.aeroport_depart} - ${record.itineraire.aeroport_arrive}` : ''
+  ]
 
     const title = [
-        "Id",
+     // "#",
         "Numéro de vol",
-        "Id Avion",
-        "Itineraire"
+        "Avion",
+        "Itinéraire"
 
     ]
 
-   const IndexData = [    
-        "id_vol",
+ const IndexData = [    
         "num_vol",
         "avionID",
         "itineraireID",
@@ -62,11 +70,11 @@ useEffect(()=> {
      const key = [
         "id_vol",
         "num_vol",
-        "id_aeronef",
-        "id_itineraire",
+        "avionID",
+        "itineraireID",
         "date_depart",
-        "heure_depart"
      ]
+
      const [recherche, setRecherche ] = useState('')
      const handleRecherche = (e)  => {
        setRecherche(e.target.value)
@@ -77,33 +85,133 @@ useEffect(()=> {
     const fetch = async () => {
         let resultat = await axios.get("http://localhost:5160/api/Vols")
         setData ( resultat.data)
-        console.log(data)
     }
 
     useEffect(()=> {
         const intervale = setInterval(() => {
             fetch()
         }, 1000)
-        document.title = "Nos Vols"
+        document.title = "Vols"
         return () => clearInterval(intervale)
     })
 
+      // Ajout de données // 
+        
+      const [open, setOpen ]= useState(false)
+      const HandleModalAdd = () => {
+              setOpen(true)
+            }
+            
+          //Modification
+
+        const [openModalEdit, setOpenModalEdit] = useState(false)
+        const OpenModalEdit = () => {
+            setOpenModalEdit(true)
+          } 
+          
+        const [idVol, setIdVol] =useState()
+        const [numVol, setNumVol] =useState('')
+        const [avionID, setAvionID] =useState('')
+        const [itineraireID, setItineraireID] =useState()
+        const [statut, setStatut] =useState('')
+        const [dateD, setDateD] =useState('')
+        const [heureD, setHeureD] =useState('')
+
+
+        const handleUpdate = (id_vol) =>
+            {
+            axios.get( "http://localhost:5160/api/Vols/ " + id_vol )
+            .then ((resultat) => {
+              setIdVol (resultat.data.id_vol)
+              setNumVol(resultat.data.num_vol)
+              setAvionID(resultat.data.avionID)
+              setItineraireID(resultat.data.itineraireID)
+              setStatut(resultat.data.statut)
+              setDateD(new Date(resultat.data.date_depart).toISOString().split('T')[0])
+              setHeureD(resultat.data.heure_depart)
+              
+            }).catch(error => console.log(error))
+            
+            }
+        
+            const   handleSaveUpdate = () =>  {
+             const url =" http://localhost:5160/api/Vols/" + idVol
+             const data = {
+              "id_vol":idVol,
+              "num_vol":numVol,
+              "avionID": avionID ,
+              "itineraireID": itineraireID,
+              "statut": statut,
+              "date_depart": dateD,
+              "heure_depart": heureD
+             }
+             axios.put(url, data)
+             .then(() => {
+              setOpenModalEdit(false)
+              fetch()
+             }).catch(error => console.log(error))
+            }
+            
     // Modal information //
-    const recuperedInfo = (id_vol) => {
 
-    data.map( (items) => { 
-    Modal.info({
-      style: 'height 50vh ',
-      title: 'Information de vol numéro'   + items.num_vol  ,
-      content: (
-        <div key={items.id_vol}>
-          <label> Numéro de ce vol : </label>
-          <p>{items.}</p>
-        </div>
-      ),
-      onOk() {}
-    })  })
+    const handleInfo = (id_vol) => {
 
+      data.map(items => { 
+
+        if(items.id_vol === id_vol) {
+          Modal.info({
+            title: 'Information sur le vol numéro  '   + items.num_vol ,
+            content: (
+              <div key={items.id_vol}>
+                <label> Identifiant du vol :  <span>{items.id_vol}</span></label> <br/> <br/>
+                <label> Numéro de ce vol :  <span>{items.num_vol}</span></label> <br/> <br/>
+                <label> Nom de l'appareil : <span>{items.avion.type_aeronef}</span></label> <br/> <br/>
+                <label> Date de départ :  <span>{new Date(items.date_depart).toLocaleDateString()}</span></label> <br/> <br/>
+                <label> Heure de départ :  <span>{items.heure_depart} </span></label> <br/> <br/>
+                <label> Itinéraire  : <span>{items.itineraire.aeroport_depart + '-' +  items.itineraire.aeroport_arrive }</span> </label> <br/> <br/>
+                <label> Status du vol  : <span>{items.statut }</span> </label> <br/> <br/>
+              </div>
+            ),
+            onOk() {}
+          })
+        } 
+        })
+    }
+
+    const { Option } = Select
+    const statuts = [
+    "A l'heure",
+    "Retardé",
+     "Annuler" 
+    ]
+
+    //  Suppression de vol///
+
+                
+         const handleDeleteVol =  (id_vol) => {
+                
+          Modal.confirm ({
+              cancelText:'Non',
+              okText:'oui',
+              okType:'danger',
+              title : "Êtes vous sûr de supprimer ? ", 
+               onOk: () => {
+               axios.delete("http://localhost:5160/api/Vols/" + id_vol )
+               .then(() => fetch())
+               .catch(error => console.log(error))
+            } }) }
+        
+
+  //deconnexion // 
+const navigate = useNavigate()
+  const deconnexion = () => {
+    Modal.confirm({
+      cancelText:'Non',
+      okType:'danger',
+      okText:'oui',
+      title : "Voulez vous vraiment se déconnecter ? ", 
+      onOk: navigate("/")
+    })
   }
 
     return (
@@ -138,14 +246,11 @@ useEffect(()=> {
               }
     
             }} >
-              <NavLink to="/">
+              
               <Button  type="link"
-                onClick={()=> {
-                  console.log("login");
-                }}
-                style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}
-                > <LoginOutlined/> Deconnexion</Button>
-                </NavLink>
+                onClick={()=>deconnexion ()}
+                style={{ fontFamily:'"Poppins", cursive, "open-sans"', color:'#b82626'}}>  {<LogoutOutlined/>}Deconnexion</Button>
+                
              </ConfigProvider>
     
             </div>
@@ -195,19 +300,87 @@ useEffect(()=> {
                                 hoverBorderColor:'#b82626'
                             }
                             }}} >
-                            {/* <Button  onClick={() => HandleModalAdd () }
-                            icon ={ <UploadOutlined/>} > Importer </Button> */}
-                            <Input style={{ marginLeft:'80%' }} value={recherche} onChange={handleRecherche} placeholder =  "Rechercher" />
+                            <Button  onClick={() => HandleModalAdd () } type='primary'
+                            icon ={ <BiIcons.BiAddToQueue/>} > Ajouter </Button> 
+                            <label htmlFor='recherche'> </label>
+                            <Input id='recherche' style={{ marginLeft:'75%' }} value={recherche} onChange={handleRecherche} placeholder =  "Rechercher ici..." />
                         </ConfigProvider>
                         </div>
+                        
+                      <ModalVol
+                      titre='Ajouter un Vol'
+                      cancelText= 'Annuler'
+                      okText='Ajouter' open={open} 
+                      onCancel = {() => setOpen(false)}
+                      handleSave  = {() => setOpen(false)} />
 
-                        <TableVols
-                            handleInfo={(id_vol) => recuperedInfo(id_vol)}
-                            data = { data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
-                            title={title} 
-                            IndexData={IndexData} 
-                            size='large' />
+                  <Modal
+                      style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
+                      title = "Modification"
+                      cancelText ="Annuler"
+                      okText = "Enregistrer"
+                      width= '300px'
+                      open  = {openModalEdit }
+                      onCancel={() => setOpenModalEdit(false)}
+                      onOk={() => handleSaveUpdate()} >
+
+                  <ConfigProvider 
+                  theme={{
+                      components : {
+                          Input: {
+                              activeBorderColor:'#b82626',
+                              hoverBorderColor:'#b82626'
+                              }, 
+                              Select: {
+                                //optionSelectedBg:'#b82626',
+                                colorPrimaryHover:'#b82626',
+                                colorPrimaryBg:'#b82626'
+                              }
+                      }
+                  }} >
+                  
+                  <label htmlFor="idVol">ID :</label>
+                  <Input disabled={true} id='idvol' value={idVol}  onChange={(e) => setIdVol(e.target.value) }/> 
+
+                  <label htmlFor="numeroVol">Numero de vol :</label>
+                  <Input  id='numeroVol' disabled={false} onChange={(e) =>setNumVol(e.target.value) }  value={numVol}/>
+
+                  <label htmlFor="avion">Avion :</label>
+                  <Input id='avion' disabled={true} onChange={(e) => setAvionID(e.target.value)}  value={avionID} />
+
+                  <label htmlFor="Itineraire">Itineraire du vol :</label>
+                  <Input id='Itineraire' disabled={true} onChange={(e)=> setItineraireID(e.target.value)}  value={itineraireID}/>
+
+                  <label htmlFor="Statut">Statut de vol :</label>
+                  <Select style={{width:'250px'}} id='Statut' onChange={(value)=>setStatut(value)}  value={statut}>
+                    {statuts.map( items => <Option key={items}>{items}</Option>)}
+                  </Select>
+
+                  <label htmlFor="Date">Date de départ :</label>
+                  <Input type='date' disabled={true} id='Date' onChange={(e)=> setDateD(e.target.value)}  value={dateD}/>
+
+                  <label htmlFor="Heure">Heure de départ :</label>
+                  <Input type='time'disabled={true} id='Heure' onChange={(e) => setHeureD(e.target.value)}  value={heureD}/>  
+
+                  </ConfigProvider>
+
+              </Modal>
+
+                 <TableVols
+                    handleDalete={(id_vol)=> handleDeleteVol(id_vol) }
+                    handleInfo={(id_vol) => handleInfo(id_vol)}
+                   handleEdit={(id_vol) => {
+                      OpenModalEdit(id_vol)
+                      handleUpdate(id_vol)
+                      }}
+                    data = { data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
+                    title={title} 
+                    customRenderers= {customRenderers}
+                    IndexData={IndexData} 
+                    size='samll' />
+
                 </Card>
+
            </div>
 
             {/* <AppContent/> */}

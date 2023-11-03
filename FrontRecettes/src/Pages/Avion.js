@@ -124,6 +124,53 @@ const Avion = () => {
          fetch()
         }).catch(error => console.log(error))
        }
+
+           // Modal information //
+
+
+    const handleInfo = (id_aeronef) => {
+      
+      const Avion = data.find( items => items.id_aeronef === id_aeronef)
+
+        const nbrClasse  = Avion.classeServices.length
+        
+        let CapaciteTotal = 0
+        
+         Avion.classeServices.forEach(items => {CapaciteTotal += items.num_siege })
+
+         console.log(CapaciteTotal)
+        
+          data.map((items) => { 
+            
+          if(items.id_aeronef === id_aeronef ) {
+            
+            if (CapaciteTotal === 0 ) {
+              CapaciteTotal = "Zéro" 
+            }
+            
+            Modal.info({
+              
+              title: "Information sur l'Avion "   + items.type_aeronef,
+
+              content: (
+
+                <div key={items.id_aeronef}>
+
+                <label> Numéro d'identification :  <span>{items.id_aeronef}</span></label> <br/> <br/>
+                <label> Nom de l'appareil : <span>{items.type_aeronef}</span></label> <br/> <br/>
+
+                <label> Possède {nbrClasse} classe(s) de service(s) :</label> <br/>
+                   {Avion.classeServices.map((item) => <span key={item.id_classe}> - {item.type_classe +' : '+ item.num_siege } <br/>  </span>  ) }  <br/> 
+
+                <label> Capacité max de l'avion jusqu' à : <span> { CapaciteTotal + " Passager(s)"}</span></label> <br/> <br/>
+
+              </div>
+          ),
+          onOk() {}
+        })
+      } 
+    })
+    }
        
 
    // suppression de données // 
@@ -137,8 +184,7 @@ const Avion = () => {
         axios.delete("http://localhost:5160/api/Avions/" + id_aeronef )
           .then(() => fetch())
           .catch(error => console.log(error))
-           }
-                })
+           }  })
       }
     return (
       <MenuProvider>
@@ -158,16 +204,16 @@ const Avion = () => {
           <ConfigProvider
           theme={{
             components : {
-              Button : {
-               //   primaryColor :'#b82626',
-              //    defaultBorderColor:'#b82626',
-                  linkHoverBg:'#88080833',
-              //     defaultColor:'white',
-              //     textHoverBg:'white',
-              //     ghostBg:'#880808',
-              //     defaultGhostColor:'white',
-              //     defaultGhostBorderColor:'#880808',
-                 }
+                Button : {
+                //   primaryColor :'#b82626',
+                //    defaultBorderColor:'#b82626',
+                    linkHoverBg:'#88080833',
+                //     defaultColor:'white',
+                //     textHoverBg:'white',
+                //     ghostBg:'#880808',
+                //     defaultGhostColor:'white',
+                //     defaultGhostBorderColor:'#880808',
+                  }
             }
   
           }} >
@@ -237,6 +283,7 @@ const Avion = () => {
                                 {/* Affichage de données */}
                 
                             <TableAvion
+                                handleInfo={(id_aeronef)=> {handleInfo(id_aeronef)}}
                                 handleEdit = {(id_aeronef) => {
                                 OpenModalEdit(id_aeronef) 
                                 handleUpdate(id_aeronef)
@@ -270,6 +317,11 @@ const Avion = () => {
                                                 Input: {
                                                     activeBorderColor:'#b82626',
                                                     hoverBorderColor:'#b82626'
+                                                    }, 
+                                                    Select: {
+                                                      //optionSelectedBg:'#b82626',
+                                                      colorPrimaryHover:'#b82626',
+                                                      colorPrimaryBg:'#b82626'
                                                     }
                                             }
                                         }} >

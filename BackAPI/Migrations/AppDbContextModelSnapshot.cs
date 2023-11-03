@@ -80,6 +80,10 @@ namespace BackAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id_classe"));
 
+                    b.Property<int>("AvionID")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_aeronef");
+
                     b.Property<int>("Num_siege")
                         .HasColumnType("integer")
                         .HasColumnName("num_siege");
@@ -90,6 +94,8 @@ namespace BackAPI.Migrations
                         .HasColumnName("type_classe");
 
                     b.HasKey("Id_classe");
+
+                    b.HasIndex("AvionID");
 
                     b.ToTable("classeservice");
                 });
@@ -181,13 +187,17 @@ namespace BackAPI.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id_passager");
 
+                    b.Property<double>("Prix")
+                        .HasColumnType("double precision")
+                        .HasColumnName("prix");
+
+                    b.Property<double>("Remboursement")
+                        .HasColumnType("double precision")
+                        .HasColumnName("remboursement");
+
                     b.Property<int>("VolID")
                         .HasColumnType("integer")
                         .HasColumnName("id_vol");
-
-                    b.Property<double>("remboursement")
-                        .HasColumnType("double precision")
-                        .HasColumnName("remboursement");
 
                     b.HasKey("Num_reservation");
 
@@ -291,12 +301,12 @@ namespace BackAPI.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id_aeronef");
 
-                    b.Property<DateTime>("Date_depart")
-                        .HasColumnType("timestamp with time zone")
+                    b.Property<DateOnly>("Date_depart")
+                        .HasColumnType("date")
                         .HasColumnName("date_depart");
 
-                    b.Property<DateTime>("Heure_depart")
-                        .HasColumnType("timestamp with time zone")
+                    b.Property<TimeOnly>("Heure_depart")
+                        .HasColumnType("time without time zone")
                         .HasColumnName("heure_depart");
 
                     b.Property<int>("ItineraireID")
@@ -307,6 +317,10 @@ namespace BackAPI.Migrations
                         .HasMaxLength(6)
                         .HasColumnType("character varying(6)")
                         .HasColumnName("num_vol");
+
+                    b.Property<string>("Statut")
+                        .HasColumnType("text")
+                        .HasColumnName("statut");
 
                     b.HasKey("Id_vol");
 
@@ -320,13 +334,13 @@ namespace BackAPI.Migrations
             modelBuilder.Entity("BackAPI.Models.Appartenir", b =>
                 {
                     b.HasOne("BackAPI.Models.Avion", "Avion")
-                        .WithMany("Appartenirs")
+                        .WithMany()
                         .HasForeignKey("AvionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BackAPI.Models.ClasseService", "ClasseService")
-                        .WithMany("Appartenirs")
+                        .WithMany()
                         .HasForeignKey("ClasseServiceID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -334,6 +348,17 @@ namespace BackAPI.Migrations
                     b.Navigation("Avion");
 
                     b.Navigation("ClasseService");
+                });
+
+            modelBuilder.Entity("BackAPI.Models.ClasseService", b =>
+                {
+                    b.HasOne("BackAPI.Models.Avion", "Avion")
+                        .WithMany("ClasseServices")
+                        .HasForeignKey("AvionID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Avion");
                 });
 
             modelBuilder.Entity("BackAPI.Models.Reservation", b =>
@@ -403,15 +428,13 @@ namespace BackAPI.Migrations
 
             modelBuilder.Entity("BackAPI.Models.Avion", b =>
                 {
-                    b.Navigation("Appartenirs");
+                    b.Navigation("ClasseServices");
 
                     b.Navigation("Vols");
                 });
 
             modelBuilder.Entity("BackAPI.Models.ClasseService", b =>
                 {
-                    b.Navigation("Appartenirs");
-
                     b.Navigation("Reservations");
 
                     b.Navigation("Tarifs");
