@@ -12,55 +12,55 @@ namespace BackAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TarifsController : ControllerBase
+    public class ParametresController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public TarifsController(AppDbContext context)
+        public ParametresController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Tarifs
+        // GET: api/Parametres
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tarif>>> GetTarif()
+        public async Task<ActionResult<IEnumerable<Parametre>>> GetParametre()
         {
-          if (_context.Tarif == null)
+          if (_context.Parametre == null)
           {
               return NotFound();
           }
-            return await _context.Tarif.Include(v => v.ClasseService).Include(v => v.Vol).OrderBy(t => t.Montant_tarif).ToListAsync();
+            return await _context.Parametre.ToListAsync();
         }
 
-        // GET: api/Tarifs/5
+        // GET: api/Parametres/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tarif>> GetTarif(int id)
+        public async Task<ActionResult<Parametre>> GetParametre(int id)
         {
-          if (_context.Tarif == null)
+          if (_context.Parametre == null)
           {
               return NotFound();
           }
-            var tarif = await _context.Tarif.FindAsync(id);
+            var parametre = await _context.Parametre.FindAsync(id);
 
-            if (tarif == null)
+            if (parametre == null)
             {
                 return NotFound();
             }
 
-            return tarif;
+            return parametre;
         }
 
-        // PUT: api/Tarifs/5
+        // PUT: api/Parametres/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTarif(int id, Tarif tarif)
+        public async Task<IActionResult> PutParametre(int id, Parametre parametre)
         {
-            if (id != tarif.Id_tarif)
+            if (id != parametre.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tarif).State = EntityState.Modified;
+            _context.Entry(parametre).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace BackAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TarifExists(id))
+                if (!ParametreExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace BackAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Tarifs
+        // POST: api/Parametres
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Tarif>> PostTarif(Tarif tarif)
+        public async Task<ActionResult<Parametre>> PostParametre(Parametre parametre)
         {
-          if (_context.Tarif == null)
+          if (_context.Parametre == null)
           {
-              return Problem("Entity set 'AppDbContext.Tarif'  is null.");
+              return Problem("Entity set 'AppDbContext.Parametre'  is null.");
           }
-            _context.Tarif.Add(tarif);
+            _context.Parametre.Add(parametre);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTarif", new { id = tarif.Id_tarif }, tarif);
+            return CreatedAtAction("GetParametre", new { id = parametre.Id }, parametre);
         }
 
-        // DELETE: api/Tarifs/5
+        // DELETE: api/Parametres/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTarif(int id)
+        public async Task<IActionResult> DeleteParametre(int id)
         {
-            if (_context.Tarif == null)
+            if (_context.Parametre == null)
             {
                 return NotFound();
             }
-            var tarif = await _context.Tarif.FindAsync(id);
-            if (tarif == null)
+            var parametre = await _context.Parametre.FindAsync(id);
+            if (parametre == null)
             {
                 return NotFound();
             }
 
-            _context.Tarif.Remove(tarif);
+            _context.Parametre.Remove(parametre);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TarifExists(int id)
+        private bool ParametreExists(int id)
         {
-            return (_context.Tarif?.Any(e => e.Id_tarif == id)).GetValueOrDefault();
+            return (_context.Parametre?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

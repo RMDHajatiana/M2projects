@@ -11,6 +11,7 @@ import * as BiIcons from "react-icons/bi";
 import {  useNavigate } from 'react-router-dom';
 import { ModalVol } from '../Components/Modal';
 import { LogoutOutlined } from '@ant-design/icons';
+import { CircularProgress } from '@mui/material';
 
 
 const Vol = () => {
@@ -81,6 +82,7 @@ useEffect(()=> {
      }
 
     // fetch data //
+
     const [data,setData] = useState([]) 
     const fetch = async () => {
         let resultat = await axios.get("http://localhost:5160/api/Vols")
@@ -94,6 +96,27 @@ useEffect(()=> {
         document.title = "Vols"
         return () => clearInterval(intervale)
     })
+
+    const ProgressData = () => {
+      if(data.length === 0) {
+        return( <CircularProgress style={{ color:'#b82626', marginLeft:'50%', marginTop:'4%'}} />)
+      } else {
+        return (
+          <TableVols
+          handleDalete={(id_vol)=> handleDeleteVol(id_vol) }
+          handleInfo={(id_vol) => handleInfo(id_vol)}
+         handleEdit={(id_vol) => {
+            OpenModalEdit(id_vol)
+            handleUpdate(id_vol)
+            }}
+          data = { data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
+          title={title} 
+          customRenderers= {customRenderers}
+          IndexData={IndexData} 
+          size='samll' />
+        )
+      }
+    }
 
       // Ajout de données // 
         
@@ -158,7 +181,7 @@ useEffect(()=> {
 
       data.map(items => { 
 
-        if(items.id_vol === id_vol) {
+        if(items.id_vol === id_vol ) {
           Modal.info({
             title: 'Information sur le vol numéro  '   + items.num_vol ,
             content: (
@@ -170,6 +193,8 @@ useEffect(()=> {
                 <label> Heure de départ :  <span>{items.heure_depart} </span></label> <br/> <br/>
                 <label> Itinéraire  : <span>{items.itineraire.aeroport_depart + '-' +  items.itineraire.aeroport_arrive }</span> </label> <br/> <br/>
                 <label> Status du vol  : <span>{items.statut }</span> </label> <br/> <br/>
+                <label> Tarif de ce vol :
+                {items.tarifs.map(tarif =>   <span> {tarif.montant_tarif+ ' Ar'} ; </span>)} </label><br/> <br/>
               </div>
             ),
             onOk() {}
@@ -205,13 +230,7 @@ useEffect(()=> {
   //deconnexion // 
 const navigate = useNavigate()
   const deconnexion = () => {
-    Modal.confirm({
-      cancelText:'Non',
-      okType:'danger',
-      okText:'oui',
-      title : "Voulez vous vraiment se déconnecter ? ", 
-      onOk: navigate("/")
-    })
+   navigate('/')
   }
 
     return (
@@ -303,7 +322,7 @@ const navigate = useNavigate()
                             <Button  onClick={() => HandleModalAdd () } type='primary'
                             icon ={ <BiIcons.BiAddToQueue/>} > Ajouter </Button> 
                             <label htmlFor='recherche'> </label>
-                            <Input id='recherche' style={{ marginLeft:'75%' }} value={recherche} onChange={handleRecherche} placeholder =  "Rechercher ici..." />
+                            <Input id='recherche'  style={{ marginLeft:'75%' }} value={recherche} onChange={handleRecherche} placeholder =  "Rechercher ici..." />
                         </ConfigProvider>
                         </div>
                         
@@ -366,18 +385,7 @@ const navigate = useNavigate()
 
               </Modal>
 
-                 <TableVols
-                    handleDalete={(id_vol)=> handleDeleteVol(id_vol) }
-                    handleInfo={(id_vol) => handleInfo(id_vol)}
-                   handleEdit={(id_vol) => {
-                      OpenModalEdit(id_vol)
-                      handleUpdate(id_vol)
-                      }}
-                    data = { data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
-                    title={title} 
-                    customRenderers= {customRenderers}
-                    IndexData={IndexData} 
-                    size='samll' />
+                  <>{ProgressData()}</>
 
                 </Card>
 

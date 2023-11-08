@@ -121,6 +121,103 @@ export const ModalAvion = ({  titre, okText, open, cancelText, onCancel, handleS
     )
 }
 
+export const ModalTarif = ({  titre, okText, open, cancelText, onCancel, handleSave}) => {
+
+  const [vol, setVol] = useState()
+  const [classe, setClasse] = useState()
+  const [montant, setMontant] = useState()
+  const [ dataVol, setDataVol ] = useState([])
+const [ dataClass, setDataClass ] = useState([])
+const {Option }= Select
+
+
+
+const fetch = async () => {
+  let resultat = await  axios.get("http://localhost:5160/api/Vols")
+  setDataVol(resultat.data)
+}
+useEffect(()=> {
+  const intervale = setInterval(() => {
+    fetch()
+  }, 1000)
+  return () => clearInterval(intervale)
+})
+
+const fetch1 = async () => {
+  let resultat = await  axios.get("http://localhost:5160/api/ClasseServices")
+  setDataClass(resultat.data)
+}
+useEffect(()=> {
+  const intervale = setInterval(() => {
+    fetch1()
+  }, 1000)
+  return () => clearInterval(intervale)
+})
+
+
+
+  handleSave = () => {
+      const url = "http://localhost:5160/api/Tarifs"
+      const data = 
+      {
+          "volID": vol ,
+          "classeServiceID": classe ,
+          "Montant_tarif": montant ,
+      }
+      axios.post(url, data)
+      .then(() => {
+          onCancel()
+          setVol('')
+          setClasse('')
+          setMontant('')
+        })
+      .catch(error => console.log(error))
+    }
+  return (
+      <Modal   
+      style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
+      title = {titre} 
+      width= '300px'
+      okText = {okText} 
+      open  = {open}
+      cancelText = {cancelText}
+      onCancel={onCancel}
+      onOk={ handleSave  }>
+          <ConfigProvider theme={{
+              components : {
+                  Input: {
+                      activeBorderColor:'#b82626',
+                      hoverBorderColor:'#b82626'
+                    },
+                    Select: {
+                      //optionSelectedBg:'#b82626',
+                      colorPrimaryHover:'#b82626',
+                      colorPrimaryBg:'#b82626'
+                    }
+              }
+          }} >
+          <label htmlFor="vol"> Numéros de vol :</label>
+          <Select id='vol' onChange={(value) => setVol(value)}  style={{width : 250,  fontFamily:'"Poppins", cursive, "open-sans"' }}  value={vol}>
+            {
+             dataVol.map(items => (<Option value= {items.id_vol} key={items.id_vol}>{items.num_vol}</Option>))
+            }
+          </Select><br/>
+
+          <label htmlFor="class"> Classe de sevice :</label>
+          <Select id='class' onChange={(value) => setClasse(value)}  style={{width : 250,  fontFamily:'"Poppins", cursive, "open-sans"' }}  value={classe}>
+            {
+              dataClass.map(items => (<Option value= {items.id_classe} key={items.id_classe}>{items.type_classe}</Option>))
+            }
+          </Select><br/>
+
+          <label htmlFor="mt"> Montant :</label>
+          <Input id='mt' value={montant} onChange={(e) => setMontant(e.target.value)} /> <br/>
+
+          </ConfigProvider>
+      </Modal>
+  )
+}
+
 export const ModalClasse = ({  titre, okText, open, cancelText, onCancel, handleSave}) => {
 
     const [capacite, setCapacite] = useState()
@@ -186,7 +283,7 @@ export const ModalClasse = ({  titre, okText, open, cancelText, onCancel, handle
             <label htmlFor="avion">Avion :</label>
            <Select style={{width : 250,  fontFamily:'"Poppins", cursive, "open-sans"' }}
              onChange={(value) => setAvionID(value)} 
-             defaultValue={dataAV}
+             //defaultValue={dataAV}
              value={avionID} >
             {dataAV.map(items => (
              <Option key={items.id_aeronef} value={items.id_aeronef}>
@@ -197,7 +294,7 @@ export const ModalClasse = ({  titre, okText, open, cancelText, onCancel, handle
 
             <label htmlFor="nom">Type de classe de service :</label>
            <Select style={{width : 250,  fontFamily:'"Poppins", cursive, "open-sans"' }}
-           defaultValue={classeService[0]}
+           //defaultValue={classeService[0]}
              onChange={(value) => setType(value)}  value={type} >
                 {
              classeService.map((items, index) => (
@@ -267,41 +364,285 @@ export const ModalReservationUpload = ({  titre, okText, open, cancelText, onCan
     )
 }
 
+// export const ModalReservationAdd = ({ titre, okText, open, cancelText, onCancel, handleSave }) => {
 
-export const ModalReservationAdd = ({  titre, okText, open, cancelText, onCancel, handleSave}) => {
+//   const [volID, setVolID] = useState('')
+//   const [classID, setClassID] = useState('')
+//   const [passagerID, setPassagerID] = useState('')
+//   const [dateRes, setDateRes] = useState('')
+//   const [prix, setPrix] = useState(null)
+//   const [remboursement, setRemboursement] = useState(0)
 
-  const [ volID, setVolID ] = useState()
-  const [ classID, setclassID ] = useState()
-  const [ passagerID, setPassagerID ] = useState()
-  const [ dateRes, setDateRes ] = useState()
-  const [prix, setPrix]  = useState()
-  const [ remboursement, setRemboursement ] = useState(0)
+//   const { Option } = Select
+//   const [dataVol, setDataVol] = useState([])
+//   const [dataClass, setDataClass] = useState([])
+//   const [dataPassager, setDataPassager] = useState([])
+//   const [dataTarif, setDataTarif] = useState([])
 
-  handleSave = () => {
-    const url = "http://localhost:5160/api/Reservations"
-    const data = 
-    {
-        "volID": volID ,
-        "classeServiceID": classID,
-        "passagerID": passagerID,
-        "prix": prix,
-        "remboursement": remboursement,
-        "date_reservation":dateRes
+//   const fetchPassagers = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:5160/api/Passagers")
+//       setDataPassager(response.data);
+//     } catch (error) {
+//       console.error(error)
+//     }
+//   }
 
+//   const fetchTarifs = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:5160/api/Tarifs")
+//       setDataTarif(response.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }
+
+//   const fetchClasses = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:5160/api/ClasseServices")
+//       setDataClass(response.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }
+
+//   const fetchVols = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:5160/api/Vols")
+//       setDataVol(response.data)
+//     } catch (error) {
+//       console.error(error)
+//     }
+//   }
+
+//   useEffect(() => {
+//     const intervalPassagers = setInterval(() => fetchPassagers(), 1000);
+//     const intervalTarifs = setInterval(() => fetchTarifs(), 1000);
+//     const intervalClasses = setInterval(() => fetchClasses(), 1000);
+//     const intervalVols = setInterval(() => fetchVols(), 1000);
+
+//     return () => {
+//       clearInterval(intervalPassagers);
+//       clearInterval(intervalTarifs);
+//       clearInterval(intervalClasses);
+//       clearInterval(intervalVols);
+//     }
+//   }, []);
+
+//   useEffect(() => {
+//     const matchingTarif = dataTarif.find(
+//       (tarif) => tarif.volID === volID && tarif.classeServiceID === classID
+//     )
+
+//     if (matchingTarif) {
+//       setPrix(matchingTarif.montant_tarif);
+//     } else {
+//       setPrix(null); // Aucune correspondance trouvée
+//     }
+//   }, [volID, classID, dataTarif]);
+
+//    handleSave = () => {
+//     const url = "http://localhost:5160/api/Reservations";
+//     const data = {
+//       volID: volID,
+//       classeServiceID: classID,
+//       passagerID: passagerID,
+//       prix: prix,
+//       remboursement: remboursement,
+//       date_reservation: dateRes
+//     };
+
+//     axios.post(url, data)
+//       .then(() => {
+//         onCancel();
+//         setVolID('');
+//         setClassID('')
+//         setPassagerID('')
+//         setPrix(null);
+//         setRemboursement(0);
+//         setDateRes('')
+//       })
+//       .catch((error) => console.log(error));
+//   };
+
+//   return (
+//     <Modal
+//       style={{ justifyContent: 'center', fontFamily: '"Poppins", cursive, "open-sans"' }}
+//       title={titre}
+//       width='350px'
+//       okText={okText}
+//       open={open}
+//       cancelText={cancelText}
+//       onCancel={onCancel}
+//       onOk={handleSave}
+//     >
+//       <Select
+//         style={{ width: '300px' }}
+//         id='vol'
+//         onChange={(value) => setVolID(value)}
+//         value={volID}
+//         placeholder="Numéro du vol :"
+//       >
+//         {dataVol.map((item) => (
+//           <Option key={item.id_vol} value={item.id_vol}>
+//             {item.num_vol}
+//           </Option>
+//         ))}
+//       </Select>
+
+//       <Select
+//         style={{ width: '300px' }}
+//         id='class'
+//         onChange={(value) => setClassID(value)}
+//         value={classID}
+//         placeholder="Classe de service :"
+//       >
+//         {dataClass.map((item) => (
+//           <Option key={item.id_classe} value={item.id_classe}>
+//             {item.type_classe}
+//           </Option>
+//         ))}
+//       </Select>
+
+//       <Select
+//         style={{ width: '300px' }}
+//         id='ps'
+//         onChange={(value) => setPassagerID(value)}
+//         value={passagerID}
+//         placeholder="Passager :"
+//       >
+//         {dataPassager.map((item) => (
+//           <Option key={item.id_passager} value={item.id_passager}>
+//             {item.nom_passager}
+//           </Option>
+//         ))}
+//       </Select>
+
+//       <Input
+//         id='mt'
+//         onChange={(e) => setPrix(e.target.value)}
+//         value={prix !== null ? prix.toString() : ''}
+//         placeholder="Montant :"
+//       />
+
+//       <Input
+//         id='remboursement'
+//         onChange={(e) => setRemboursement(e.target.value)}
+//         value={remboursement}
+//         placeholder="Remboursement :"
+//       />
+
+//       <Input
+//         id='date'
+//         type='date'
+//         onChange={(e) => setDateRes(e.target.value)}
+//         value={dateRes}
+//         placeholder="Date de réservation :"
+//       />
+//     </Modal>
+//   )
+// }
+
+export const ModalReservationAdd = ({ titre, okText, open, cancelText, onCancel, handleSave }) => {
+
+  const [volID, setVolID] = useState('')
+  const [classID, setClassID] = useState('')
+  const [passagerID, setPassagerID] = useState('')
+  const [dateRes, setDateRes] = useState('')
+  const [prix, setPrix] = useState(null)
+  const [remboursement, setRemboursement] = useState(0)
+
+  const { Option } = Select
+  const [dataVol, setDataVol] = useState([])
+  const [dataClass, setDataClass] = useState([])
+  const [dataPassager, setDataPassager] = useState([])
+  const [dataTarif, setDataTarif] = useState([])
+
+  const fetchPassagers = async () => {
+    try {
+      const response = await axios.get("http://localhost:5160/api/Passagers")
+      setDataPassager(response.data);
+    } catch (error) {
+      console.error(error)
     }
+  }
+
+  const fetchTarifs = async () => {
+    try {
+      const response = await axios.get("http://localhost:5160/api/Tarifs")
+      setDataTarif(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const fetchClasses = async () => {
+    try {
+      const response = await axios.get("http://localhost:5160/api/ClasseServices")
+      setDataClass(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const fetchVols = async () => {
+    try {
+      const response = await axios.get("http://localhost:5160/api/Vols")
+      setDataVol(response.data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    const intervalPassagers = setInterval(() => fetchPassagers(), 1000);
+    const intervalTarifs = setInterval(() => fetchTarifs(), 1000);
+    const intervalClasses = setInterval(() => fetchClasses(), 1000);
+    const intervalVols = setInterval(() => fetchVols(), 1000);
+
+    return () => {
+      clearInterval(intervalPassagers);
+      clearInterval(intervalTarifs);
+      clearInterval(intervalClasses);
+      clearInterval(intervalVols);
+    }
+  }, []);
+
+  useEffect(() => {
+    const recherTarif = dataTarif.find(
+      (tarif) => tarif.volID === volID && tarif.classeServiceID === classID
+    )
+
+    if (recherTarif) {
+      setPrix(recherTarif.montant_tarif);
+    } else {
+      setPrix(null); // Aucune correspondance trouvée
+    }
+  }, [volID, classID, dataTarif]);
+
+   handleSave = () => {
+    const url = "http://localhost:5160/api/Reservations";
+    const data = {
+      volID: volID,
+      classeServiceID: classID,
+      passagerID: passagerID,
+      prix: prix,
+      remboursement: remboursement,
+      date_reservation: dateRes
+    };
+
     axios.post(url, data)
-    .then(() => {
-        onCancel()
-        setVolID('')
-        setclassID('')
-        setPassagerID()
-        setPrix('')
-        setRemboursement()
+      .then(() => {
+        onCancel();
+        setVolID('');
+        setClassID('')
+        setPassagerID('')
+        setPrix(null);
+        setRemboursement(0);
         setDateRes('')
       })
-    .catch(error => console.log(error))
-  }
-  
+      .catch((error) => console.log(error));
+  };
 
   return (
     <Modal   
@@ -320,7 +661,6 @@ export const ModalReservationAdd = ({  titre, okText, open, cancelText, onCancel
                     hoverBorderColor:'#b82626'
                   }, 
                   Select: {
-                    //optionSelectedBg:'#b82626',
                     colorPrimaryHover:'#b82626',
                     colorPrimaryBg:'#b82626'
                   }
@@ -328,17 +668,32 @@ export const ModalReservationAdd = ({  titre, okText, open, cancelText, onCancel
         }} >
 
           <label htmlFor="vol">Numéro du vol :</label>
-          <Input id='vol' onChange={(e)=> setVolID(e.target.value)}  value={volID}/>
+                <Select  style={{width:'300px'}} id='vol' onChange={(value)=>{ setVolID(value) }}  value={volID}>
+                  {
+                dataVol.map((items) => 
+                <Option key={items.id_vol} value={items.id_vol} >{items.num_vol}</Option> 
+                )}
+             </Select>
+
+             {/* <label htmlFor="it"></label>
+             <Input id='it'  disabled={true} value={itineraire}/> */}
 
           <label htmlFor="class">Classe de service :</label>
-          <Input id='class' onChange={(e) =>setclassID(e.target.value) }  value={classID}/>
+          <Select  style={{width:'300px'}}  id='class' onChange={(value) =>setClassID(value) }  value={classID}>
+            {
+              dataClass.map(items => (<Option key={items.id_classe} value={items.id_classe} >{items.type_classe}</Option>))
+            }
+          </Select>
+          
+          <label htmlFor="ps">Passager :</label>
+          <Select id='ps' style={{width:'300px'}} placeholder="Nom de passager" onChange={(value)=> setPassagerID(value)}  value={passagerID}>
+            {
+              dataPassager.map(items => (<Option key={items.id_passager} value= {items.id_passager} >{items.nom_passager}</Option>))
+            }
+          </Select>
 
-
-          <label htmlFor="passeport">Passager :</label>
-          <Input onChange={(e)=> setPassagerID(e.target.value)}  value={passagerID}/>
-
-          <label htmlFor="passeport">Montant :</label>
-          <Input onChange={(e)=> setPrix(e.target.value)}  value={prix}/>
+          <label htmlFor="mt">Montant :</label>
+          <Input placeholder='Montant' id='mt' onChange={(e)=> setPrix(e.target.value)}  value={prix !== null ? prix.toString() : ''}/>
 
           <label htmlFor="remboursement">Remboursement :</label>
           <Input id='remboursement' onChange={(e) => setRemboursement(e.target.value)}  value={remboursement}/>
@@ -351,79 +706,6 @@ export const ModalReservationAdd = ({  titre, okText, open, cancelText, onCancel
   )
 }
 
-// export const ModalReservation = ({  titre, okText, open, cancelText, onCancel, handleSave}) => {
-//   const { Option } = Select
-//   const [data,setData] = useState([])
-
-// const fetch = async () => {
-//   let  response = await axios.get("http://localhost:5160/api/Vols") 
-//   setData (response.data)
-// }
-// useEffect(()=> {
-//   const intervale = setInterval(()=>{
-//     fetch()
-//   },1000)
-//   return ()=> clearInterval(intervale)
-// })
-
-// const ReservationForm = () => {
-
-//   const [selectedVol, setSelectedVol] = useState(null);
-//   const [selectedAvion, setSelectedAvion] = useState(null);
-//   const [selectedClasse, setSelectedClasse] = useState(null);
-
-//   const handleVolChange = (value) => {
-//     setSelectedVol(value);
-//     // Recherchez l'avion associé à ce vol dans le tableau de données JSON
-//     const avion = data.find((item) => item.id_vol === value)?.avion;
-//     setSelectedAvion(avion?.id_aeronef);
-//   };
-
-//   const handleAvionChange = (value) => {
-//     setSelectedAvion(value);
-//     // Recherchez les classes de service associées à cet avion dans le tableau de données JSON
-//     const classes = data.find((item) => item.avion.id_aeronef === value)?.avion.classeServices;
-//     // Remplissez les options de classe ici
-//   };
-
-//   const handleClasseChange = (value) => {
-//     setSelectedClasse(value);
-//   };
-
-//   return (
-//     <div>
-//       <h1>Sélection de vol, avion et classe</h1>
-//       <Select style={{ width: 200 }} onChange={handleVolChange} placeholder="Sélectionnez un vol">
-//         {data.map((item) => (
-//           <Option key={item.id_vol} value={item.id_vol}>
-//             {item.num_vol}
-//           </Option>
-//         ))}
-//       </Select>
-//       {selectedAvion && (
-//         <Select style={{ width: 200 }} onChange={handleAvionChange} placeholder="Sélectionnez un avion">
-//           {data
-//             .find((item) => item.avion.id_aeronef === selectedAvion)
-//             ?.avion.classeServices.map((classe) => (
-//               <Option key={classe.id_classe} value={classe.id_classe}>
-//                 {classe.type_classe}
-//               </Option>
-//             ))}
-//         </Select>
-//       )}
-
-//       {selectedClasse && (
-//         <Select style={{ width: 200 }} onChange={handleClasseChange} placeholder="Sélectionnez une classe">
-//           {/* Remplissez les options de classe ici */}
-//         </Select>
-
-//       )}
-//     </div>
-//   )
-// }
-
-
-// }
 
 
 export const ModalVol= ({  titre, okText, open, cancelText, onCancel, handleSave}) => {
@@ -515,7 +797,7 @@ theme={{
 
     <label htmlFor="avion">Avion :</label>
     <Select style={{width : 250,  fontFamily:'"Poppins", cursive, "open-sans"' }}
-    defaultValue={dataAV[0]}
+    //defaultValue={dataAV[0]}
     onChange={(value) => setAvionID(value)} 
     value={avionID} >
       {dataAV.map(items => (
@@ -527,7 +809,7 @@ theme={{
 
       <label htmlFor="Itineraire">Itineraire du vol :</label>
       <Select style={{width : 250,  fontFamily:'"Poppins", cursive, "open-sans"' }}
-      defaultValue={dataIT[0]}
+      //defaultValue={dataIT[0]}
      onChange={(value)=> setItineraireID(value)} 
      value={itineraireID}>
         {dataIT.map(items => (
@@ -541,7 +823,7 @@ theme={{
      options={dataAV.map(items => ({label: items.type_aeronef, value: items.id_aeronef }))}
       options = {dataIT.map((items) =>( { label: items.aeroport_depart + "-" + items.aeroport_arrive,  value: items.id_itineraire })  )}
      <Select 
-     defaultValue={statuts[0]}
+     //defaultValue={statuts[0]}
       style={{width : 250,  fontFamily:'"Poppins", cursive, "open-sans"' }}
       onChange={(value)=>setStatut(value)} 
       value={statut}
@@ -657,14 +939,18 @@ export const ModalItineraire = ({  titre, okText, open, cancelText, onCancel, ha
               }
           }} >
           <label htmlFor="depart">Aéroport de départ :</label>
-          <Select style={{width:'300px'}} onChange={(value) => setDepart(value)}  defaultValue={aeropoDepart[0]} value={depart} >
+          <Select style={{width:'300px'}} onChange={(value) => setDepart(value)}  
+          //defaultValue={aeropoDepart[0]} 
+          value={depart} >
             {
               aeropoDepart.map(items => (<Option key = {items} >{items}</Option>))
             }
           </Select> <br/>
 
           <label htmlFor="arrive"> Aéroport d'arrivée :</label>
-          <Select style={{width:'300px'}} onChange={(value) => setArrive(value)}  defaultValue={aeropoArrive[0]}  value={arrive} >
+          <Select style={{width:'300px'}} onChange={(value) => setArrive(value)}  
+          //defaultValue={aeropoArrive[0]}  
+          value={arrive} >
             {
               aeropoArrive.map(items => (<Option key={items}>{items}</Option>))
             }
@@ -673,5 +959,6 @@ export const ModalItineraire = ({  titre, okText, open, cancelText, onCancel, ha
       </Modal>
   )
 }
+
 
 

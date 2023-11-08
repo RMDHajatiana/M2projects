@@ -48,7 +48,6 @@ export const TablePassagers = ({title, IndexData, data, size, handleDelete, hand
     )
 }
 
-
 export const TableAvion = ({title, handleInfo,IndexData, data, size, handleDelete, handleEdit}) => {
 
   const colonne = IndexData.map( (items, index) => ({
@@ -93,6 +92,51 @@ return (
 )
 }
 
+export const TableTarif = ({title,IndexData, data,customRenderers, size, handleDelete, handleEdit}) => {
+
+  const colonne = IndexData.map( (items, index) => ({
+   title : title[index],
+   dataIndex: items,
+   render: customRenderers[index]
+ }))
+
+ colonne.push({
+   title: 'Action',
+   render: (action) => {
+     return (
+       <>
+         <FiIcons.FiEdit  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_tarif) }/>
+         <DeleteOutlined style={{ fontSize:16, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleDelete (action.id_tarif) }/>
+       </>
+     )}
+ })
+
+return (
+   <div initial={{ opacity: 0 }} transition={{ duration: 0.5 }} animate={{ opacity: 1 }} >
+   <ConfigProvider 
+
+   theme={{
+       components : {
+           Table : {
+               fontSizeIcon:14,
+               fontFamily:'"Poppins", cursive, "open-sans"',
+               colorText:'#051039',
+               fontSize:13,
+               headerBg :'#d1d1d1',
+               rowHoverBg:'#ebe9e9',
+           }
+       }
+   }} >
+
+   <Table size={size}  columns={colonne} 
+   scroll={{ y: 300 }}
+   dataSource={data.map(  (items, index) => ( { ...items, key:index  })) }  />
+   </ConfigProvider>
+   </div>
+)
+}
+
+
 
 export const TableClasse = ({title, IndexData, data, size, handleDelete, handleEdit}) => {
   const colonne = IndexData.map( (items, index) => ({
@@ -136,11 +180,12 @@ export const TableClasse = ({title, IndexData, data, size, handleDelete, handleE
  )
 }
 
-export const TableReservation = ({title, IndexData, data, size, handleDelete, handleEdit}) => {
+export const TableReservation = ({title, customRenderers, IndexData, data, size, handleDelete, handleEdit}) => {
 
   const colonne = IndexData.map( (items, index) => ({
    title : title[index],
-   dataIndex: items
+   dataIndex: items,
+   render:customRenderers[index]
  }))
 
  colonne.push({
@@ -158,8 +203,8 @@ export const TableReservation = ({title, IndexData, data, size, handleDelete, ha
    render: (action) => {
      return (
        <>
-         <FiIcons.FiEdit  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.id_passager) }/>
-         <DeleteOutlined style={{ fontSize:15.5, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleDelete (action.id_passager) }/>
+         <FiIcons.FiEdit  style={{ fontSize:15.5 }}  onClick={()  => handleEdit (action.num_reservation) }/>
+         <DeleteOutlined style={{ fontSize:15.5, marginLeft: '10px', color: '#b82626'  }}  onClick={() => handleDelete (action.num_reservation) }/>
        </>
      )}
  })

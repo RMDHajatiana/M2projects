@@ -5,6 +5,10 @@ namespace BackAPI.Context
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext()
+        {
+        }
+
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
@@ -18,6 +22,7 @@ namespace BackAPI.Context
         public DbSet<Vol> Vol { get; set; } 
         public DbSet<Tarif> Tarif { get; set; } 
         public DbSet<Utulisateur> Utulisateur { get; set; }
+        public DbSet<BackAPI.Models.Parametre> Parametre { get; set; } = default!;
 
 
         /* protected override void OnModelCreating(ModelBuilder modelBuilder)

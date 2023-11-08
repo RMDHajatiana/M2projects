@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, ConfigProvider, Input, Drawer} from 'antd';
+import { Button, Card, ConfigProvider, Input, Drawer, Modal} from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import { TablePassagers } from '../Components/Table';
+import { TableReservation } from '../Components/Table';
 import { ModalReservationAdd, ModalReservationUpload } from '../Components/Modal';
 import { Menus } from "../Components/Menus";
 import { Menus2 } from "../Components/Menu2";
@@ -12,6 +12,7 @@ import * as BiIcons from "react-icons/bi";
 import { LoginOutlined } from "@ant-design/icons";
 import { MenuProvider } from "../Components/MenuContext";
 import { NavLink } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 const Reservation = () => {
 
@@ -44,9 +45,13 @@ useEffect(()=> {
     window.removeEventListener("scroll", navControl)
   }
   }, [])
-    useEffect(()=>{
-        document.title = "Tableau de bord"
-    })
+
+    const customRenderers = [
+        (text, record) => record.num_reservation,
+        (text, record) => record.vol ? record.vol.num_vol : '',
+        (text, record) => record.classeService ? record.classeService.type_classe: '',
+        (text, record) => record.passager ? record.passager.nom_passager : ''
+      ]
 
     const title = [
         "#",
@@ -54,6 +59,7 @@ useEffect(()=> {
         "Classe de service",
         "Passager",
         "Remboursement",
+      
     ]
 
     const IndexData = [
@@ -70,14 +76,11 @@ useEffect(()=> {
     }
     const key = [  
         "num_reservation",
-        "id_vol",
-        "id_itineraire",
-        "itineraire",
+        "volID",
+        "passagerID",
+        "classeServiceID",
+        "prix",
          "remboursement",
-        "date_depart",
-        "heure_depart",
-        "id_classe",
-        "id_passager",
         "date_reservation"
     ]
     
@@ -96,17 +99,104 @@ useEffect(()=> {
         return () => clearInterval(intervale)
     })
 
-    // Ajout de données // 
+    const ProgressData = () => {
+      if(data.length === 0) {
+        return( <CircularProgress style={{ color:'#b82626', marginLeft:'50%', marginTop:'4%'}} />)
+      } else {
+        return (
+          <TableReservation
+          handleEdit = { (num_reservation) => {
+          OpenModalEdit(num_reservation) 
+          handleUpdate(num_reservation)
+          }}
+          handleDelete={ (num_reservation) => handleDelete(num_reservation) }
 
-    const [open, setOpen ]= useState(false)
-     const HandleModalUpload = () => {
-        setOpen(true)
+          data = {data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
+          title={title} 
+          customRenderers = {customRenderers}
+          IndexData={IndexData} 
+          size='small' />
+        )
+      }
     }
 
-    const [openAdd, setOpenAdd ]= useState(false)
-    const HandleModalAdd = () => {
-       setOpenAdd(true)
-   }
+
+   // Ajout de données // 
+        
+   const [open, setOpen ]= useState(false)
+   const HandleModalUpload = () => {
+      setOpen(true)
+  }
+
+  const [openAdd, setOpenAdd ]= useState(false)
+  const HandleModalAdd = () => {
+     setOpenAdd(true)
+ }
+
+         
+       //Modification
+
+     const [openModalEdit, setOpenModalEdit] = useState(false)
+     const OpenModalEdit = () => {
+         setOpenModalEdit(true)
+       } 
+       
+       const [ id, setId ] = useState()
+       const [ volID, setVolID ] = useState()
+       const [ classID, setclassID ] = useState()
+       const [ passagerID, setPassagerID ] = useState()
+       const [ dateRes, setDateRes ] = useState()
+       const [prix, setPrix]  = useState()
+       const [ remboursement, setRemboursement ] = useState(0)
+
+
+     const handleUpdate = (num_reservation) =>
+         {
+         axios.get( "http://localhost:5160/api/Reservations/ " + num_reservation )
+         .then ((resultat) => {
+          setId (resultat.data.num_reservation)
+           setVolID(resultat.data.volID)
+           setclassID(resultat.data.classeServiceID)
+           setPassagerID(resultat.data.passagerID)
+           setPrix(resultat.data.prix)
+           setDateRes(new Date(resultat.data.date_reservation).toISOString().split('T')[0])
+           setRemboursement(resultat.data.remboursement)
+           
+         }).catch(error => console.log(error))
+         
+         }
+     
+         const   handleSaveUpdate = () =>  {
+          const url =" http://localhost:5160/api/Reservations/" + id
+          const data = {
+           "num_reservation":id,
+           "volID":volID,
+           "classeServiceID": classID,
+           "passagerID": passagerID,
+           "prix": prix,
+           "date_reservation": dateRes,
+           "remboursement": remboursement
+          }
+          axios.put(url, data)
+          .then(() => {
+           setOpenModalEdit(false)
+           fetch()
+          }).catch(error => console.log(error))
+         }
+
+             //  Suppression de res///  
+             const handleDelete =  (num_reservation) => {
+                
+              Modal.confirm ({
+                  cancelText:'Non',
+                  okText:'oui',
+                  okType:'danger',
+                  title : "Êtes vous sûr de supprimer ? ", 
+                   onOk: () => {
+                   axios.delete("http://localhost:5160/api/Reservations/" + num_reservation )
+                   .then(() => fetch())
+                   .catch(error => console.log(error))
+                } }) }
 
     return (
         <MenuProvider>
@@ -174,7 +264,7 @@ useEffect(()=> {
 
             <div  className='conteneur'>
                 <Card
-                title="Toutes les réservations"
+                title={"Toutes les réservations :  "  +   data.length  }
                 style={{   width: '100% ',  height: '88vh', marginLeft:'40px', maxWidth:'94%', fontFamily : '"Poppins", cursive, "open-sans"'   }}
                 className='cardBorder'
                 rootClassName='card'
@@ -209,17 +299,7 @@ useEffect(()=> {
 
                 {/* Affichage de données */}
 
-                    <TablePassagers
-                        // handleEdit = {(id_passager) => {
-                        // OpenModalEdit(id_passager) 
-                        // handleUpdate(id_passager)
-                        // }}
-                        //handleDelete={ (id_passager) => handleRecuperedId(id_passager) }
-
-                        data = {data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
-                        title={title} 
-                        IndexData={IndexData} 
-                        size='small' />
+                        <>{ProgressData()}</>
 
                         <ModalReservationUpload
                         titre="Importation "
@@ -236,6 +316,53 @@ useEffect(()=> {
                         open = {openAdd} 
                         onCancel={()=> setOpenAdd(false)}
                         handleSave={()=> setOpenAdd(false)}/>
+
+                     <Modal   
+                        style={{ justifyContent:'center', fontFamily:'"Poppins", cursive, "open-sans"' }}
+                        title = "Modification"
+                        cancelText ="Annuler"
+                        okText = "Enregistrer"
+                        width= '300px'
+                        open  = {openModalEdit }
+                        onCancel={() => setOpenModalEdit(false)}
+                        onOk={() => handleSaveUpdate()} >
+                            <ConfigProvider theme={{
+                                components : {
+                                    Input: {
+                                        activeBorderColor:'#b82626',
+                                        hoverBorderColor:'#b82626'
+                                      }, 
+                                      Select: {
+                                        //optionSelectedBg:'#b82626',
+                                        colorPrimaryHover:'#b82626',
+                                        colorPrimaryBg:'#b82626'
+                                      }
+                                }
+                            }} >
+                              <label htmlFor="num">Identifiant :</label>
+                              <Input  disabled = {true} id='num' onChange={(e)=> setId(e.target.value)}  value={id}/>
+
+                              <label htmlFor="vol">Numéro du vol :</label>
+                              <Input id='vol' onChange={(e)=> setVolID(e.target.value)}  value={volID}/>
+
+                              <label htmlFor="class">Classe de service :</label>
+                              <Input id='class' onChange={(e) =>setclassID(e.target.value) }  value={classID}/>
+
+
+                              <label htmlFor="passeport">Passager :</label>
+                              <Input onChange={(e)=> setPassagerID(e.target.value)}  value={passagerID}/>
+
+                              <label htmlFor="passeport">Montant :</label>
+                              <Input onChange={(e)=> setPrix(e.target.value)}  value={prix}/>
+
+                              <label htmlFor="remboursement">Remboursement :</label>
+                              <Input id='remboursement' onChange={(e) => setRemboursement(e.target.value)}  value={remboursement}/>
+
+                              <label htmlFor="date">Date de réservation:</label>
+                              <Input id='date' type='date' onChange={(e)=>setDateRes(e.target.value)}  value={dateRes}/>
+
+                              </ConfigProvider>
+                          </Modal>
 
                     </div>
                 </Card>

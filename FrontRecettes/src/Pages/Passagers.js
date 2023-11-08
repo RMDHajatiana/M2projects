@@ -11,6 +11,7 @@ import * as AiIcons from "react-icons/ai";
 import { LoginOutlined } from "@ant-design/icons";
 import { MenuProvider } from "../Components/MenuContext";
 import { NavLink } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 const Passagers = () => {
 
@@ -80,6 +81,26 @@ useEffect(()=> {
           document.title = "Les Passagers"
           return () => clearInterval(intervale)
         },[])
+
+        const ProgressData = () => {
+          if(data.length === 0) {
+            return( <CircularProgress style={{ color:'#b82626', marginLeft:'50%', marginTop:'4%'}} />)
+          } else {
+            return (
+              <TablePassagers
+              handleEdit = {(id_passager) => {
+              OpenModalEdit(id_passager) 
+              handleUpdate(id_passager)
+              }}
+              handleDelete={ (id_passager) => handleRecuperedId(id_passager) }
+              data = { data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
+              title={title} 
+              IndexData={IndexData} 
+              size='small' />
+            )
+          }
+        }
+    
         
         
         //recherche//
@@ -265,16 +286,7 @@ useEffect(()=> {
 
                   {/* Affichage de données */}
 
-                      <TablePassagers
-                      handleEdit = {(id_passager) => {
-                      OpenModalEdit(id_passager) 
-                      handleUpdate(id_passager)
-                      }}
-                      handleDelete={ (id_passager) => handleRecuperedId(id_passager) }
-                      data = { data.filter( (items)  =>  key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche)  )) }
-                      title={title} 
-                      IndexData={IndexData} 
-                      size='small' />
+                      <>{ProgressData()}</>
 
                       {/* Modal Ajout */}
 

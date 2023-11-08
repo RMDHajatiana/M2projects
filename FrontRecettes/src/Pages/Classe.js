@@ -12,6 +12,7 @@ import * as AiIcons from "react-icons/ai";
 import { LoginOutlined } from "@ant-design/icons";
 import { MenuProvider } from "../Components/MenuContext";
 import { NavLink } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 const Classe = () => {
 
@@ -84,6 +85,25 @@ const Classe = () => {
             document.title = "Les Classes de services"
             return () => clearInterval(intervale)
           })
+
+          const ProgressData = () => {
+            if(data.length === 0) {
+              return( <CircularProgress style={{ color:'#b82626', marginLeft:'50%', marginTop:'4%'}} />)
+            } else {
+              return (
+                <TableClasse
+                handleEdit = {(id_classe) => {
+                  OpenModalEdit(id_classe) 
+                  handleUpdate(id_classe)
+                  }}
+                  handleDelete={ (id_classe) => handleRecuperedId(id_classe) }
+                  data = { data.filter( (items)  => key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche))) }
+                  title={title} 
+                  IndexData={IndexData} />
+              )
+            }
+          }
+      
         
         
         // Ajout de données // 
@@ -250,16 +270,7 @@ const Classe = () => {
                               <Input style={{ marginLeft:'70%' }} value={recherche} onChange={handleRecherche} placeholder = "Rechercher"/>
                 </ConfigProvider>
               </div>
-
-          <TableClasse
-              handleEdit = {(id_classe) => {
-                  OpenModalEdit(id_classe) 
-                  handleUpdate(id_classe)
-                  }}
-                  handleDelete={ (id_classe) => handleRecuperedId(id_classe) }
-                  data = { data.filter( (items)  => key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche))) }
-                  title={title} 
-                  IndexData={IndexData} />
+                <>{ProgressData()}</>                           
 
                   {/* Modal Ajout */}
 

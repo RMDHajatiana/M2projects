@@ -11,6 +11,7 @@ using BackAPI.Models;
 namespace BackAPI.Controllers
 {
     [Route("api/[controller]")]
+
     [ApiController]
     public class ReservationsController : ControllerBase
     {
@@ -29,8 +30,13 @@ namespace BackAPI.Controllers
           {
               return NotFound();
           }
-            return await _context.Reservation.ToListAsync();
+            return await _context.Reservation
+                .Include(v => v.Vol)
+                .Include(c => c.ClasseService)
+                .Include(p => p.Passager)
+                .OrderBy(r => r.Date_reservation).ToListAsync();
         }
+
 
         // GET: api/Reservations/5
         [HttpGet("{id}")]

@@ -31,8 +31,10 @@ namespace BackAPI.Controllers
             {
                 return NotFound();
             }
-            return await _context.Vol.Include(v => v.Avion).Include(v => v.Itineraire).OrderBy(a=>a.Id_vol).ToListAsync();
+            return await _context.Vol.Include(v => v.Avion).Include(r => r.Reservations).Include(t => t.Tarifs).Include(v => v.Itineraire).OrderBy(a=>a.Date_depart).ToListAsync();
         }
+
+        // selectionner avion, classe, tarif associé au vol
 
         [HttpGet("/tarif")]
         public ActionResult<IEnumerable<object>> GetVolComplete()

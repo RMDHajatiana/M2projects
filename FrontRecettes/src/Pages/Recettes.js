@@ -7,6 +7,7 @@ import * as AiIcons from "react-icons/ai";
 import { LoginOutlined } from "@ant-design/icons";
 import { MenuProvider } from "../Components/MenuContext";
 import { NavLink } from 'react-router-dom';
+import axios from 'c:/xampp/htdocs/geohetra_react/src/api/axios';
 
 const Recettes = () => {
     
@@ -21,6 +22,43 @@ const Recettes = () => {
     SetOpenMenu(true)
   }
 
+  // fetch data 
+  const [recetteFuture, setRecetteFuture] = useState([])
+  const [recetteGlobale, setRecetteGlobale] = useState([])
+
+  const  fetchRecetteFuture = async () => {
+    try {
+       axios.get("http://localhost:5160/operation/future")
+       .then(data => setRecetteFuture(data.recetteFuture))
+       
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    
+    const  fetchRecetteGlobal = async () => {
+      try {
+         axios.get("http://localhost:5160/operation")
+         .then (data => setRecetteGlobale(data.recetteGlobale))
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    
+    useEffect(()=> {
+    fetchRecetteFuture()
+    fetchRecetteGlobal()
+   console.log(recetteFuture)
+  })
+
+  const recetteF = recetteFuture.toLocaleString('fr-FR', {
+    minimumFractionDigits: 0, 
+  })
+
+  const recetteG = recetteGlobale.toLocaleString('fr-FR', {
+    minimumFractionDigits: 0, 
+  })
+
 // Disparaitre si on scrowll //
 
 const [show, setShow] = useState(true)
@@ -33,16 +71,18 @@ const navControl = () => {
   }
 }
 
+const {Meta} = Card
+
 useEffect(()=> {
   window.addEventListener("scroll", navControl)
   return () => {
     window.removeEventListener("scroll", navControl)
   }
   }, [])
-    const {Meta} = Card
     useEffect(()=> {
         document.title  = "Recettes"
     })
+
     return (
         
         <MenuProvider>
@@ -122,7 +162,7 @@ useEffect(()=> {
                             style={{ fontFamily : '"Poppins", cursive, "open-sans"', width: '40%', height:'200px', justifyContent:'center'}}
                             hoverable
                             cover ={ ""} >
-                            <Meta title="Recettes globale" description="7 000 000 Ar" />
+                            <Meta title="Recettes globale" description={recetteG + " Ariary"} />
                             Avion 1 : 1 000 00 Ar 
                             Avion 2 : 4 000 000 Ar
                             Avion 3 : 2 000 000 Ar
@@ -131,7 +171,7 @@ useEffect(()=> {
                             style={{  fontFamily : '"Poppins", cursive, "open-sans"', height:'200px', width: '40%', justifyContent:'center'}}
                             hoverable
                             cover ={ ""} >
-                            <Meta title="Recettes nettes" description="9 000 000 Ar" />
+                            <Meta title="Recettes nettes" description="7000000" />
                             Avion 1 : 1 000 00 Ar 
                             Avion 2 : 4 000 000 Ar
                             Avion 3 : 2 000 000 Ar
@@ -141,7 +181,7 @@ useEffect(()=> {
                             style={{ fontFamily : '"Poppins", cursive, "open-sans"', marginLeft:'50%', marginTop:'-27%',  height:'200px', width: '40%', justifyContent:'center'}}
                             hoverable
                             cover ={ ""} >
-                            <Meta title="Recettes futures" description="9 000 000 Ar" />
+                            <Meta title="Recettes futures" description={recetteF + "Ariary"} />
                             Avion 1 : 1 000 00 Ar 
                             Avion 2 : 4 000 000 Ar
                             Avion 3 : 2 000 000 Ar

@@ -11,12 +11,14 @@ import Historique from '../Pages/Historique';
 import Avion from '../Pages/Avion';
 import About from '../Pages/About';
 import Itineraire from '../Pages/Itineraire';
+import Tarif from '../Pages/Tarif';
 
 const Navigation = () => {
     return ( 
         <Routes>
             <Route path="/" element = { <Login/> } />
             <Route path="/Tableau_de_bord" element = { <Dashbord/> } />
+            <Route path="/Tarif" element = { <Tarif/> } />
             <Route path="/Vente" element = { <Reservation/> } />
             <Route path="/Vols" element = { <Vol/> } />
             <Route path="/Recettes" element = { <Recettes/> } />

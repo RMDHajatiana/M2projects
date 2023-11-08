@@ -12,6 +12,7 @@ import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
 import * as SiIcons from "react-icons/si";
 import * as LiaIcons from "react-icons/lia";
+import * as BiIcons from "react-icons/bi";
 import { useMenuContext } from './MenuContext';
 
 export const Menus = ({ Isinline = false, onSelect }) => {
@@ -28,6 +29,7 @@ export const Menus = ({ Isinline = false, onSelect }) => {
             itemColor: '#051039',
             itemHoverBg: '#b82626',
             itemHoverColor: 'white',
+            subMenuItemBg:'white',
             itemSelectedBg: '#8808087d',
             itemSelectedColor: 'white'
           }
@@ -59,11 +61,16 @@ export const Menus = ({ Isinline = false, onSelect }) => {
         <Menu.Item key="Recettes" icon={<DollarOutlined />}>
           <Link to="/Recettes">Recettes</Link>
         </Menu.Item>
+        {/* SuMenu */}
+        <Menu.SubMenu key="params" title="Paramètres" icon={<MdIcons.MdSettingsApplications />}>
         <Menu.Item key="Avion" icon={<MdIcons.MdFlight />}>
           <Link to="/Avion">Avion</Link>
         </Menu.Item>
         <Menu.Item key="Classe_de_Service" icon={<MdIcons.MdFlightClass />}>
           <Link to="/Classe_de_Service">Classe de Service</Link>
+        </Menu.Item>
+        <Menu.Item key="Tarif" icon={<BiIcons.BiMoney />}>
+          <Link to="/Tarif">Tarif</Link>
         </Menu.Item>
         <Menu.Item key="itineraire" icon={<LiaIcons.LiaFantasyFlightGames />}>
           <Link to="/Itineraire">Itinéraire</Link>
@@ -71,6 +78,8 @@ export const Menus = ({ Isinline = false, onSelect }) => {
         <Menu.Item key="Passager" icon={<UserOutlined />}>
           <Link to="/Passager">Passagers</Link>
         </Menu.Item>
+        </Menu.SubMenu>
+        {/* SubMenu */}
         <Menu.Item key="Historique" icon={<HistoryOutlined />}>
           <Link to="/Historique">Historique</Link>
         </Menu.Item>

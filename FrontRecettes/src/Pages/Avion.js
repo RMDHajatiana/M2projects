@@ -13,6 +13,7 @@ import * as AiIcons from "react-icons/ai";
 import { LoginOutlined } from "@ant-design/icons";
 import { MenuProvider } from "../Components/MenuContext";
 import { NavLink } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 
 const Avion = () => {
@@ -52,7 +53,7 @@ const Avion = () => {
     "type_aeronef",
     ]
     const title  = [
-    "Id",
+    "#",
     "Nom de l'Avion",
     ]
 
@@ -73,7 +74,7 @@ const Avion = () => {
   const [ data, setData ] = useState([])
 
   const fetch = async () => {
-    let resultat =await  axios.get("http://localhost:5160/api/Avions")
+    let resultat = await  axios.get("http://localhost:5160/api/Avions")
     setData(resultat.data)
   }
 
@@ -83,6 +84,26 @@ const Avion = () => {
     }, 1000)
     return () => clearInterval(intervale)
   })
+
+  const ProgressData = () => {
+    if(data.length === 0) {
+      return( <CircularProgress style={{ color:'#b82626', marginLeft:'50%', marginTop:'4%'}} />)
+    } else {
+      return (
+        <TableAvion
+        handleInfo={(id_aeronef)=> {handleInfo(id_aeronef)}}
+        handleEdit = {(id_aeronef) => {
+        OpenModalEdit(id_aeronef) 
+        handleUpdate(id_aeronef)
+            }}
+        handleDelete={ (id_aeronef) => handleRecuperedId(id_aeronef) }
+        data = { data.filter( (items)  => key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche))) }
+        title={title} 
+        IndexData={IndexData} 
+        size='large' />
+      )
+    }
+  }
 
     // Ajout de données // 
 
@@ -281,19 +302,7 @@ const Avion = () => {
                             </ConfigProvider>
                         </div>
                                 {/* Affichage de données */}
-                
-                            <TableAvion
-                                handleInfo={(id_aeronef)=> {handleInfo(id_aeronef)}}
-                                handleEdit = {(id_aeronef) => {
-                                OpenModalEdit(id_aeronef) 
-                                handleUpdate(id_aeronef)
-                                    }}
-                                handleDelete={ (id_aeronef) => handleRecuperedId(id_aeronef) }
-                                data = { data.filter( (items)  => key.some( key =>  items[key]  &&  items[key].toString().toLowerCase().includes(recherche))) }
-                                title={title} 
-                                IndexData={IndexData} 
-                                size='large' />
-                
+                                  <>{ProgressData()}</>
                                 {/* Modal Ajout */}
                 
                                 <ModalAvion
