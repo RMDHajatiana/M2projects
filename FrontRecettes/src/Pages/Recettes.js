@@ -23,8 +23,8 @@ const Recettes = () => {
   }
 
   // fetch data 
-  const [recetteFuture, setRecetteFuture] = useState([])
-  const [recetteGlobale, setRecetteGlobale] = useState([])
+  const [dataFuture, setRecetteFuture] = useState([])
+  const [dataGlobale, setRecetteGlobale] = useState([])
 
   const  fetchRecetteFuture = async () => {
     try {
@@ -48,16 +48,16 @@ const Recettes = () => {
     useEffect(()=> {
     fetchRecetteFuture()
     fetchRecetteGlobal()
-   console.log(recetteFuture)
+   console.log(dataFuture)
   })
 
-  const recetteF = recetteFuture.toLocaleString('fr-FR', {
-    minimumFractionDigits: 0, 
-  })
+  // const recetteF = dataFuture.toLocaleString('fr-FR', {
+  //   minimumFractionDigits: 0, 
+  // })
 
-  const recetteG = recetteGlobale.toLocaleString('fr-FR', {
-    minimumFractionDigits: 0, 
-  })
+  // const recetteG = dataGlobale.toLocaleString('fr-FR', {
+  //   minimumFractionDigits: 0, 
+  // })
 
 // Disparaitre si on scrowll //
 
@@ -162,7 +162,7 @@ useEffect(()=> {
                             style={{ fontFamily : '"Poppins", cursive, "open-sans"', width: '40%', height:'200px', justifyContent:'center'}}
                             hoverable
                             cover ={ ""} >
-                            <Meta title="Recettes globale" description={recetteG + " Ariary"} />
+                            <Meta title="Recettes globale" description={dataGlobale + " Ariary"} />
                             Avion 1 : 1 000 00 Ar 
                             Avion 2 : 4 000 000 Ar
                             Avion 3 : 2 000 000 Ar
@@ -181,7 +181,7 @@ useEffect(()=> {
                             style={{ fontFamily : '"Poppins", cursive, "open-sans"', marginLeft:'50%', marginTop:'-27%',  height:'200px', width: '40%', justifyContent:'center'}}
                             hoverable
                             cover ={ ""} >
-                            <Meta title="Recettes futures" description={recetteF + "Ariary"} />
+                            <Meta title="Recettes futures" description={dataFuture + "Ariary"} />
                             Avion 1 : 1 000 00 Ar 
                             Avion 2 : 4 000 000 Ar
                             Avion 3 : 2 000 000 Ar
